@@ -1,0 +1,55 @@
+% Preamble for the sleep tex file.
+
+\usepackage[margin=0.75in]{geometry}
+
+% Graphics stuff
+\usepackage{xcolor}
+\definecolor{CommentColor}{HTML}{3FA5FF}
+\definecolor{IDColor}{HTML}{D20DFF}
+\definecolor{KeywordColor}{HTML}{0D3AFF}
+\definecolor{StringColor}{HTML}{FF0D83}
+\usepackage{graphicx}
+
+% Set default font to charter and make it pretty
+\usepackage{charter}
+\usepackage[T1]{fontenc}
+\usepackage[charter]{mathdesign}
+\usepackage{microtype}
+
+% for new commands
+\usepackage{xspace}
+
+% source code listings
+\usepackage{textcomp}
+\usepackage{listings}
+\lstset{
+	basicstyle=\scriptsize\ttfamily,
+	breakatwhitespace=false,
+	breaklines=true,
+	commentstyle=\color{CommentColor}\textsl,
+	frame=single,
+%	identifierstyle=\color{IDColor},
+	keywordstyle=\color{KeywordColor},
+	language=Haskell,
+	showstringspaces=false,
+	stringstyle=\color{StringColor},
+	tabsize=4,
+	upquote=true
+}
+
+
+% TODO how fancy do I want the header to be?
+\pagestyle{plain}
+
+% Captioning and internal linking
+\usepackage[
+	colorlinks=true, % urlcolor and linkcolor are probably the most important
+	linkcolor=IDColor,
+	citecolor=CommentColor,
+	filecolor=KeywordColor,
+	urlcolor=StringColor
+	]{hyperref}
+\usepackage[all]{hypcap}
+
+\newcommand{\readTODO}[1]{\textbf{TODO}}
+\newcommand{\readStat}[1]{\textbf{\input{statistics/#1.txt}}\!\!\xspace}
