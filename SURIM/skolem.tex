@@ -1,0 +1,137 @@
+\label{skolem}
+Consider the following linear recurrence: $x_n = x_{n-1} +2x_{n-2} +3x_{n-3}$,$x_0=x_1=x_2=1$, where the zero set is trivially null. If you consider $x_n = -2x_n +x_{n-2}$ with initial data $x_0=2,x_1=1$, the closed form is
+\[x_n = \left(1-\frac{3}{2\sqrt 2}\right)(-1-\sqrt 2)^n +\frac{1}{4}(4+3\sqrt 2)(\sqrt 2 - 1)^n\]
+Eventually, the positive term dominates, so it goes to infinity, and there is just one zero.
+
+Consider $x_n = 2x_{n-1}-3x_{n-2}$, $x_0=0,x_1=1$. This happens to satisfy $x_n = -x_{n-1}\mod 3$, so once it becomes nonzero it never goes back. This has closed form
+\[x_n = \frac{1}{2\sqrt{-2}}(1-\sqrt{-2})^n +\frac{1}{2\sqrt{-2}}(1+\sqrt{-2})^n\]
+and when one looks at this $\mod 3$, things go away because $-2$ is a square on $\mathbb{F}_3$.
+
+Finally, one can have $x_n=x_{n-2}$, $x_0=0$, $x_1=1$. This just alternates.
+
+\begin{thm}[Skolem-Mahler-Lech]
+Let $a_n$ be a sequence defined by an integer linear recurrence. Then the set
+\[A := \{n:a_n = 0\}\]
+is the union of a finite set and finitely many arithmetical progressions.
+\end{thm}
+\subsection{Hensel's Lemma}
+Look back at the third sequence, and notice that 1 is a square root in $\Z/3$ (i.e. the integers $\mod 3$). One can lift this to $\mod 9$ by doing the following:
+\begin{align*}
+(3a+1)^2 &= -2\mod 9\\
+6a+1 &= -2\mod 9\\
+p(\bar x) &= 0\mod 3\\
+p(3a+\bar x) &= 0\mod 9
+\end{align*}
+Thus, $3p'(\bar x)a + p(\bar x) = 0\mod 9$. This didn't depend on 3 or 9, so the following lemma is proven by induction.
+\begin{lem}[Hensel]
+Let $f$ be a polynomial with integer coefficients and $p$ be prime. If the derivative is nonzero at a root, then that root can be lifted; specifically, if $f(x) = 0\mod p^k$ and $f'(x) \ne 0\mod p^{k+1}$. %And then stuff happens... look up
+\end{lem}
+This does strongly resemble Newton's method, which implies that analysis is going to happen.
+\begin{defn}
+The $p$-adic integers are defined as 
+\[\Z_p = \invlim \Z/p^k\Z = \{a_k\in\Z/p^k\Z | a_k \equiv a_{k-1}\mod p^{k-1}\}.\]
+\end{defn}
+These integers can be written as sequences of powers $d_1p^{k-1}+d_2p^{k-2}+\dots+d_k$. Looking at this mod $p^k$ is just cutting off the first entry. (All the $d_i$ satisfy $0\le d_i<p$). In some sense, $p$ is smaller than 1, and so infinite sums make sense.
+
+Unlike in $\mathbb{R}$, these decimal expansions are unique.
+
+The $p$-adic integers aren't just a ring, but a topological ring. Absolute values allow for the existence of open and closed sets, and the $p$-adic integers have a natural absolute value. It looks odd, but if $x\in\Z$ define
+\[v_p(x) = \max\{k\in\mathbb{N}\text{ such that } p^k\mid x\}\]
+which implies that $|x|_p = p^{-v_p(x)}$\dots which implies that $2<1$ and $4<2$.
+
+Just as the reals are the completion of the naturals, the $p$-adic integers are the completion of the integers under this absolute value.
+
+This allows a cleaner statement of Hansel's Lemma: if $f$ is a polynomial with integer coefficients and $x\in\mathbb{F}_p$ such that $f(x)=0$, $f'(x)\ne 0$, then $f$ has a solution $\bar x\in\Z_p$ with $\bar x = x\mod p$.
+%Whow Sierpinski gasket...?
+
+Here there is a picture of $\Z_3$, a space with three disjoint open and closed balls: $1\mod 3$, $2\mod 3$, and $3 \mod 3$. Inside each of these are three more clopen balls corresponding to $\mod 9$, and so on. Since the metric can only take on discrete values, this sort of thing happens, and makes for an interesting description of the ring.
+
+Some properties of the $p$-adic metric:
+\begin{itemize}
+\item $|0|_p = 0$ (which is essentially by definition)
+\item $|x|_p|y|_p = |xy|_p$
+\item Metrics also need to satisfy the triangle inequality, but this one satisfies a stronger criterion called the ultrametric inequaity: \[\max(|x|_p,|y|_p)\ge |x+y|_p\]
+\end{itemize}
+\begin{ex}
+Prove the latter two properties.
+\end{ex}
+
+So let's go back to the example $x_n = 2x_{n-1}-3x_{n-2}$ and its closed form. Since $\sqrt{-2} = -1\mod 3$ in $\Z_3$, so $|1-\sqrt{-2}|_3 = 1$ and $|1+\sqrt{-2}|_3 = 1/3$ (do some calculations$\mod 9$ and then apply Hensel's Lemma).\footnote{Notice that only one root of 2 makes this work: $(\sqrt{2})^2 = -1\mod 3$.}
+
+Thus, the $1/3$ term goes to zero eventually.
+
+The $p$-adic metric is very strange when compared to the conventional metric for integers: numbers close to 0 are those most divisible by $p$.
+
+\subsection{Convergence in $\Z_p$}
+\begin{lem}
+Let $b_k$ be a sequence in $\Z_p$. Then, the partial sums of $b_k$ converge iff $|b_k|\to 0$.
+\end{lem}
+This is very different from the reals, where the condition is necessary but not sufficient. it is also related to the idea of a Cauchy sequence, in which the terms become very small. In this sort of space, Cauchy sequences will converge.
+\begin{proof}
+By the ultrametric inequality,
+\[\left|\sum_{i \le n \le j} b_n\right|_p \le \max_{i \le n \le j} |b_n|_p\]
+which goes to zero.
+\end{proof}
+The left side of that inequality was the precise definition of a Cauchy sequence.
+
+Note: the following will look slightly like complex analysis --- $p$-adic analysis is much easier than over the reals.
+\begin{defn}
+Let $B$ a (cl)open ball in $\Z_p$. A function $f:B\to\Z_p$ is $p$-adic analytic if it is defined by a power series
+\[f(z) = \sum_{k \ge 0} a_n (z-b_0)^k\]
+for some $b_0\in B$, with the power series convergent on $B$.
+\end{defn}
+So this is just that $f$ has a Taylor series. The actual definition is essentially the same as in $\mathbb{R}$. And this suggests termwise differentiation, which only decreases the $p$-adic metric. (One can also do differentiation as the limit of the difference quotients.)
+
+\begin{thm}[Straussman]
+Let $f:B\to\Z_p$ be $p$-adic analytic. Then, either
+\begin{enumerate}
+\item $f = 0$, or
+\item $f$ has only finitely many zeros on $B$.
+\end{enumerate}
+\end{thm}
+This is pretty strongly reminiscent of the analogous theorems in $\mathbb{C}$ and in $\mathbb{R}$ (i.e. that zeros of analytic nonzero functions have nonzero neighborhoods).
+\begin{proof} The following lemma will be necessary:
+\begin{lem}
+$\Z_p$ is compact (i.e. it satisfies Bolzano-Weierstrauss).
+\end{lem}
+\begin{proof}
+Consider the decimal expansion of a number $a\in\Z_p$. Since $0 \le d_i < p-1$, then only a finite number of options can happen, so repetitions must happen, and this allows one to pick a constant subsequence.
+\end{proof}
+Now, suppose $f$ has infinitely many zeros $b_k$ (so thus it will be necessary to show that $f$ is identically zero). By the lemma, there exists a convergent subsequence $b_{k_i}\to b$. Take the Taylor series for $f$ about $b$ as $f(z) =\sum a_k (z-b)^k$. If $f\ne 0$, then one can choose $a_N$ to be the first nonzero coefficient, so
+\[f(z) = (z-b)^N(a_N+(z-b)g(z))\]
+for another analytic function $g$.
+
+For very small $|z-b|_p$, $|(z-b)g(z)|_p < |a_N|_p$, so then $f(z)\ne 0$, so the assumption is false.
+\end{proof}
+If this proof seems mystical, look at the proof for real analytic functions; it is nearly identical.
+\subsection{Proof of the Skolem-Mahler-Lech Theorem}
+Now that the relevant technique has been developed, it will be possible to prove the theorem that was the focus of this lecture. The strategy of the proof will be to try to find $p$-adic analytic functions $f_i:\Z_p\to\Z_p$ such that if $n\in\Z$, then $f_i(n) = a_{nm+i}$ for some $m\in\Z$. The goal is to write functions corresponding to a given recurrence relation. Once this happens, Straussman's Theorem makes the proof done.
+\begin{proof}
+Given a recurrence relation $a_n$, write $a_k = (A^k\vec v)\cdot \vec w$, where $\vec v$ corresponds to the initial conditions and $A$ is the recurrence matrix. $\vec w = (1,0,0,0,\dots)$. For example, if the sequence is just the Fibonacci numbers, then $\vec v = \displaystyle\binom{1}{1}$, $A = 
+\begin{pmatrix}1&1\\0&1\end{pmatrix}$, and $\vec w = \displaystyle\binom{1}{0}$. Calculating this out makes it clear how the recurrence works.\\
+Choose some prime $p$ that does not divide $\det A$. (Since $A$ has integer entries, then its determinant is an integer as well.) In particular, $A$ is invertible $\mod p$. Furthermore, the group of invertible $n\times n$ matrices with entries in $\Z/p$ is finite, since there are only so many options.\\
+In particular, some power of $A$ becomes the identity: $A^m = I\mod p$. Thus, $A^n = I + pB$ for some other matrix $B$.\\
+We want 
+\begin{align*}
+f_i(n) = a_{nm+i} &= (A^{mn}A^i\vec v)\cdot \vec w\\
+& = ((1+pB)^nA^i\vec v)\cdot \vec w\\
+&= \left[\left(1+pB+\binom{n}{2}p^2B + \dots\right)A\vec v\right]\cdot \vec w\\
+&= \sum_k p^k P_k(n)
+\end{align*}
+for some polynomial $P_k$. This polynomial is clearly analytic, so Straussman's theorem applies, and the proof is complete.
+\end{proof}
+\begin{ex}
+Bound the common differences in the arithmetic progressions. Hint: Extract this from the proof.
+\end{ex}
+\begin{ex}
+Bound the finite set of exceptional zeros, which is a bit harder.
+\end{ex}
+This proof admits many generalizations (e.g. in integral fields with fractional domain of fractional character zero). But it fails badly when $p = 0$: consider $\mathbb{F}_p(t)$. Define a recurrence sequence
+\[x_n = (t+1)^n-t^n-1 = (2t+2)x_{n-1} -(t^2+3t-1)x_{n-2} +(t^2+t)x_{n-3}.\]
+This is zero when $n = p^k$.
+\begin{ex}
+Where does the proof go wrong? How does it fail so badly?
+\end{ex}
+\begin{ques}
+Is there an algorithm or computer progam that decides whether an integer recurrence even has a zero?
+\end{ques}

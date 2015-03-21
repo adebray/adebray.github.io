@@ -1,0 +1,44 @@
+%\documentclass{amsart}%Turn this into one large document at some point
+%\usepackage{geometry,microtype,amssymb,enumerate}%,hyperref}
+%\geometry{margin=0.75in}
+%\def\l{\lambda}
+%\def\qedsymbol{\scriptsize\ensuremath\boxtimes}
+%\newcommand{\Z}{\mathbb{Z}}
+%\newtheorem{lem}{Lemma}
+%\newtheorem*{cor}{Corollary}
+%\theoremstyle{definition}
+%\newtheorem{ex}{Exercise}
+%\newtheorem{defn}{Definition}
+%\begin{document}
+%\title{Linear Recurrences}
+%5\author{June 26, 2012} %Yeah, yeah
+%\maketitle
+\begin{defn}
+A linear recurrence is a sequence of the form $0 = \sum_{j=1}^r c_ja_{n+j}$, where $c_j\in\Z$ and (typically) $c_1=1$. The simplest example is the Fibonacci numbers: $F_{n+2} = F_{n+1}+F_n$, $F_0=F_1=1$.\end{defn}
+One way to obtain a closed form for a linear recurrence is through a generating function.\\
+%Insert the example here
+There does exist a nice shortcut, however: suppose $a_{n+2} = 3a_{n+1}-2a_n$, and create the characteristic polynomial $p(x) = x^2-3x+2 = (x-1)(x-2)$.
+\begin{ex} Show that if this polynomial has distinct roots $\lambda_1,\dots,\lambda_k$, then all linear recurrences with it as their characteristic polynomial are of the form $a_n = \sum_{j=1}^k c_j\l_j^n$. (From there one can plug in the initial values and solve.) If a polynomial has a root with multiplicity $r$, then that term in the solution has the form $\sum_{k=1}^r c_jn^{j=1}\l^n$.\end{ex}
+This works in the case of irrational or even complex roots, because everything will cancel out nicely.
+\begin{ex} Give a closed form for the Fibonacci sequence.\end{ex}
+\begin{ex} Find all real solutions $(x_1,\dots,x_5,y)$ to
+\begin{align*}
+x_1+x_3 &= yx_2\\
+x_2+x_4 &= yx_3\\
+x_3+x_5 &= yx_4\\
+x_4+x_1 &= yx_5\\
+x_5+x_2 &= yx_1.
+\end{align*}
+\end{ex}
+Given an integer recurrence relation, it is often worth asking which values of $n$ satisfy $a_n = 0$. This may involve describing the structure of the zero set. Similarly, is it possible to find a sequence given by a recurrence relation such that $a_n = 0$ when $n\in S$? Is there a sequence which is zero at every prime, or every square, or every number congruent to $1\bmod 3$?\\
+Some more interesting sequences to play with:
+\begin{enumerate} %I would like these to be better aligned at some point
+\item $a_{n+2} = a_{n+1}-a_n,$ $a_0=a_1 = 1$
+\item $a_{n+2} = 2a_{n+1}-5a_n,$ $a_0=a_1=1$
+\item $a_{n+2} = a_{n+1} + a_n,$ $a_0 = a_1 = 1$ (Fibonacci sequence)
+\item $a_{n+2} = a_{n+1}+a_n,$ $a_0 = 2$, $a_1 = 1$ (Lucas sequence)
+\item $a_{n+3} = 2a_{n+2}-4a_{n=1}+4a_n,$ $a_0=a_1=0,$ $a_2=1$
+\item $a_{n+6} = 6a_{n+4}-12a_{n+2} +8a_n$, $(a_0,\dots,a_5) = (8,0,9,0,8,0)$.
+\end{enumerate}
+If a sequence has no zeros, it can be worth asking why. It could go to infinity, or may always be $m \bmod n$, or so on.
+%\end{document}

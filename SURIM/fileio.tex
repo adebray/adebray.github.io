@@ -1,0 +1,34 @@
+\subsection{File I/O}
+I/O stands for input/output, but the goal is to use the program to read in data from files, process it, and write the results to some other file.
+
+One useful command in R is the help operator. Typing \texttt{?\,\,cmd} will bring up the documentation (equivalent to \texttt{man} or \texttt{help}). In RStudio, this is put in another window nicely.
+
+One can use a command called \texttt{scan} to read in data. However, a bunch of higher-level commands, such as \texttt{read.table} or \texttt{read.csv}, use \texttt{scan} and so you don't necessarily need to use it.
+
+Other not-terribly-useful commands include \texttt{readBin} and \texttt{writeBin}, which are useful for binary files.
+
+\texttt{cat} can be used to append to files in a somewhat analogous manner to Unix. \texttt{dump} can put objcts into a file in a way that R recognizes later. \texttt{source} is a way to execute an R script inline. This can be useful to read in lots of macros or functions definitions that might otherwise clutter the file where work is done. \texttt{save} can save objects in a \texttt{.r} data file --- unike \texttt{dump}, \texttt{save} is less humna-readable (and correspondingly a little faster). \texttt{load} is the inverse operation of \texttt{save}, used to read in \texttt{.r} data file. \texttt{save.image} saves the entire workspace, which is rather convenient in terms of lunch breaks and such. The output file is of type \texttt{.rdata}.
+
+A \texttt{.csv} file is a type of data file. Using \texttt{read.csv} gets the data file and stores it in a variable of some sort (presumably a table). This is very similar to \texttt{read.table} and declare whether or not there is a header (which can be true or false for \texttt{csv} files, so be careful). \texttt{csv} simply stands for comma-separated values, which gives some impression of what the interior of the file looks like.
+
+Notice that R contains some scripting commands, such as \texttt{ls()}, which can list all the files in the current directory.
+
+\subsection{Functions in R}
+So now functions. They are of course useful so that you can avoid doing the same thing so many times, just like subroutines in any language. Honestly, this is not too different from other languages: definitions are straightforward (i.e. \texttt{name = function(x,y) \{\dots\}}) The return statement is just \texttt{return(stuff)}. In addition to the time-saving and space-saving reasons listed above, code decomposed into functions is generally easier to understand (both by the coder and by others). Notice that \texttt{function} is a function that generates new functions! Functions are also easy to modify, which is not quite news. Functions can also be faster to write and such (and they can even call other functions as arguments).
+
+Another sort of syntax is to specify a default argument: writing \texttt{name = function(\dots)\{default\}}, so that one doesn't need to pass it arguments. One can also write \texttt{function(arg1,arg2,...)}. Using the ellipse allows one to pass any number of other arguments. For example, this can be used to pass arguments about the plot. Interestingly, it looks like one has to name the variables in the arguments: \texttt{name = function(x,y)} must be called by \texttt{name(x=2,y=3)}.
+
+Whatever you do inside a function doesn't affect things which aren't returned, as in other languages. Apparently passing by reference is supported but complicated. This is the fairly standard use of the concept of scope. Since scope can be confusing, it is important to test this sort of thing.
+
+Comments in R are prefaced by \verb+#+, and are really pretty helpful. Really.
+
+\subsection{More UNIX}
+\begin{itemize}
+\item \texttt{ssh}, \texttt{ls}, and \texttt{cd} are as discussed in the first lecture.
+\item More interestingly, a program called \texttt{more} is a text editor with a simple GUI (yay X-forwarding!)
+\item The name \texttt{..} refers to one directory higher, which can be useful for moving things.
+\item The command \texttt{rm} is used to delete files. Don't be stupid here.
+\item \texttt{man} will be a useful way to learn more about certain commands. \texttt{man pdflatex} is a great way to learn about what \texttt{pdflatex} does and what arguments it accepts. It can also be used to check if something is installed (since it won't have a \texttt{man} file if it isn't).
+\item \texttt{top} is a command that shows all the running processes. This is a good way to know what is going on or why something might be crashing. In particular, you know who is doing what. Using \texttt{write username} allows one to send messages to another user.
+\end{itemize}
+More generally, learning to Google your questions will help solve more specific or harder problems.

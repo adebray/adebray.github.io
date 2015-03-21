@@ -1,0 +1,40 @@
+%Hopefully these results about sequences will illuminate some of the ideas in Sections~\ref{struct} and~\ref{tryagain}.
+\begin{defn}
+A short exact sequence is $A\stackrel{f}{\hookrightarrow} B \stackrel{g}{\twoheadrightarrow} C$ for groups $A,B,C$ such that $\Im f = \Ker g$.
+\end{defn}
+An exact sequence is a composition of short exact sequences (so that the image of one map is the kernel of the next). Notationally, it is common to write a short exact sequence as $0\to A\to B\to C\to0$, emphasizing its properties. (if the groups are written multiplicatively, $1$ is used instead of $0$.)
+\begin{defn}
+Given a short exact sequence of groups $0\to A\stackrel{f}{\to} B\stackrel{g}{\to} C\to 0$, a section is a group homomorphism $s:C\to B$ such that $g\circ s = \id_C$.
+\end{defn}
+From this definition, $s$ is injective, so $\Im s\simeq C$.
+
+Consider the two short exact sequences
+\[
+\begin{tabular}{c @{$\to$} c @{$\to$} c @{$\to$} c @{$\to$} l}
+$0$ & $\Z/2\Z$ & $\Z/4\Z$ & $\Z/2\Z$ & $0$\\
+$0$ & $\Z/2\Z$ & $\Z/2\Z\times \Z/2\Z$ & $\Z/2\Z$ & $0$.
+\end{tabular}
+\]
+For the second sequence, the maps $f:a\mapsto (a,0)$ and $g:(a,b)\mapsto b$ define a short exact sequence for which $s: b\mapsto(0,b)$ is a section. However, the first such sequence actually doesn't have a section: $f: a\mapsto 2a$ and $g:\Z/4\Z \to (2\Z)/(4\Z)$ define a short exact sequence, but none of the possible maps $\Z/2\Z \to \Z/4\Z$ are sections. Of course, one could define a set-theoretic section using preimages, but this is not a group homomorphism.
+\begin{defn}
+A short exact sequence is split if there exists a section.
+\end{defn}
+\begin{thm}
+\label{splitting}
+If $0\to A\to B\to C\to 0$ is a short exact sequence of Abelian groups with maps $f:A\to B$ and $g:B\to C$ with a section $s$, then $B \simeq A\times C$ (or, equivalently, $B\simeq A\oplus C$).
+\end{thm}
+\begin{proof}
+Suppose $a\in A$, $b\in B$, and $c\in C$. Then,
+\begin{align*}
+g(b-s(g(b))) & = g(b) - g(s(g(b)))\\
+&= g(b) - g(b) = 0,
+\end{align*}
+so $b-s(g(b))\in A$, and $b = s(g(b)) + a$ for some $a$, so $s$ is surjective. This sum is unique: if $a+s(c) = a'+s(c')$, then $g(a+s(c)) = g(a'+s(c')) = g(s(c)) = c = g(s(c')) = c'$, and since $c = c'$, then $a = a'$ as well.
+\end{proof}
+In this language, the fundamental theorem for finitely generated abelian groups (Theorem~\ref{fgagtheorem}) reduces to asserting that if $G$ is abelian of order $p^b$ for some prime $p$ and $x\in G$ is of maximal order, then
+\[0\to\langle x\rangle \to G\to Q\to 0\]
+is a short exact sequence, where $Q = G/\langle x\rangle$. The inductive assumption is that $Q$ is a product, and since $|G|/|\langle x \rangle| = |Q|$, then this can be used to justify that $G$ also is. The big question in this proof is how to show that the sequence splits.
+
+Precautionary remark: in for non-abelian groups, splitting implies decomposition into a semidirect product, not a direct one. For example, the dihedral group of six elements\footnote{Notational conflict; some write $D_n$ for the dihedral group of $n$ elements; others use it to designate the group of symmetries of the regular $n$-gon. In this case, what I have called $D_6$ can also be written $D_3$.} $D_6$ is the set of symmetries of an equilateral triangle. It is given by the presentation $D_6 = \langle \sigma,\tau:\sigma^3 = 1,\tau^2 = 1,\tau\sigma = \sigma^3\tau\rangle$. $\sigma$ represents a rotation by $120^\circ$ and $\tau$ represents a reflection. Notice that $\langle\sigma\rangle = C_3$ and $\langle\tau\rangle = C_2$, but $D_6$ is non-abelian, so $D_6 = C_3 \rtimes C_2$, and the sequence $1\to C_3\to D_6\to C_2\to 1$ splits.
+
+Another reason splitting can be confusing is that it doesn't extend nicely to vector spaces. Thanks to the rank-nullity theorem, a short exact sequence of vector spaces \emph{always} splits.

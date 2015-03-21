@@ -1,0 +1,22 @@
+One can use the dot product for projecting one vector onto another. If $\vec A_{\vec B}$ is the projection of $\vec A$ onto $\vec B$, then $\vec A_{\vec B}= \frac{\vec A\cdot \vec B}{\|\vec B\|}$.
+
+Thus, multiplication can be thought of as a projection: suppose $X\in\R^{n\times p}$ with rows $\vec x_i\in\R^p$. Then, multiplying by a vector projects each $\vec x_i$ into the new space.
+
+This happens to have statistical applications: the variance is defined as
+\[\Var(Y,Z) = \vec E((Y-\vec E Y)(Z-\vec E Z))\] where $\vec E X$ is the expected value of $X$. For a set of pairs $(Y_i,Z_i)$ this becomes
+\[\sum_{i=1}^n \frac{(Y_i-\bar Y)(Z_i-\bar Z)}{n}.\]
+The data matrix $X$, then, represents $n$ observations of $p$ variables. In order to study how these variables co-vary, one could compute every $\Var(x_i,x_j)$ by centering $X$ to get $X_C$,\footnote{i.e. setting the mean to $\vec 0$.} and then compute the standard covariance matrix $\hat\Sigma = X_C\T X_C$, which can be thought of as taking dot products.
+
+Here the SVD comes back from Section~\ref{svd}: there is a unique\footnote{up to sign.} decomposition $X = UDV\T\!$, where $U,V$ are unitary and $D$ is diagonal.
+\begin{defn}
+The diagonal entries in $D$ are the singular values of $X$. The vectors in $U$ and $V$ are called singular vectors.
+\end{defn}
+This does in fact have to do with variance: a direction in which $X$ has high variance is equivalent to finding large values of $X\vec v$, where $\vec v$ is some unit vector. This can be estimated with the sample variance: since the SVD is unique, then $\hat \Sigma = D$.
+
+Conceptually, the SVD involves finding the direction with the most variation (the variation is just $d_i^2$), squishing the data down from that direction, and then repeating until there are no more dimensions (so the algorithm can be implemented recursively). Since the SVD calculates relative variance, it doesn't actually matter if the data is centered before the calculation (unlike when calculating standard covariance).
+
+Sometimes, one can scale the matrix to unit variance, which is helpful if one only wants the directions of variance or the units aren't relevant. However, knowing the amounts of variance is helpful in many cases.
+
+One can do a limited principal component analysis; if $V = [\vec v_1\dotsb\vec v_n]$ is given as in the SVD, then calculating $X[\vec v_1\ \vec v_2]$ gives only the first two principal components, which is helpful for analysis and plotting. These are the axes which yield the most variation in the data, out of all possible axes (up to sign again). (The can also be done with $\vec u_1$ and $\vec u_2$ instead of $X\vec v_1$ and $X\vec v_2$, but this is no different after scaling.)
+
+Then units of such a graph can be cryptic, but they represent variance. Often, the first component represents size to some degree (such as when there are three variables for length, width, and height). A size less than zero would mean less than the mean. Sometimes, though, a component doesn't have any particular meaning.

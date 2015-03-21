@@ -1,0 +1,85 @@
+%\documentclass{amsart}
+%\usepackage[margin=0.75in]{geometry}
+%\usepackage{microtype,hyperref,amsthm,amssymb}
+%\newcommand{\Z}{\mathbb Z}
+%\newcommand{\inj}{\hookrightarrow}
+%\newcommand{\surj}{\twoheadrightarrow}
+%\DeclareMathOperator{\Ker}{Ker}
+%\DeclareMathOperator{\qwsa}{Im}
+%\def\Im{\qwsa}
+%\DeclareMathOperator{\id}{id}
+%\renewcommand{\vec}{\mathbf}
+%\newtheorem{thm}{Theorem}
+%\newtheorem{lem}{Lemma}
+%\theoremstyle{definition}
+%\newtheorem*{defn}{Definition}
+%\begin{document}
+%\title{The Structure Theorem for Finitely Generated Abelian Groups}
+%\author{Arun Debray}
+%\maketitle
+%\subsection{Short Exact Sequences} %All sections changed to subsections
+%\begin{defn}
+%A short exact sequence is $A\stackrel{f}{\hookrightarrow} B \stackrel{g}{\twoheadrightarrow} C$ for groups $A,B,C$ such that $\Im f = \Ker g$.
+%\end{defn}
+%\begin{defn}
+%Given a short exact sequence of groups $0\to A\stackrel{f}{\to} B\stackrel{g}{\to} C\to 0$, a section is a group homomorphism $s:C\to B$ such that $g\circ s = \id_C$.
+%\end{defn}
+%From this definition, $s$ is injective, so $\Im s\simeq C$.
+%\begin{defn}
+%A short exact sequence is split if there exists a section.
+%\end{defn}
+%\begin{thm}
+%\label{splitting}
+%If $0\to A\to B\to C\to 0$ is a short exact sequence of abelian groups with maps $f:A\to B$ and $g:B\to C$ with a section $s$, then $B \simeq A\times C$ (or, equivalently, $B\simeq A\oplus C$).
+%\end{thm}
+%\begin{proof}
+%Suppose $a\in A$, $b\in B$, and $c\in C$. Then,
+%\begin{align*}
+%g(b-s(g(b))) & = g(b) - g(s(g(b)))\\
+%&= g(b) - g(b) = 0,
+%\end{align*}
+%so $b-s(g(b))\in A$, and $b = s(g(b)) + a$ for some $a$, so $s$ is surjective. This sum is unique: if $a+s(c) = a'+s(c')$, then $g(a+s(c)) = g(a'+s(c')) = g(s(c)) = c = g(s(c')) = c'$, and since $c = c'$, then $a = a'$ as well.
+%\end{proof}
+\subsection{Torsion-Free Finitely Generated Abelian Groups}
+%This ends up not being necessary...
+%\begin{lem}
+%If $A$ is a finitely generated abelian group and $B < A$, then $B$ is finitely generated.
+%\end{lem}
+%So apparently I am able to assume this.
+%\begin{lem}
+%Any finitely generated abelian group has a minimal set of generators.
+%\end{lem}
+\begin{thm}[Structure Theorem for Torsion-Free Finitely Generated Abelian Groups]
+\label{torsionfree}
+If $A$ is a torsion-free\footnote{i.e. all of the elements of $A$ have infinite order. This implies $A$ has infinite order as well, but the converse is not true, as in $\prod_{i=1}^{\infty} \Z/2\Z$.} abelian group, then $A\simeq \Z^k$ for some natural number $k$.
+\end{thm}
+\begin{proof}
+Let $\langle x_1,\dots,x_n\rangle$ be the minimum generating set for $A$ (such a set exists because $A$ is finitely generated). Let $f: x_j\mapsto\vec e_j\in\Z^k$ and $f(g+g') = f(g)+f(g')$. Then, $f$ is a bijection, since any element of $\Z^k$ can be sent by its basis elements via $f^{-1}:\vec e_j\mapsto x_j$. Thus $A\simeq \Z^k$.
+\end{proof}
+\subsection{Finite Abelian Groups}
+\begin{thm}
+If $A$ is a finite abelian group, then $A \simeq \prod_{i=1}^r \Z/n_i\Z$.
+\label{finite}
+\end{thm}
+\begin{proof}
+Let $N$ be the order of $A$ and pick some element $x\in A$ of order $N$. Consider the short exact sequence
+\[0\to \langle x\rangle \inj A \stackrel g\surj A/\langle x \rangle \to 0.\]
+Let $\pi: A/\langle x \rangle \to A$ be given by $\pi(c) = x+ c$. Thus, $g(\pi(c)) = c$ and $\pi$ maps the identity to itself, so this sequence splits by Theorem~\ref{splitting}. Thus, $A = \langle x \rangle \times A/\langle x\rangle$.
+
+However, $\langle x \rangle \simeq \Z/N\Z$, and using induction on the order of $A$, since the order of $A/\langle x\rangle$ is less than that of $A$, then $A = \prod_{j=1}^r \Z/n_i\Z$.
+\end{proof}
+\subsection{The General Theorem}
+\begin{thm}[Structure Theorem for Abelian Groups]
+\label{fgagtheorem}
+If $A$ is a finitely generated abelian group, then \[A\simeq \Z^k\times \prod_{j=1}^r \Z/n_i\Z\] for some natural numbers $k,r,n_i$.
+\end{thm}
+\begin{proof}
+Let $T$ be the torsion subgroup of $A$ and consider the sequence
+\[0\to T\stackrel f\inj A\stackrel g\surj A/T \to 0,\]
+where $f$ is given by inclusion and $g$ assigns elements of $A$ to their cosets in $A/T$. Since $\Im f = \Ker g$, then this is a short exact sequence $\pi$ that splits (the proof is the same as in Theorem~\ref{finite}).
+%Show that this splits
+
+Thus, $A = T\times A/T$. However, since $A$ is finitely generated, then $T$ is finite, so $T = \prod_{j=1}^r \Z/n_i\Z$ for some $n_i$ by Theorem~\ref{finite}, and since $T$ is the torsion subgroup then $A/T$ is torsion-free, which means that $A/T \simeq \Z^k$ by Theorem~\ref{torsionfree}. Thus,
+\[A = A/T\times T = \Z^k\times \prod_{i=1}^r \Z/n_i\Z.\qedhere\]
+\end{proof}
+%\end{document}

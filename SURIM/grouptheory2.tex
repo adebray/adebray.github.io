@@ -1,0 +1,186 @@
+\subsection{Some Preliminaries}
+\begin{defn}
+A group is a set $G$ with an identity element $e\in G$ and an operation $\cdot: G\times G\to G$ such that:
+\begin{enumerate}
+\item $\cdot$ is associative,
+\item $e\cdot g = g\cdot e = g$ for all $g\in G$, and
+\item $\forall g\in G$ $\exists g^{-1}\in G$ such that $gg^{-1} = g^{-1}g = e$.
+\end{enumerate}
+\end{defn}
+\begin{defn}
+The order of a group, denoted $\ord G$ or $\card G$, is the number of elements it contains, or is infinite if the group contains infinitely many elements.
+\end{defn}
+\begin{defn}
+A subgroup of a group $G$ is a subset $H$ of $G$ that forms a group under the same operation. Subgroups are denoted $H\le G$.
+\end{defn}
+\begin{defn}
+A (left) coset of a subgroup $H\subseteq G$ is a set $gH = \{gh: h\in H\}$.
+\end{defn}
+\begin{defn}
+If $H\subseteq G$ is a subgroup, then the quotient $G/H$ (read $G$ mod $H$) is the set of left cosets of $H$.
+\end{defn}
+Inside of the Klein-four group $G = \Z/2\Z \times \Z/2\Z$, the set $H = \{(0,0),(1,0)\}$ is a subgroup whose cosets are $H$ and $G\setminus H$.
+\begin{lem}
+The sizes of the cosets for a subgroup are the same: $|gH| = |g'H|$.
+\end{lem}
+\begin{proof}
+The bijection $g'g^{-1}$ sends $gH$ to $g'H$ (by group property, it is invertible), so the cosets have the same size.
+\end{proof}
+\begin{lem}
+Any 2 cosets of $H$ are equal or disjoint.
+\end{lem}
+\begin{proof}
+Suppose $gH$ and $g'H$ have some element in common, so $\exists x\in gH\cap g'H$. Then, since $x = gh = g'h'$ for some $h,h'\in H$, then $g = g'h'h^{-1}$. But since $H$ is a group, then $h'h^{-1} H = H$, so $gH = g'(h'h^{-1} H) = g'H$.
+\end{proof}
+\begin{thm}
+Let $H$ be a subgroup of a finite group $G$. Then, $\card H$ divides $\card G$.
+\end{thm}
+\begin{proof}
+Since all left cosets of $H$ have the same size and are disjoint, and every element of $G$ belongs to some coset of $H$, then\footnote{$\bigsqcup$ is used to denote the disjoint union of sets.}
+\[G = \bigsqcup_i g_iH \quad \implies \card G = \card{G/H}\cdot \card H.\qedhere\]
+\end{proof}
+\begin{cor}[Lagrange]
+The order of any $g\in G$ divides $\ord G$.
+\end{cor}
+\begin{proof}
+Since every element generates a subgroup of its order, then that order must divide $\ord G$.
+\end{proof}
+\begin{defn}
+A group action of a group $G$ on a set $X$ is a map $\cdot: G\times X\to X$ such that if $g,g'\in G$ and $x\in X$, then $(gg')\cdot x = g\cdot (g'\cdot x)$ and $1\cdot x = x$.
+\end{defn}
+\begin{ex}
+Verify that $G$ always acts on $G/H$ on the left by the map $g\cdot aH = gaH$.
+\end{ex}
+\begin{proof}[Solution]
+Suppose $g,g',a\in G$, so that $aH \in G/H$. Then, $(gg')\cdot aH = (gg'a)H$ and $g\cdot(g'\cdot aH) = g\cdot(g'aH) = (gg'aH)$, and $1\cdot aH - (1a)H = aH$. Thus $\cdot$ is a group action.
+\end{proof}
+\begin{defn}
+A subgroup $H\subseteq G$ is normal, denoted $H \!\vartriangleleft G$, if $gH = Hg$, or equivalently, $gHg^{-1} = H$ for all $g\in G$.
+\end{defn}
+\begin{ex}
+Show that if $H\!\vartriangleleft G$, then $G/H$ has a group structure given by $gH \cdot g'H = gg'H$.
+\end{ex}
+\begin{proof}[Solution]
+Suppose $g'H$ is an inverse of $gH$ in $G/H$. Then, $gH\cdot g'H = H$, so $gH\cdot g'Hg = Hg = gH$, so left-multiplying by $g^{-1}H$, $g'Hg = H$, so $g' = g^{-1}$. Thus, the inverse is unique.
+
+The other group properties are trivial, since each can be taken from $G/H$ to $G$, where they already hold.
+\end{proof}
+Thus, one way to think of a group structure is a group acting upon itself: $G\times (G/H) \to G/H$. If $H\!\vartriangleleft G$, then $H \times (G/H) \to G/H$ acts trivially (i.e. it is the projection to right coordinates, so the element of $H$ is ignored. Thus $H$ is the kernel of this action).
+\begin{defn}
+An automorphism of a set $X$ is a bijection from $X$ to itself. The set of automorphisms of a given $X$ is denoted $\Aut(X)$.
+\end{defn}
+\begin{ex}
+Show that a group action of a group $G$ on a set $X$ is the same as a map $f:G\to\Aut (X)$.
+\end{ex}
+\begin{proof}[Solution]
+For any $g\in G$, a group action $f:G\times X \to X$ defines a map $h: x\mapsto f(g,x)$. The map $h^{-1}(x) = f(g^{-1},x)$ satisfies
+\[h(h^{-1}(x)) = h^{-1}(h(x)) = f(gg^{-1},x) = f(1,x) = 1,\]
+so $h: X\to X$ is a bijection. Thus $f:G\to\Aut(X)$.
+\end{proof}
+In some cases this is a group homomorphism (since group homomorphisms preserve group actions).
+
+Given this, $H\subset\Ker f$, so $f(H) = e$ (the identity).
+\begin{defn}
+The image of a map $f$ is the set $\Im f = \{y\in H\mid\exists x\in G: y = f(x)\}$.
+\end{defn}
+\begin{ex}[$1^{\mathrm{st}}$ Isomorphism Theorem]
+\label{firstiso}
+Show that if $f:G\to H$ is a group homomorphism, then:
+\begin{enumerate}
+\item \label{imiso} $\Im(f) \le H$,
+\item $\Ker f \!\vartriangleleft G$, and
+\item \label{bij}$G/(\Ker f) \simeq \Im f$.
+\end{enumerate}
+In particular, verify that the bijection for item~\ref{bij} is well-defined.
+\end{ex}
+\begin{proof}
+\begin{enumerate}
+\item Since $H$ is a group, then associativity must hold in $\Im(f)$.
+\begin{itemize}
+\item Closure: if $a,b\in\Im(f)$, then $a = f(g),b = f(g')$ for some $g,g'\in G$, so $f(gg') = f(g)f(g') = ab)$.
+\item Identity: given by $f(1)$: $f(g)f(1) = f(g\cdot 1) = f(g) = f(1\cdot g) = f(1)f(g)$.
+\item Inverses: if $a=f(g)$, let $a'=f(g^{-1})$, so $aa' = f(g)f(g^{-1}) = f(gg^{-1}) = 1$ and similarly with $a^{-1}a$.
+\end{itemize}
+Thus, $\Im f\le H$.
+\item By the proof of~\ref{imiso}, the identity satsifies $f(1) = 1$, so $1\in\Ker f$. Associativity in $\Ker f$ also follows, since $G$ is a group.
+\begin{itemize}
+\item Closure: if $g,g'\in\Ker f$, then $f(gg') = f(g)f(g') = (1)(1) = 1$.
+\item Inverses: if $g\in\Ker f$, then $g^{-1}\notin \Ker f$ implies $f(g)f(g^{-1})\ne 1$, but $f(gg^{-1})$.
+\item Normality: if $g\in G$, then $gH = \{a\in G: f(a)=f(g)\}$ ($\subset$ is by definition; $\supset$ is because $f(a) = f(g)\implies f(a)\cdot 1 = f(g)$, so $ah = g$ for some $h\in H$).
+
+Similarly, $Hg = \{a\in G:f(a) = f(g)\}$ by a similar line of reasoning; $\subset$ follows by definition, and $\supset$ is true because $f(a) = f(g)\implies 1\cdot f(a) =f(g)$, so for some $h\in H$, $ha = g$.
+\end{itemize}
+Thus, $\Ker f \!\vartriangleleft G$.
+\item Define a map $h: G/(\Ker f) \to \Im f$ given by $h(A) = f(g)$ for $g\in A\in(G/\Ker f)$. This is well-defined because all $g\in A$ have the same value $f(g)$ (since $a = b\Ker f$ for some $b\in G$ implies $f(g) = f(b)$ for all $g\in A$).
+
+The inverse is also well-defined: for any $x\in \Im f$, there exists a $g\in G$ such that $f(g) = x$, so $g(\Ker f)$ is a coset in $G/(\Ker f)$. If $x,x'$ are distinct in $\Im f$, then they must have distinct preimages, since all elements in a coset have the same value.
+
+The group structure is preserved because $f$ is a homomorphism and $h$ is well-defined, so $h$ is one as well.
+
+Thus, $G/(\Ker f) \simeq \Im f$.
+\end{enumerate}
+\end{proof}
+\subsection{Some Examples of Groups}
+Groups often arise due to symmetries in some object. For example, the group of automorphisms of a tetrahedron is $S_4 = \Aut(\{1,2,3,4\})$ (which can be seen by numbering the corners of the tetrahedron $1,\dots,4$; the group $S_4$ is just the set of permutations of 4 elements). This does not work as nicely for all the Platonic solids -- the icosahedron's symmetry group has order 60, and is unpleasant to work with.
+
+Interestingly, the Klein-four group $A_4$ satisfies $A_4\!\vartriangleleft S_4$.
+
+The set of $2\times 2$ matrices with nonzero determinant (which is necessary for invertibility) and complex entries forms a group called $\GL{2}(\C)$. Notice that $\det\!: \GL{2}(\C) \to \C^\times$ is a group homomorphism and $\Ker(\det) = \SL{2}(\C)$. The upper triangular matrices in this group are an abnormal subgroup of $\GL{2}(\C)$. One can also define the unitary matrices (those with determinant 1) $\mathrm{U}(2)$.
+
+There are also some interesting Abelian groups, such as $\Q$ or $\R$ under addition, $\Z$, number fields, or any ring. One also has the $p$-adic units (i.e. the $p$-adic numbers with nonzero first digit).
+
+The circle group is the set of points on the unit circle, with group operation defined by adding arguments. This can be constructed as $\{x\in\C: |x| =1\}$ or $\R/\Z$ or $\SL{1}(\C)$.
+
+Another example is the group of diagonal matrices with nonzero entries, given by $\C^\times \times \dots\times \C^\times$. All of these groups represent symmetries of some sort.
+\subsection{More Group Actions and Abelian Groups}
+Every normal subgroup $H$ is the kernel of some group action, because there exists some $f:G \to G/H$, which is a homomorphism.
+
+A group can act on itself in a trivial manner, through $G\to\Aut(G)$, but there is another path by group homomorphism. This can still be trivial, but it can also create a $g\cdot x\in G$ given by $gxg^{-1}$ (since it is necessary for $1\to 1$.)
+%\subsection{Abelian Groups}
+%\label{struct}
+\begin{defn}
+An abelian group is a group for which the operation is commutative (i.e. $ab = ba$ for all $a,b\in G$).
+\end{defn}
+Every subgroup of an Abelian group is therefore normal.
+
+These include the cyclic groups and their products, but also $\Z$ (sometimes called the infinite cyclic group) and $\Q$, $\R$, and $\C$.
+
+\begin{ex}
+If $A$ is a finitely generated abelian group and $B < A$, show that $B$ is finitely generated.
+\end{ex}
+%\begin{thm}
+%Any finitely generated abelian group is of the form
+%$\Z^k \times \prod_{i=1}^r \Z/n_i\Z$ for some $k,r,n_i\in N$.
+%\label{fgag}
+%\end{thm}
+%\begin{lem}
+%Let $A$ be a torsion-free abelian group.\footnote{i.e. all of the elements of $A$ have infinite order. This implies $A$ has infinite order as well, but the converse is not true, as in $\prod_{i=1}^{\infty} \Z/2\Z$.} Then, $A\simeq \Z^k$ for some $k\in\N$.
+%\label{torsionlemma}
+%\end{lem}
+%\begin{proof}
+%Pick a minimal set of generators (i.e. the set of generators of the smallest size) $x_1,\dots,x_n\in A$ (see Exercise~\ref{genset}). Then, every $a\in A$ can be written as $a = \sum_{i=1}^n a_ix_i$, where $a_i\in\Z$. Thus, there is an isomorphism between $A$ and $\Z^n$ given by setting $x_i\simeq \vec e_i$ and $0 \simeq (0,\dots,0)$, since the generators are linearly independent (since they are a minimal set).
+%\end{proof}
+%\begin{ex}
+%\label{genset}
+%Show that a torsion-free abelian group can be generated by some finite set. Hint: use induction.
+%\end{ex}
+%\begin{ex}
+%\label{secondlemma}
+%Suppose $A,B$, and $C$ are abelian groups and $A\to B\stackrel{g}{\to} C$ is a sequence of maps such that $A\hookrightarrow B = \Ker g$. Then, if there exists some $q:C\to B$ such that $g\circ q = e$ (i.e. the identity) on $C$, then $B\simeq A\oplus C$.%Assume this is a homomorphism?
+%\end{ex}
+%\begin{proof}[Proof of Theorem~\ref{fgag}]
+%The case of torsion-free abelian groups is taken care of by \hyperref[torsionlemma]{the lemma}, so suppose $A$ is an abelian group with torsion. Take the torsion subgroup $T\!\vartriangleleft A$, defined as all elements which are torsion (i.e. of finite order). Then, one can define maps $T \stackrel{g}{\hookrightarrow} A \stackrel{f}{\twoheadrightarrow} A/T$, where $g$ is the injection given by inclusion and $f$ is the canonical surjection $A\twoheadrightarrow A/T$ given by placing each element in its coset. Thus, $\Ker f = T$, so $f\circ g = e$.
+%
+%The map $g\oplus f^{-1}:T\oplus \Z^k \to A$ can be made by sending each basis element to any of its preimages. Thus, there exists a map $\pi:(x,y)\mapsto g(x) + f(y)$, where $x\in T$ and $y\in\Z^k$. Then, $\Ker \pi = T$.
+%
+%$\pi$ is surjective: given some $a\in A$, then $f(\pi(a))\in A$ and $\pi(a-f(\pi(a))) = 0$ (because $f(x)$ will be torsion-free). Thus, $a - f(\pi(a))\in T$, so $a = f(\pi(a)) + t$ for some $t\in T$.
+%\begin{ex}
+%Check that $\pi$ is an injection and a group homomorphism.
+%\end{ex}
+%Given this property of $\pi$ and using Exercise~\ref{secondlemma}, $A \simeq T\oplus \Z^k$.
+%
+%Now consider a finite abelian group $A$; let $N$ be the largest order of any element in $A$, and let $A'$ be the group generated by all elements of order $N$. Thus, one has maps $A'\hookrightarrow A \twoheadrightarrow A/A'$. By induction on $N$ and strong induction on $|A|$, $A/A' = \prod \Z/n_i\Z$ for $n_i < N$.
+%
+%Let $B$ be a group generated by one element of order $N$. Then, one can define the sequence of maps
+%\[B \simeq \Z/N\Z \stackrel{g}{\to} A\stackrel[\pi]{f}{\leftrightarrows}\prod_i \Z/n_i\Z \simeq A/A'\] in the same manner as above. In particular, $g\in\Ker\pi$, so using the same line of thought as above, $\pi f = 1$. Thus, using Exercise~\ref{secondlemma}, $A$ is the product of cyclic groups $\Z/n_i\Z$.
+%\end{proof}

@@ -1,0 +1,65 @@
+%\documentclass{amsart}
+%\usepackage{geometry,microtype,amssymb}%,hyperref}
+%\geometry{margin=0.75in}
+%\addtolength{\topmargin}{-0.5in}
+%\addtolength{\textheight}{0.5in}
+%I need to figure out theorems
+%\def\D{\Delta}
+%\def\qedsymbol{\scriptsize\ensuremath\boxtimes}
+%\newcommand{\T}{^{\mathrm{T}}}
+%\renewcommand{\vec}{\mathbf}
+%\newcommand{\Z}{\mathbb{Z}}
+%\DeclareMathOperator{\gyzzy}{GL}
+%\DeclareMathOperator{\syzyy}{SL}
+%\newcommand{\GL}[1]{\gyzzy_{#1}}
+%\newcommand{\SL}[1]{\syzyy_{#1}}
+%\newtheorem{lem}{Lemma}
+%\newtheorem*{cor}{Corollary}
+%\theoremstyle{definition}
+%\newtheorem{ex}{Exercise}
+%\newtheorem{defn}{Definition}
+%\begin{document}
+%\title{Class Numbers}
+%\author{June 25, 2012} %Yeah, yeah
+%\maketitle
+Consider binary quadratic forms with entries over $\Z$: $F(x,y) = ax^2+bxy+cy^2$, with $a,b,c\in\Z$.
+\begin{defn} The discriminant $\D$ is $\D = b^2-4ac$.\end{defn}
+This is just what would happen if you took $y = 1$ and solved for $0$ in the normal way.
+\begin{defn} Two quadratic forms $F(x,y)$ and $G(x,y)$ are equivalent, denoted $F\sim G$, if there exists a matrix $A$ such that $\det A = \pm 1$ and $F(x,y) = G(A(x,y))$, with the entries of $A$ in $\Z$.\end{defn}
+These are the matrices in $\GL{2}(\Z)$, which is typically the set of matrices over a field with nonzero determinant, but given the criterion for invertibility, the determinant must be $\pm 1$ over $\Z$. In particular, this means one has equivalence classes of equivalent forms.\\
+Some equivalences are straightforward: $F(x,y) \sim F(-y,x)$ via $A = \begin{pmatrix}0&1\\-1&0\end{pmatrix}$.\\%Make better!
+Similarly, if $A = \begin{pmatrix}1&0\\2&1\end{pmatrix}$, then $u=x$ and $v = 2x+y$, so
+$F(u,v) = (a+2b+4c)x^2+(b+4c)xy+cy^2.$\\
+This leads to a natural question: how does one tell if two forms are equivalent?\\
+It can be easier to think of quadratic forms via their representation as symmetric matrices: the product
+\[\begin{pmatrix}x\\y\end{pmatrix}
+\begin{pmatrix}a&b/2\\b/2&c\end{pmatrix}
+\begin{pmatrix}x&y\end{pmatrix}\]
+is equivalent to the form $ax^2+bxy+cy^2$. Then, equivalence means having similar matrices, or that $F = C\T{}\!\!AC$ for some $A\in\GL{2}(\Z)$. This is the same idea, but from a different viewpoint.
+\begin{defn}Two quadratic forms $F$ and $G$ are properly equivalent if the change-of-basis matrix $C$ has $\det C = 1$, denoted $F \simeq G$; similarly, if $\det C = -1$, then they are improperly equivalent.\end{defn}
+\begin{defn} A quadratic form $F$ represents an integer $m$ if there exist $x_0,y_0\in\Z$ such that $F(x_0,y_0) = m$.\end{defn}
+\begin{ex} Show that equivalent forms represent the same numbers.\end{ex}
+\begin{proof}[Solution:] Suppose that $F$ represents $m$ by $F(x_0,y_0) = m$ and $G(x,y) = (c_1x+c_2y,c_3x+c_4y)$. Then let $x_0' = c_1x_0+c_2y_0$ and $y_0'=c_3x_0+c_4y_0$, so that $G(x_0',y_0') = F(x_0,y_0)=m$. Thus equivalent forms represent the same numbers.\end{proof}
+Notice that the converse is not always true; two nonequivalent forms may share the same discriminant, as in $x^2+5y^2$ versus $2x^2+2xy+3y^2$. However, this is still helpful for determinging whether two forms are equivalent.
+\begin{defn} A form $F(x,y) = ax^2+bxy+cy^2$ is primitive if $(a,b,c) = 1$ (where this is the standard greatest common divisor function).\end{defn}
+All forms are thus either primitive or the scalar multiple of a primitive form.
+\begin{defn} A positive definite form is one for which $\D < 0$ and it takes on positive values. Negative definite forms, semidefinite forms, and indefinite forms can be defined similarly.\end{defn}
+\begin{ex} Show that equivalent forms have the same discriminant.\end{ex}
+\begin{proof}[Solution:] Suppose $A$ is the matrix of the quadratic form $F(x,y) = ax^2+bxy+cy^2$ and $A = C\T\!BC$ for some $C\in\GL{2}(\Z)$. Then,
+\[\det A = \begin{vmatrix}a&b/2\\b/2&c\end{vmatrix} = ac - \frac{b^2}{4} = -\frac{\D_F}{4}.\]
+Thus, two forms have the same discriminant if their matrices have the same determinant. Since $A = C\T \!BC$, then
+\[\det A = \det\left(C\T\right)\det B\det C = \left(\det C\right)^2\det B = \det B\]
+since $\det C = \pm 1$. Thus $-\frac{\D_F}{4} = -\frac{\D_G}{4}$, so $\D_F = \D_G$.
+\end{proof}
+\begin{defn} A reduced form is a positive definite form $F(x,y) = ax^2+bxy+cy^2$ such that $|b|\le a\le c$ and if $|b|=a$ or $a = c$, then $b>0$.\end{defn}
+An easy example is just $x^2+y^2$. Note that the definition must change slightly for non-positive definite forms. The motivation behind these forms is to make it easier to check equivalence thanks to the following exercise.
+\begin{ex} Show that every primitive positive definite form is properly equivalent to a reduced form of the same discriminant. (It may also be beneficial to find an algorithm.)\end{ex}
+\begin{ex} Show that no two reduced forms are properly equivalent. Hint: Look at which integers they represent.\end{ex} % I really need to find out what these do
+\begin{ex}How many reduced positive definite forms exist for a given discriminant $\D$? Hint: Do some exploration and calculation before arriving at an answer or trying to find a proof.
+\label{formula}
+\end{ex}
+\begin{defn} The class number $h(\D)$ of a given discriminant is the number of reduced positive definite quadratic forms that have $\D$ as a discriminant (e.g. $h(-4) = 1$, since $x^2+y^2$ is unique).\end{defn}
+It is also worthwhile knowing that $\SL{2}(\Z)$, the group of matrices of unitary determinant, is generated by two matrices, so every matrix in the group is a product of these matrices and their inverses:
+\[\SL{2}(\Z) = \left\langle \begin{pmatrix}0&-1\\1&0\end{pmatrix},
+\begin{pmatrix}1&1\\0&1\end{pmatrix}\right\rangle\] 
+%\end{document}

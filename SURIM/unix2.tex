@@ -1,0 +1,22 @@
+%\documentclass{article}
+%\usepackage{geometry,microtype,hyperref}
+%\geometry{margin=0.67in}
+%\begin{document}
+%\title{UNIX, quickly}
+%\author{SURIM}
+%\date{\today}
+%\maketitle
+Examples of basic commands that are good to know:
+\begin{itemize}
+\item \texttt{ls} can be used to list all files and directories in a given folder.
+\item \texttt{cd} is used to change from one directory to another. Notice that pressing the tab key allows completions of names.
+\begin{itemize}
+\item If one types \texttt{cd ..} one is sent to the directory one level up. \texttt{cd $\sim$} returns to the home directory.
+\end{itemize}
+\item It is also worth knowing a text editor. The lecturer uses emacs, with syntax \texttt{emacs vigre.txt}, but everyone knows vim is better. The syntax for the latter is \texttt{vim vigre.txt} or \texttt{vi vigre.txt}. Interestingly, Stanford's computers have a GUI for emcas but not vim, so if you ssh into a Stanford computer and enable X-forwarding (i.e. \texttt{ssh -X adebray@stanford.edu})
+\item One can use \texttt{mv} to move a file into a different directory or \texttt{cp} to copy a file (syntax \texttt{cp} oldfile newfile). This can be used to rename files by moving into the current directory, but with a different name, since the syntax is \texttt{mv} file directory/newname.
+\item Typing \texttt{R} at the command line opens up the interface for the R language (assuming you have it installed or are using a Stanford computer with X-forwarding, so you can see the plots unfold).
+\item The command \texttt{evince} can be used to open pdfs, which is particularly nice if you don't feel like downloading a pdf.
+\item One can use \texttt{scp} to move files between computers on the command line, but the lecturer didn't seem aware of this. Instead, he uses a GUI called CyberDock, which makes it pretty easy to send things between places\dots unless it crashes as in the demonstration.
+\end{itemize}
+%\end{document}

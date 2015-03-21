@@ -1,0 +1,54 @@
+%\documentclass{amsart}
+%\usepackage{geometry,microtype}
+%\geometry{margin=0.5in}
+%\theoremstyle{definition}
+%\newtheorem*{thm}{Theorem}
+%\begin{document}
+%\title{Factoring}
+%\author{Dr. Akshay Venkatesh\\June 27, 2012}
+%\maketitle
+Given some integer $N$, what is an algorithm to generate $p,q\in\mathbb{Z}$ siuch that $N = pq$?
+
+The first such algorithm is to divide $N$ by primes $2,3,5,\dots$ up to $\sqrt{N}$. Then, if $H$ has a factor, then one of $p,q \le \sqrt{N}$. This is inefficient, but any better method takes a bit of cleverness.
+
+The next two methods are $O(N^{\frac{1}{4}})$, which is pretty nice. (It's actually quite easy to tell whether a number is prime, but factoring it is harder.)
+
+The second method is a refinement of the first: you don't have to divide by every prime, because knowing information about $N/i$ allows you to know information about $N/(i+j)$ for small integers $j$.
+
+Suppose $i \approx \sqrt{N}$, which is a reasonable assumption because this is where the first algorithm tends to spend the most time. Then, one can expand the Taylor series to conclude that
+\[\frac{N}{i+1} = \frac{N}{i(1+\frac{1}{i})} = \frac{N}{i}\left(1-\frac{1}{i} +\frac{1}{i^2}-\dots\right) \approx \frac{N}{i} -\frac{N}{i^2}\]
+Similarly, $\frac{N}{i+2} \approx \frac{N}{i} -\frac{2N}{i^2}$.
+
+For example, consider $N = 295313885939$. It has a factor near $10^6$, so consider a small $j\in\mathbb{Z}$ such that $\frac{N}{10^6 + j}\in\mathbb{Z}$.
+\[\implies\frac{N}{10^6} - j\frac{N}{10^{12}} \approx k + 0.885939 - j\cdot0.295313\]
+for some $k\in\Z$ that isn't important. This can be solved by inspection: $j = 3$ makes this very close to zero, and in fact $1000003 \mid N$.
+
+In order for this to work, one needs an algorithm that takes $0<\alpha,\beta<1$ and finds a $j$ such that $a\approx \{j\beta\}$ (where $\{\}$ denotes the fractional part). Thus, this algorithm requires a careful implementation, and is not used very frequently, given the existence of better ones.
+
+For a slightly more complicated exampe, consider $M = 295322745329$, which also has a factor near $10^6$, so we want $0.745329 - j\cdot 0.295322$ to be an integer. Since the latter term is about $13/44$, take $j = 44$, and notice that $1000033 \mid M$.
+
+The third algorithm, called the Pollard $\rho$ algorithm.\footnote{I'm not convinced anybody actually knows why it's called the $\rho$ algorithm. This question was asked at the talk and nobody knew.} Suppose that $N = pq$; then, we want to produce $x,y$ such that $x \equiv y\mod p$ and $x \not\equiv y \mod q$. If this is possible, then $p = \gcd(x,y,N)$, from which a factor can be obtained fairly quickly.
+
+So how can this be done without knowing $p$ or $q$? Randomly picking them, of course. If you pick $p+1$ such numbers, then at least 2 will be congruent $\mod p$, since there are only so many options. This is the worst-case scenario; in the average case far fewer are needed --- usually you need about $\sqrt p$.\footnote{This is actually the solution to the birthday paradox: it's precisely the same question, so you need about $\sqrt{365} \approx 23$ people to get someone in the common in the average case.}
+
+Thus, one can choose a ``random'' sequence $x_1,x_2,\dots\in\Z$ given by $x_1 = 2$, $x_n = x_{n-1}^2 +1 \mod N$. If $N$ is composite, then it has a factor $p\le \sqrt N$, so $x_i=x_i$ for some $i,j < \sqrt p < N^{\frac{1}{4}}$ in the average case (which is why the algorithm is $O(N^{\frac{1}{4}})$). So you just need to look for $i,j\le N^{\frac{1}{4}}$.
+
+\dots but Pollad's big realization was that you don't have to test all of these, but instead try $\gcd(x_i-x_{2i},N)$. This can't be guaranteed to work, and so it is usually a bit slower than $O(N^{\frac{1}{4}})$, but you can just try again with different values and the algorithm is still pretty fast.
+
+Moreover, the actual polynomial used to generate a recurrence relation doesn't actually matter, so as long as the relation eventually becomes periodic $\mod N$ one could easily use another.
+
+For example, using $N = 35$, the sequence is $2,5,26,12,5$, so taking $\gcd(12 - 5,35) = 7$, a factor has been found.
+
+The fourth algorithm, and the current fastest one for sufficiently large numbers, is the quadratic sieve, which is $O\left(e^{\sqrt{\log\log N}}\right)$. The goal of this method is to find $x,y$ such that $x^2\equiv y^2\mod N$, so that $N\mid (x-y)(x+y)$ and if $N = pq$, there's a good chance that $p = \gcd(x-y,N)$ as before. (Specifically, this requires $P \mid x-y$ and $q$ doesn't.)
+
+Finding $x,y$ does actually take a while, which is why this method is only useful for large numbers (on the order of $10^{100}$ rather than $10^{10}$). Specifically, one generates $a_1,\dots,a_k$ at random and chooses $x,y$ as products of some of the $a_i$. In particular, if
+\[x = \prod_{i=1}^k a_i^{\varepsilon_i} \text{ and } y = \prod_{i=1}^k a_i^{\delta_i} \text{ where } \varepsilon_i,\delta_i = 0 \text{ or } 1,\]
+then they need to satisfy
+\begin{align*}
+\prod_{i=1}^k \left(a_i^2\right)^{\varepsilon_i} &\equiv \prod_{i=1}^k \left(a_i^2\right)^{\delta_i} \mod N\\
+\implies \prod_{i=1}^k \left(a_i^2\mod N\right)^{\varepsilon_i} &\equiv \prod_{i=1}^k \left(a_i^2\mod N\right)^{\delta_i}.
+\end{align*}
+Thus, this algorithm requires one to factor $a_i^2\mod N$ such that every prime factor has an equal exponent on both sides. This becomes a system of equations $\mod 2$, which can be solved with linear algbra.
+
+The key part of the quadratic sieve is that lots of numbers are easy to factor (even by division), so the sieve is fast because it breaks the problem into lots of easy ones. Specifically, it is known that the fraction of all numbers $N$ all of whose prime factors are less than $N^{\frac{1}{50}}$ is positive (for your favorite value of 50).
+%\end{document}

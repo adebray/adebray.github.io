@@ -1,0 +1,53 @@
+Michael Manapat's trajectory through mathematics is unusual in that he went from very theoretical (number theory) to very applied (game theory, including working at Google).
+
+\subsection{Evolutionary and Behavioral Game Theory}
+The canonical game in the study of game theory is the Prisoner's Dilemma: cooperation comes at a positive cost $c$ to give someone else a positive benefit $b$.
+\begin{defn}
+A Nash equilibrium is a strategy such that if both players choose it, neither has an incentive to unilaterally defect to another strategy.
+\end{defn}
+Notice that in this game, defection is a Nash Equilibrium, but not cooperation! This is interesting, because the optimal outcome would be for neither to defect\dots{} but the optimal strategy for each person is to defect.
+
+How often do people cooperate in this game? Most studies required recruiting people (especially undergrads) to play games. But undergrads are not representative of the general population. Recently, though, these sorts of studies have been implemented using Amazon's Mechanical Turk. Interestingly, there is little difference bewteen these methods: in each case, people cooperate roughly 40\% of the time.
+
+So that means people don't behave rationally almost half the time. Why might that be? Several hypotheses exist. For example, intuitions about these things have developed in situations where they are repeated many times, which rewards cooperation.
+
+One study created a Prisoner's Dilemma in which there was a probability of continuation after each game of 0.9. (This is more interesting than just fixing a number of times to repeat the game, in which everyone will cooperate, and then defect during the last game, since the incentive for cooperation is gone. But if you both know you'll defect on the last round, you'll defect on the round before, and by backwards induction, all the way to the first.) So in this probabilistic game, one could always defect or always cooperate, or choose more interesting strategies such as going randomly or alternating or such.
+
+One strategy is called tit-for-tat, in which you cooperate the first round and follow the opponent's choice in round $n$ in round $n+1$. This has won tournaments and has a lot of nice properties. It also is aesthetically nice: it isn't vindictive. However, it actually tends to lose against most individual strategies, and is the overall winner because its overall average payoff is better. Moreover, it is rather predictable.
+
+In the real world, tit-for-tat is not robust to errors (since in real life, mistakes in this sort of thing can happen). And this would cause switches from cooperation to defection, and result in somewhat random behavior over time. Thus, a better strategy is known as generous tit-for-tat (GTFT), which has a mechanism for detecting mistakes. These strategies actually occur in animal behavior.
+
+This sort of strategy is known as direct reciprocity. One can also have indirect reciprocity (once described as based on names and reputation rather than faces) or network reciprocity (where reciprocity follows a network graph). Since the ability to recognize faces and names are different congitive abilities, these strategies should show up in different species. The continuation probability in each case is $w > c/b$.
+
+\subsection{Game Theory in Computer Science}
+Suppose Google has three slots for advertising space in a search and wants to distribute them to advertisers. Since Google is only paid if the ad is clicked, it wants to sell ad space that is also relevant to the search in question. Auction design is a setup that allows one to answer this problem.
+
+\begin{defn}
+A bidder $i$ has representation value $v_i$ if the bidder is never willing to pay more than $v_i$.
+\end{defn}
+The bidder wants to obtain the item and also maximize $v_i - p$, where $p$ is the winning price. But the auctioneer wants to sell the item for the highest price. Here game theory clearly is present.
+
+One style of auction is the ascending (or English) auction, where the price is steadily raised until there are no further bids. This requires lots of communication and is unsuited for online advertisements; it requires too much coordination.
+
+Alternatively, one could do a sealed bid. These bids will depend on others' assumptions and thus might not award the item to the person who wants it the most (or is even willing to pay the most).
+
+\begin{defn}
+A dominant strategy is a strategy which is optimal no matter the opponent's decision.
+\end{defn}
+In the Prisoners' Dilemma, defection is a dominant strategy. However, in a coordination game where it is favored to side with one's opponent, each strategy is Nash but neither is dominant.
+
+The auctioneer wants to design the game such that bidding the representation value is the dominant strategy.
+
+Truth-telling is a dominant strategy if bidder $i$ maximizes their payoff by bidding $v_i$ irrespective of the actual values of other players, $i$'s perceptions of these values, and the others' bids. In some sense, it should be best to play $v_i$ no matter the state of the world.
+
+The solution is the Vickrey auction: a sealed-bid auction where the winner doesn't play their bid, but the second-highest bid plus some $\varepsilon$. Why does this work?
+
+Consider two bidders. The expected payoff for the first is $(v_1-b_2)P(b_1>b_2)$ (where $b_i$ is the $i^{\mathrm{th}}$ bid). This favors setting $b_1=v_1$ in each case ($v_1 > b_2$, $v_1 < b_2$).
+
+When there are multiple slots and there is one auction for several options, the first pays $\$1$ more than the second bid, the second pays $\$1$ more than the third, etc. However, since Google also cares about relevance, the bids are weighted by a quality score to judge whether ads will be clicked on.
+\subsection{Decision Making}
+Michael Manapat's life is a list of decisions between theoretical CS, pure math, and applied math, and between industry and academia. Do you want to go to grad school and work on a problem for five years? If so, maybe pure math is for you. If not, applied math might be better. But the results in pure math are also potentially worth it. Everything goes more slowly in pure math: years to learn a subject, years to publish, etc. But there's a lot of pressure to study pure math because anything else would be easier, and that's not necessarily a valid decision.
+
+Similarly, academia versus industry is a choice that may be difficult. Within academia, there can be a notion that industry is lesser. There are plenty of more fulfilling or important things than necessarily becoming a mathematician. But there are advantages to both sides.
+
+General advice by the lecturer: grad school isn't something you have to do. One can have an intellectually stimulating life outside of academia. Stanford's startup culture is nice for this. Additionally, it can be useful to learn probability and statistics. It can be useful in both pure and applied math. And, of course, figure out what you really enjoy.

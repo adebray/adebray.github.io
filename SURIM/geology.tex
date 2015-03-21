@@ -1,0 +1,23 @@
+Dr. Erickson is in the interesting position of being a postdoc in the geophysics department despite having a PhD in mathematics. Her work relates to the mathematical modeling of earthquakes.
+
+The San Andreas Fault is a vertical strike-slip fault (the two sides move past each other, instead of causing subduction). One way to model this is in a lab, pushing rocks against each other at high pressures.
+
+The Burridge-Knopoff model is a way to model a block attached to a spring with some law of friction: the friction stress statisfies $\tau = \mu\sigma_n$ (where $\sigma_n$ is the normal stress and $\mu$ is a nonconstant coefficient of friction). $\mu$ is logarithmically dependent on sliding velocity and a state variable (which accounts for the irregularity of the surface). It can be quite difficult to account for the variability of these such variables over time or scale them up to faults.
+
+This model doesn't seem to have an analytic solution, but there are two solutions: the stationary situation has all time derivatives equal to 0; the block just slides along. But periodic solutions also exist, in which the block gets stuck and then shoots forward periodically. This is called stick-slip behavior, and the jerks forward actually correspond to earthquakes.
+
+A more complicated model involves viewing the fault in 3-dimensional space. Temperature is also accounted for (since deeper into the Earth, movement is easier than at the top). In order to simplify the model, it can be discretized and a couple assumptions need to be made: such as that the earth around the fault is perfectly elastic (which seems untrue).
+
+Then, using Newton's Second Law, one can set up a system of PDEs in $\R^2$: $\rho\ddot u = G\nabla u$ (where $u$ is the displacement and $G$ is a modulus that represents stiffness). There will thus be some boundary conditions given by the shear stress.
+
+Solving semi-discrete equations is actuall how PDEs are solved numerically, so chopping up this PDE results in a huge system of (non-differential) equations. This ends up being approximately $u_{tt} = Ku$ for some matrix $K$ (plus some boundary conditions). This equation is an ODE now, which makes solving by computer a bit easier.
+
+One area of research is to try and model the initial conditions before an earthquake, or to model the entire earthquake cycle. This can be computationally intensive, but some simplifications can be made. In particular, the acceleration is nearly zero, so $0 = G\nabla u$, which makes the computation much less difficult. This results in a periodic model rather like the simpler one, in which the velocity is very slow for most of the time and then large (1 meter per second) during earthquakes. The shear stress builds up over time, until it is released with each earthquake. Notice that this periodicity doesn't happen very often in real life, but that can be represented by a fault that's not a line or making the initial stress heterogeneous.
+
+Another way to add complexity to the models is to notice that permanent damage and change can happen after earthquakes, changing the nature of the rocks around it. There is a core of highly damaged rocks, and farther from the fault less and less damage and more elascitity (which lends an ability to recover from damage, like Play-Doh). Rocks, however, are both elastic and plastic: they can be bent to a degree, but eventually can't return to their initial state if subjected to a sufficient amount of stress.
+
+Interestingly, it is better to know how an earthquake will happen rather than when, since designing earthquake-safe buildings is so helpful. Thus many seismologists predict that it will be possible to predict ground motion eventually, but not necessarily the timing of earthquakes.
+
+Plasticity is a constrained optimization problem. The set of admissible stresses is $\mathbb E = \{\sigma_{ij}:f(\sigma_{ij}) \le 0\}$ ($f$ is the yield condition) and the flow rule requires $\dot\epsilon = \lambda P_{ij}(\sigma_{ij})$ (where $\epsilon$ is a second-order tensor), etc. It can be difficult to include these laws in a model, so sometimes some are left out. There is an elastic stiffness tensor that is fourth-order and not particularly fun to play with, but they are solved through an iterative procedure. These large nonlinear systems can be solved through fixed-point methods, Newton's Method, and other such numerical methods.
+
+(The next earthquake in the Bay Area is predicted to be along the Hayward fault, in the East Bay, sometime in the next 30 years. It is estimated to be magnitude 6 or so --- not much greater. But the Pacific Northwest is overdue for a big one, and that's a subduction zone, which means it might be much stronger.)

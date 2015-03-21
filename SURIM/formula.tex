@@ -1,0 +1,77 @@
+Suppose $p = 7$. Then, the squares $\mod 7$ are
+\begin{tabular}{c c c|c c c}
+$1$&$2$&$3$&$4$&$5$&$6$\\
+$+$&$+$&$-$&$+$&$-$&$-$.
+\end{tabular}\\
+For $p = 23$ it's a bit harder, though still computable without paper:
+
+\begin{tabular}{c c c c c c c c c c c|c c c c c c c c c c c}
+$1$&$2$&$3$&$4$&$5$&$6$&$7$&$8$&$9$&$10$&$11$&$12$&$13$&$14$&$15$&$16$&$17$&$18$&$19$&$20$&$21$&$22$\\
+$+$&$+$&$+$&$+$&$-$&$+$&$-$&$+$&$+$&$-$&$-$&
+$+$&$+$&$-$&$-$&$+$&$-$&$+$&$-$&$-$&$-$&$-$
+\end{tabular}\\
+And just for one more example, here are the residues $\mod 31$:
+
+\begin{center}
+\begin{tabular}
+{c c c c c c c c c c c c c c c}
+$1$&$2$&$3$&$4$&$5$&$6$&$7$&$8$&$9$&$10$&$11$&$12$&$13$&$14$&$15$\\
+$+$&$+$&$-$&$+$&$+$&$-$&$+$&$+$&$+$&$+$&$-$&$-$&$-$&$+$&$-$\\
+\hline
+$16$&$17$&$18$&$19$&$20$&$21$&$22$&$23$&$24$&$25$&$26$&$27$&$28$&$29$&$30$\\
+$+$&$-$&$+$&$+$&$+$&$-$&$-$&$-$&$-$&$-$&$-$&$-$&$+$&$-$&$-$
+\end{tabular}\\
+\end{center}
+
+Notice that there are more minus signs on the right-hand side of each table than on the left.
+
+Suppose $\chi(n) = \jac{n}{p}$. Then, $\sum_{n=1}^{p-1}\chi(n) = 0$. However, since the residues are distributed unevenly, one obtains
+\[
+\sum_{n=1}^{\frac{p-1}{2}} \chi(n) =\left\{
+\begin{array}{c l r @{\,=\,} l}
+1 & p=7 & h(-7)&1\\
+3 & p=23 & h(-23)&3\\
+3 & p = 31& h(-31)&3.
+\end{array}\right.
+\]
+Well, this looks suspicious. And this suspicion can be confirmed:
+\begin{thm}
+\label{halfsum}
+If $p\equiv 3\mod 8$, then $h(p) = \displaystyle{\sum_{n=1}^{\frac{p-1}{2}}} \chi(n)$.
+\end{thm}
+In general, the formula is $\sum_{(x,D) = 1}^{D/2}\chi_D(x) = (2-\chi(D))h(-D)$, where $\chi_D(x) = \jac xD$ is called the quadratic character of $D$. Notice that since $\chi(D) = \pm 1$, the conjectured formula is only off by a factor of at most 3.
+
+Now consider
+\[
+\sum_{n=1}^{p-1}\chi(n)n =\left\{
+\begin{array}{r l}
+-7 & p = 7\\-69 & p = 23\\ -93 & p = 31\end{array}\right.
+\]
+Once again, this looks like $\sum_{n=1}^{p-1} \chi(n)n = ph(-p)$. However, if you take only the first half, it evaluates to $\sum_{n=1}^{\frac{p-1}{2}} \chi(n)n = 0$.
+\begin{thm}
+\label{wholesum}
+The more general version of the formula is
+\[\frac{1}{|D|}\sum_{(x,D) = 1}^{D-1}\chi(x)x = h(-|D|).\]
+\end{thm}
+Theorems~\ref{halfsum} and \ref{wholesum} are consequences of a more general class number formula.\footnote{Much of this is going to look like magic and won't be very enlightening without some more background.}
+\begin{defn}
+Let $K =\Q[\sqrt D]$, $\cO_K$ be its ring of integers, and $D$ be its discriminant. Then, the zeta function $\zeta_{_K}:\C\to\C$ associated with $K$ is 
+\[\zeta_{_K}(s) = \sum_{I\subset\cO_K}\Norm(I)^{-s}.\]
+\end{defn}
+This is where complex analysis enters into number theory. Additionally, the Riemann zeta function is just the function for $K = \Q$: $\zeta_\Z(s) = \sum_{n\in\N} n^{-s}$.
+\begin{thm}
+\[\lim_{s\to 1} (s-1)\zeta_{_K}(s) = \frac{2\pi}{|\cO_K^\times|}\sqrt{|D|}h(-|D|).\]
+\end{thm}
+In all but a few small cases, $|\cO_K^\times| = 2$, making this computation relatively straightforward. Interestingly, this theorem was first proven by Dirichlet with quadratic forms, and the modern number-field version came later.
+\begin{defn}
+The L-function associated with a number field is $L(s,K) = \sum_{n=1}^\infty \chi(n)n^{-s}$, where $\chi$ is the character associated with $K$ (in this case, the Legendre symbol).
+\end{defn}
+This gives $\zeta_{_K}(s) = \zeta(s)L(s,K)$. Since $\lim_{s\to 1} \zeta(s) = 1$, then the L-function can be used for a class number formula (which is not a closed form, since there is an infinite series involved):
+\[L(1,\chi) = \frac{2\pi h(-|D|)}{|\cO_K^\times|\sqrt D}.\]
+This is the source of the above formulae.
+
+In the end, there is a class number formula, and Exercise~\ref{formula} has a solution --- albeit not one that can be easily found. It is surprisingly analytic, but also explains a couple observations:
+\begin{enumerate}
+\item Why the growth rate of the class number formula has to do with the Riemann Hyporthesis, and
+\item Since the class number is positive, then there are more quadratic residues in the first half of $\Z/p\Z$ than in the second half. In fact, this \emph{is} the proof; no simpler one has been found.
+\end{enumerate}

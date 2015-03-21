@@ -1,0 +1,23 @@
+A list of topics I was interested in pursuing within linear recurrences:
+\begin{enumerate}
+\item How fast can a squence (or its absolute value) grow? This would be solved by studying its closed form.
+\item How can sequences be decomposed or combined into other sequences?
+\item What is the structure of the zero set? For a given set $S$, is there a recurrence that satisfies $a_n = 0$ when $n\in S$? Thanks to the Skolem-Mahler-Lech theorem below, there is less to do here.
+%I need to learn how to hyperlink.
+\item Do the difference tables for a recurrence relation converge? I would guess so, but I haven't proven it.
+\item What sorts of decimals can a recurrence relation represent? (Some work done, see below)
+\item Is there a function whose series of derivatives at a point matches a recurrence relation? What can be said about the function? This might relate to differential equations.
+\item How does one determine whether a sequence is bounded or unbounded? Can the characteristic polynomial be helpful here rather than going all the way to closed forms?
+\end{enumerate}
+\begin{ex}
+Show that any polynomial sequence is a linear recurrence sequence, or that (more generally) the sum or product of two recurrence sequences is also a linear recurrence sequence. Hint: This is related to the closure of $\A$ (i.e. the roots in $\mathbb{C}$ of $x^2+bx+c$, $b,c\in\Z$. $\mathbb{Q}\cap\A = \Z$).
+\end{ex}
+\begin{ex}
+What is the minimum degree of a recurrence relation with zeros given by some zero set?
+\end{ex}
+\begin{ex}
+Are linear recurrences $\mod n$ periodic? What is a sharp\footnote{i.e. there exists such a sequence with that bound as a period.} bound on the period of such a sequence? Hint: Look at for which degrees/moduli a given bound is possible or impossible. Even $\mod 2$ has some interesting things to share.
+\begin{proof}[Partial Solution]
+Suppose a linear recurrence is of degree $k$ and we are interested in $\mod{} n$. Then, there are only $n^k$ possible inputs into the recurrence, since the recurrence can be thought of as a function of $k$-tuples to $k$-tuples. Thus, the function must repeat itself, since there are only a finite number of possible inputs. The recurrence must be periodic, then, with period at most $T = kn^k$.
+\end{proof}
+\end{ex}

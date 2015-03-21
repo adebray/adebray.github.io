@@ -1,0 +1,38 @@
+\subsection{What is {\sc{Sage}}?}
+\textsc{Sage} is an open-source alternative to the well-known Mathematica, Matlab, Maple, etc. It can be useful for graphics, a ``calculator'' for higher math, and even a scripting language.
+
+Sage is based on Python, but it also has a lot of additions. It unifies a lot of other open-source mathematical libraries (e.g. \textsc{Atlas}, GAP, Singular, R, and a bunch of Python packages).
+
+Python is object-oriented, so you have the familiar classes, methods, instance variables, and so on. Using this class heirarchy, \textsc{Sage} builds up lots of mathematical objects with class inheritance and such.
+
+\textsc{Sage} is only about 6 years old, and as such a lot of the progress and development is accomplished by volunteers.
+
+The \textsc{Sage} website allows one to download a binary source file for the program. This is interestingly most stable on Macs, because Linux is so diverse and Windows requires one to install a virtual machine.
+
+\subsection{Using {\sc{Sage}}}
+On the command line, \textsc{Sage} is very much like any Unix shell. iPython allows one to use Emacs\footnote{``Harrumph,'' quoth the Vim user.} keybindings, and there is plenty of in-line and online documentation. There is also tab completion just like on the command line, and the equivalent to \texttt{man} is to type the command followed by a question mark. Appending two question marks, if you're really confused, prints out the source.
+
+However, there is a GUI in the form of a notebook. One can use their own computer, or alternatively set up a server or use \texttt{sagenb.org}. Much of the server setup is customizable, for the purposes of security and the like. To run the notebook, open a terminal and type \texttt{sage} and then enter the command \texttt{notebook()}. From here it is best to just experiment, and maybe browse some of the ongoing research projects. For example, there are huge databases of elliptic curves (even over quadratic fields: William Stein et al are looking at $\Q[\sqrt{5}]$, for example).
+
+Some useful websites:
+\begin{itemize}
+\item \texttt{http://sagemath.org}: The central repository for all things \textsc{Sage}.
+\item \texttt{http://sagenb.org}
+\item \texttt{http://ask.sagemath.org}: a support website.
+\item \texttt{http://sagemath.org/library-publications.html}: a list of publications and books that use \textsc{Sage}.
+\end{itemize}
+It is also worth visiting the help and development sections of \texttt{sagemath.org}.
+\subsection{Demonstration}
+Notice that bash claims to be running Python rather than \textsc{Sage}, which indicates how closely the two are tied.
+
+The command \texttt{iload} reads in a file (in this case, a \texttt{.sage} file) and executes the commands found in it. In this case, the program generates a $500\times500$ random matrix from a field called $RDF$, or the real numbers with double precision (so not technically $\Q$ or $\R$ or even a field at all, but it is approximately one and will do). Then, the eigenvalues of this matrix are plotted on the plane. This involves using list comprehensions and tuples (which are no different than in Python). For example, the commands \texttt{len()}, \texttt{range()}, and \texttt{type()} were demonstrated.
+
+Interestingly, one can also generate algebraic objects, such as a polynomial ring over $\Q$: the syntax \texttt{R.<x,y> = QQ[]}.\footnote{\texttt{QQ} represents $\Q$, which has some minor amusing connotations.} One can thus factor polynomials, which reveals interesting things about the structure of the \textsc{Sage} class system. Then, of course, one can do list stuff as in Python, with \texttt{for each} loops and the like.
+
+Some arguments (which can be found with tab completion) contain one or more underscores at the beginning of the command. These are generally low-level commands not intended for the end user\footnote{\dots unless you have an underscore to settle with the system or something.} --- generally, the more underscores, the less likely it will be necessary to the user.
+
+It is also possible to define quadratic extensions of $\Q$ (for a definition of a quadratic field, see Section~\ref{qfields}). Impressively, \texttt{QuadraticField(D)} is already defined in \textsc{Sage}! One can also get the defining polynomials for a given field (though it is slightly different than in the aforementioned section). For example, the field $K_1$, with defining polynomial $x^2+4$, was looked at, and found to have only trivial units.
+
+\textsc{Sage} seems to also be good at elliptic curves. The \texttt{EllipticCurve()} argument accepts a string that represents a curve in a large catalog of them, and can return the defining equation, integral points, and such. The integral points in particular are returned in the projective notation $(a:b:c)$, indicating they are in $\mathbb{RP}^3$. Finally, one can even plot the curve (which, like all plots, is a \texttt{.png} file that opens in Preview or whatever equivalent you use to open images).
+
+Of course, like any programming language, \textsc{Sage} allows you to make bugs, and tracebacks are just like the ones you are warmly familiar with.

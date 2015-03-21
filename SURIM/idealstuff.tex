@@ -1,0 +1,83 @@
+Recall that the ring of integers $\cO_K$ has unique factorization of ideals (which is rather difficult to prove).
+\begin{thm}[Chinese Remainder Theorem]
+\label{crt}
+Given some distinct primes $p_i$, then the system $x \equiv a_i\mod p_i$ has a unique solution $\mod \prod_i p_i$.
+\end{thm}
+(This also works if $p_i$ are any relatively prime numbers.)
+
+For example, if $x\equiv 4\mod 5$, $x\equiv 0\mod 2$, and $x \equiv 0\mod 3$, then $x\equiv 24\mod 30$.
+
+There are several alternate formulations to the Chinese Remainder Theorem:
+\begin{thm}
+Suppose $n$ has the prime factorization $n = \prod_{i=1}^r p_i^{e_i}$. Then,
+\[\Z/n\Z \simeq \prod_{i=1}^r \Z/p_i^{e_i}\Z.\]
+\end{thm}
+As in the previous example, $\Z/30\Z = \Z/2\Z\times\Z/3\Z\times \Z/5\Z$, and $24\to (0,0,4)$.
+\begin{thm}[Chinese Remainder Theorem for Ideals]
+\label{crtideals}
+Let $\fp_i$ be distinct prime ideals of some ring of integers $\cO_K$. Then,
+\[\cO_K / \prod_i \fp_i^{e_i} \simeq \prod_i \cO_K/\fp_i^{e_i}.\]
+\end{thm}
+Consider the Gaussian integers $\Z[i]\subset\Q(i)$.\footnote{The notational difference between $\Q[i]$ and $\Q(i)$ is subtle. The former allows addition, subtraction, and multiplication (i.e. constructs a ring), but the latter also allows for division (making it a field). However, since $\Q$ is already a field, $\Q[\sqrt{-D}] = \Q(\sqrt{-D})$, and in these cases it does not matter.}
+
+They can also be thought of as $\Z[x]/(x^2+1)$, which is isomorphic to $\Z[i]$. Notationally, $K[x]$ is the ring of polynomials over the ring $K$, and $(x^2+1)$ is the set $\{(x^2+1)p(x):p(x)\in\Z[x]\}$. This is because $x^2+1 = 0$ is equivalent to $x^2\equiv -1$ when modding out by $x^2+1$. In particular, since $x^2\equiv -1$, then
+\[(a+bx)(c+dx) = ac+(ad+bc)x+bdx^2 = (ac-bd) + (ad+bc)x \simeq (a+bi)(c+di).\]
+Some interesting things can be passed into the Chinese Remainder Theorem:
+\[\Z[i][x]/(x^2+1) \simeq \Z[i][x]/(x+i) \times \Z[i][x]/(x-i).\]
+The ideals $(x+i)$ and $(x-i)$ are both prime because of degree.
+
+It will be helpful to have a more intuitive understanding of the multiplication of ideals: consider $(2,1+\sqrt{-5}),(2,1-\sqrt{-5})\in\Z[\sqrt{-5}]$. Multiplication of ideals involves multiplying the elements together, but also eliminating dependencies:
+\[(2,1+\sqrt{-5})(2,1-\sqrt{-5}) = (4,2-2\sqrt{-5},2+2\sqrt{-5},6) = (2)\] because $2(2) = 4$, $2(3) = 6$, and $2(1\pm \sqrt{-5}) = 2\pm 2\sqrt{-5}$.
+
+Consider the quotient $\Z[i]/(5) = \Z[i]/(2+i) \times \Z[i]/(2-i)$. In this ring, $\alpha = \beta$ iff $\alpha \equiv \beta \mod (5)$ in $\Z[i]$. Thus, it can be thought of as a $5\times 5$ lattice in which the ends are identified, as on a torus.
+\begin{defn}
+The norm of an ideal $I$ is $|\cO_K/I|$.
+\end{defn}
+In particular, $N((5)) = 25$, given the $5\times 5$ lattice seen above. In general $N((k)) = N(k)$ (norm of an ideal vs. norm of a number); the proof relies on a geometry-of-numbers argument very similar to the one presented in Section~\ref{geoofnum} and considers $\cO_K$ as a lattice.
+
+It is also true that $N(\alpha\beta) = N(\alpha)N(\beta)$, as with the norm on $\C$; the proof follows from the above for the case of single-generated ideals and is a little more complicated otherwise.\footnote{This property of the norm holds in number fields, but not everywhere: $|\R[x]/(x^2+1)| =\infty.$} Thus, if $I,J$ are relatively prime ideals, then $\cO_K/(IJ) = \cO_K / I \times \cO_K/J$.
+
+This can be used to check whether an ideal is prime: since $(5) = (1+2i)(1-2i)$ in $\Z[i]$, then $N(1+2i) = N(1-2i) = 5$ (since $N((5)) = 25$). Since 5 is prime over $\Z$, then $(1\pm 2i)$ are both prime. The converse, however, is not true: $N((3)) = 9$, but if $3 = \fp_1\fp_2$, then $N\fp_1 = 3$, so $9 = (a^2+b^2)(c^2+d^2)$ where $a^2+b^2 = 3$ over $\Z$, which doesn't work.
+
+Consider the following equivalent rings:
+\[\Z[i]/(5) \simeq \Z[x]/(x^2+1,5) \simeq(\Z[x]/(x^2+1))/(5)\simeq \mathbb F_5[x]/(x^2+1).\]
+It happens that the First Isomorphism Theorem (see Exercise~\ref{firstiso}) also holds for rings; both the statement and the proof are identical. Thus, consider the map $\Z[x] \stackrel{f}{\to} \mathbb F_5[x]/(x^2+1)$ such that $1\to 1$, $x\to x$, and $f(a+b) = f(a)+f(b)$. This implies that $\Ker f = (5,x^2+1)$.
+
+Notice that $x^2+1 \equiv (x+2)(x+3)\mod 5$, and that $x^2+2$ is irreducible. However, one can show that if $K$ is a field, then $K[x]$ is a PID, and since $\mathbb F_5$ is a field, then there is unique factorization about irreducibles. Additionally, by the Chinese Remainder Theorem (specifically, formulation~\ref{crtideals}), if $f$ is irreducible, then $(f)$ is prime.
+\begin{claim}
+This gives rise to some more isomorphisms:
+\[\Z[i]/(5)\simeq \mathbb F_5[x]/(x+2)\times \mathbb F_5[x]/(x+3) \simeq \mathbb F_5\times \mathbb F_5.\]
+\end{claim}
+\begin{proof}
+Consider the map $\mathbb F_5[x] \stackrel{g}{\to} \mathbb F_5$ such that $g(1) = 1$, $g(x) = 2$ (or 3), and $\Ker g = (x+2)$ (or 3). For the last map, just subtract 2 or 3 from each element.
+\end{proof}
+Similarly, because 3 is prime in $\Z[i]$, $\Z[i]/(3) \simeq \mathbb F_3[x]/(x^2+1)$ is also prime.
+
+In general, one can determine the decomposition of a prime $p$ by factoring $(x^2+1)$ into two quotients. There are three possibilities:
+\begin{enumerate}
+\item $(p)$ is prime in $\Z[i]$ iff $(x^2+1)$ is irreducible in $\mathbb F_p[x]$, in which case $p$ is called inert. This requires $x^2+1\not\equiv 0$, so happens iff $p \equiv 3\mod 4$.
+\item If $(x^2+1) = (x+a)(x+b)$ for distinct $a,b$, then $p$ splits in $\Z[i]$, which happens iff $p \equiv 1\mod 4$ (because that is the requirement for $-1$ to be a quadratic residue).
+\item If $(x^2+1) = (x+a)^2$, then $p$ is ramified. 2 is the only ramified prime (and $a = 1$).
+\end{enumerate}
+Recall that the class group was defined as ideals up to the equivalence relation $\mathfrak a \sim \mathfrak b$ iff $c\mathfrak a = d\mathfrak b$ for $c,d\in\cO_K$.\footnote{When handwritten, it is common to use $\underline{a},\underline{b},\underline{\smash p}$ instead of $\mathfrak a,\mathfrak b,\mathfrak p$.} For example, in $\Z[i]$, $(2)\sim (4)$ and $(2)\sim (2,2+2i)\sim (1)$. In $\Z[\sqrt{-5}]$, $(2,1+\sqrt{-5}) \nsim (1)$.
+\begin{thm}
+Suppose that $K = \Q(\sqrt{-D})$ and $D_K$ is its discriminant as defined in Section~\ref{qfields}. If $C$ is an ideal class, then there exists an ideal $I\in C$ such that $N(I) \le \frac{2}{\pi}\sqrt{|D_K|}$.
+\end{thm}
+This proof also relies on a geometry-of-numbers argument like the Four-Squares Theorem (Theorem~\ref{foursquare}). The idea is that $\cO_K$ is the set of intersections of some lines, and that $I$ is a sublattice. Then, $|I|$ is the area of the fundamental \pgram{} relative to $\cO_K$. Then, by Minkowski's Theorem (Theorem~\ref{mink}), there has to be a nontrivial lattice point eventually.
+
+For example, all ideals in $\Z[i]$ must contain an ideal of norm $N<2$ ---  but if $N\in\N$, then there is only one equivalence class, so the class group is the trivial group $C_1$.
+
+As another example, consider $\Q[\sqrt{-5}]$, for which $D_K = -20$, so every ideal class contains an ideal of norm $\le \frac{2}{\pi}\sqrt{20} < 3$. The trivial ideal (i.e. $(1)$) has order 1, but $(2)$ factors as
+\[\Z[-5]/(2) \cong (\Z[x]/(x^2+5))/(2) \cong\mathbb F_2[x]/(x^2+5).\]
+This does factor, since $(x+1)^2 \equiv x^2+5\mod 2$, so $(2) = \fp^2$ is ramified. Since $N(2) = 4$, then $N(\fp) = 2$, so there must be some other ideal with norm 2. $\fp = (x+iy)$ is not principal, but $\fp^2 = (2)$ is.
+Thus there are two distinct classes of ideals and $h(-20) = 2$.
+\begin{ex}
+Using this method, calculate the class group of $\Q[\sqrt{-26}]$.
+\end{ex}
+These techniques can also be used to answer the questions raised in Section~\ref{use}. The older ($18^{\mathrm{th}}$--\,Century) formulation of a question might be that $x^2+5y^2 = p$ iff $p \equiv 1,9\mod 20$ and $x^2+2xy+3y^2 = p$ iff $p \equiv 3,6\mod 20$, and otherwise, $\jac{-20}{p} = -1$, so there is no such representation.
+
+However, with quadratic fields, writing a prime of the form $p = x^2+5y^2$ is akin to aking if there is a principal ideal of norm $p$ in $\Z[\sqrt{-5}]$. If $(p)$ splits or is ramified (which in this case could be both 2 and 5), then there is such an ideal. (This statement is isomorphic to the statement that equivalent quadratic-forms represent the same integers in Section~\ref{use}).
+\begin{ex}
+When does $2p = x^2+5y^2$ have a solution?
+\end{ex}
+%\tbc

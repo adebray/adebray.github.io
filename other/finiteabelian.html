@@ -1,0 +1,111 @@
+<head>
+<title>Multiplication Tables of Finite Abelian Groups</title>
+</head>
+<body>
+<body bgcolor=#BDD7DE>
+<body link=#4D5466>
+<body vlink=#8C6A84>
+This is a work in progress that does calculations of multiplcation tables of finite abelian groups. As such, there won't be much of an explanation, nor is it to look particularly pretty.
+
+<form name="myForm" onsubmit="return doStuff()" method="post">
+Arguments (e.g. "2 2"):<input type="text" name="fname">
+<input type="submit" value="Submit">
+</form>
+<p id="test"></p>
+<script>
+toPrint = ""; //global?
+
+function multiply(firstArray,secondArray,comps) {
+	var toReturn = new Array();
+	for(var i = 0;i < comps.length;i++) {
+		toReturn[i] = (firstArray[i] + secondArray[i]) % comps[i];
+	}
+	//document.write("" + firstArray + " * " + secondArray + " = " + toReturn);
+	return toReturn;
+}
+
+function makeTable(allElements,comps) {
+	//document.write("<html><body>");
+	//document.write("<table border=\"1\">");
+	toPrint += "<table border=\"1\">";
+	for(var i = 0;i < allElements.length;i++) {
+	//document.write("<tr>");
+	toPrint += "<tr>";
+		for(var j = 0;j < allElements.length;j++) {
+			//document.write("<td>(");
+			toPrint += "<td>(";
+			var prod = multiply(allElements[i],allElements[j],comps);
+			toPrint += prod.toString();
+			toPrint += ")</td>";
+			/*for(var k = 0;k < prod.length;k++) {
+				if (k != 0) {
+					document.write(",");
+				}
+				document.write(prod[i]);
+			}*/
+			//document.write(prod.toString);
+			//document.write(")</td>");
+		}
+		//document.write("</tr>");
+		toPrint += "</tr>";
+	}
+	//document.write("</table></body></html>");
+	toPrint += "</table>";
+}
+
+function mapParseInts(arr) {
+	var toReturn = new Array();
+	for (var i = 0;i < arr.length;i++) {
+		toReturn[i] = parseInt(arr[i]);
+	}
+	return toReturn;
+}
+
+function update(temp,comps) {
+	temp[temp.length - 1]++;
+	for (var i = temp.length - 1;i > 0;i--) {
+		if (temp[i] < comps[i]) {
+			return temp.slice(0); //we want to return a new copy
+		} else {
+			temp[i] = 0;
+			temp[i-1]++;
+		}
+	}
+	return temp.slice(0);
+}
+
+// Given [a_1,...,a_n], returns all elements of Z/a_1Z x ... x Z/a_nZ
+// as arrays (e.g. [0,2,4,5] is one value returned by [2,3,6,6])
+function allGroupElements(comps) {
+	var toReturn = new Array(); //an array of arrays
+	var temp = new Array();
+	for (var i = 0;i < comps.length;i++) {
+		temp[i] = 0; //this probably isn't the best way to do this
+	}
+	while (temp[0] < comps[0]) {
+		toReturn.push(temp.slice(0));
+		temp = update(temp,comps); //want this to return something new
+	}
+	/*for(var i = 0;i < toReturn.length;i++) {
+		document.write(toReturn[i]);
+	}*/
+	return toReturn;
+}
+
+//Meh I'll validate things later
+//if (!(arguments[0])) {
+//	document.write("Usage: ./yclictables.js number");
+//	quit();
+//}
+function doStuff() {
+	var x = document.forms["myForm"]["fname"].value;
+	var comps = mapParseInts(x);
+	var elems = allGroupElements(comps);
+	makeTable(elems,comps);
+	var x = document.getElementById("test");
+	console.log(toPrint);
+	x.innerHTML = toPrint;
+	return true;
+}
+</script>
+</body></html>

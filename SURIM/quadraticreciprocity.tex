@@ -1,0 +1,55 @@
+%\documentclass{amsart}%Turn this into one large document at some point
+%\usepackage{geometry,microtype,amssymb,enumerate}%,hyperref}
+%\geometry{margin=0.75in}
+%\def\l{\lambda}
+%\def\qedsymbol{\scriptsize\ensuremath\boxtimes}
+%\newcommand{\jac}[2]{\left(\frac{#1}{#2}\right)}
+%\newcommand{\Z}{\mathbb{Z}}
+%\newtheorem{lem}{Lemma}
+%\newtheorem*{cor}{Corollary}
+%\theoremstyle{definition}
+%\newtheorem{ex}{Exercise}
+%\newtheorem{defn}{Definition}
+%\begin{document}
+%\title{Quadratic Reciprocity}
+%\author{June 26, 2012} %Yeah, yeah
+%\maketitle
+\begin{defn} The Legendre symbol for an integer $a$ and an odd prime $q$ is
+\[\jac{a}{q} = 
+\left\{
+\begin{array}{r l}
+1 & \text{if }a\text{ is square}\bmod q,\\
+0 & \text{if }a\equiv 0 \bmod q,\\
+-1 & \text{otherwise.}
+\end{array}
+\right.%\}
+\]
+\end{defn}
+Note that squares in modular arithmetic act differently than normal: for example, the squares $\mod 7$ are 1, 2, and 4, because $2 = 3^2\mod 7$.\\
+One can figure out whether a prime $p$ is a quadratic residue of $q$ (i.e. if $p$ is a square $\bmod q$) using this technique. In particular, $p$ and $q$ satisfy
+\[\jac{p}{q}\jac{q}{p} = (-1)^{\left(\frac{p-1}{2}\right)\left(\frac{q-1}{2}\right)}\]
+so if at least one of $p$ and $q$ is $1\bmod 4$, then $\jac{p}{q} = \jac{q}{p}$. Thus, in this case, $p$ is a quadratic residue of $q$ iff $q$ is of $p$. However, if $p,q\equiv 3\bmod 4$, exactly one will be a quadratic residue of the other.
+\begin{ex}
+Show that $\jac{ab}{p} = \jac{a}{p}\jac{b}{p}$.
+\end{ex}
+From the basic definition, several generalizations folllow. First, the Legendre symbol is defined for $a = 2,-1$.
+\[\jac{2}{p} = 
+\left\{
+\begin{array}{rl}
+1 & p\equiv 1, 7 \bmod 8\\
+-1 & p\equiv 3,5 \bmod 8
+\end{array}\right. \qquad\qquad
+\jac{-1}{p} = 
+\left\{
+\begin{array}{rl}
+1& p\equiv \phantom{-}1\bmod 4\\
+-1& p\equiv -1\bmod 4
+\end{array}
+\right.\]
+\label{qr}
+Then, one can generalize further to the Jacobi symbol $\jac{a}{b}$ where $b$ is odd but not necessarily prime: if $S$ is the set of prime factors of $b$ including multiplicities, then
+$\jac{a}{b} = \prod_{p\in S}\jac{a}{p}.$
+For example, $\jac{2}{45} = \jac{2}{5}\jac{2}{3}^2$. By the Chinese Remainder Theorem, this implies that 2 is a square $\bmod 45$ iff it is a square $\bmod 9$ and $\bmod 5$.\\
+Be careful with the Jacobi symbol --- it doesn't always do what you would think it does. In particular, it can tell you that something's not a square (if you get $-1$), but not necessarily that something is.\\
+Finally, the Kronecker symbol generalizes this to allow the deominator to be any integer, but that isn't extremely relevant to quadratic reciprocity.
+%\end{document}

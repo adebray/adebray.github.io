@@ -1,0 +1,32 @@
+%WHere are your pictures?
+Consider some manifold $M^n\subset \R^N$ with some metric $g$. Consider the tube of radius $r$ around this manifold:
+\[T(r) :=\{x\in\R^N:g(x,M) = r\},\]
+which is a manifold of codimension 1. This tube is in a sense the product $M \times S^{N-n-1}$, though if $M$ is not completely straight this is incorrect. However, it is roughly so, since the volume $V(r) = \vol(T(r)) \sim r^{N-n-1}$.
+
+More explicitly, Weyl's Tube Formula gives the volume as polynomial in $r$: $V(r) = \sum_{j=0}^{N-n-1} a_jr^j$, where the $a_j$ are geometric invariants. $a_0 = \vol(M)$, which is a geometric qualtity, but $a_{N-n-1} = \chi(M)$, the manifold's Euler characteristic, which is topological.
+
+In $\R^3$, this simplifies to $V(r) = \chi(M)r^2 + \Area(M)$ for a surface and $V(r) = 2\pi r\ell(M)$ for curves. This latter case is interesting because it looks exactly like if the tube were the direct product $M\times S^{N-n-1}$.
+
+This model has some interesting and unexpected applications in statistics.
+
+Differential geometry also uses hyperbolic space. One can think of hyperbolic space $\H^n\subset \R^n$ as an open disc in which lines in $\H^n$ are arcs of circles in $\R^n$ and parallel lines are defined as those that do not intersect. Thus, one line can have many parallels, some of which intersect each other.
+
+The Riemannian metric for hyperbolic space is
+\[g = \frac{\sum_{i=1}^n \ud x_i^2}{\left(1- \sum_{i=1}^n x_i^2\right)^2},\]
+which results in a constant curvature of $-1$. it also leads to a Laplacian, which is different from $\D g_{_{\R^n}} = \sum_{j=1}^n \frac{\partial^2}{\partial x_j^2}$. However, it enables one to think of bounded harmonic functions in $\H^n$.
+
+Liouville's Theorem states that any bounded harmonic function in $\R^n$ is constant, but hyperbolic space (which is topologically just an $n$-dimensional space) looks very different; there are plenty of nonconstant harmonic functions, and any continuous function on ``the sphere at infinity'' is the limit of some harmonic function. This is indicative of the different geometries of $\R^n$ and $\H^n$, which is also represented by the fact that the volume of the unit ball in $\H^n$ grows exponentially with the radius, rather than as a polynomial.
+
+Instead of considering strictly harmonic functions, however, one can consider solutions to the equation $(\D + \l^2)u = 0$ in $\R^n$, which have applications to scattering theory in mathematical physics. Looking from infinity, $u$ will satisfy the Helmholtz equation
+\[
+u \sim r^{\frac{1-n}{2}} e^{i\l r}a(\theta) +r^{\frac{1-n}{2}}e^{-i\l r}a(-\theta)
+\]
+where $\theta\in S^{n-1}$ and $a$ is some function. Physically, this means sending waves through Euclidean space doesn't change them; they come out like they went in. However, if you add some obstacle $K$, an additional requirement of $u|_{\partial K} = 0$ as well. This is similar, but the equation then becomes
+\[
+u \sim r^{\frac{1-n}{2}} e^{i\l r}a(\theta) +r^{\frac{1-n}{2}}e^{-i\l r}b(\theta)
+\]
+for some other function $b$. Physically, this means the waves will get scattered by the obstacle $K$, and this equation can be backed up by physical data. Given scattering data, what can one determine about $K$? This problem has applications in seismology, oil detection, etc. Additionally, one can study the scattering operator for this system, given by $b = S(\l) a$.
+
+This has applications in, of all places, number theory. Consider the modular surface $\H^2/\SL{}(2,\Z)$. This looks like a once-punctured torus with a cusp at infinity, and has constant negative curvature. This surface has a hyperbolic Laplacian associated with it, and let $S(\mu)$ be the scattering operator for the equation
+\[\left(\D g +\left(\frac{1}{4} +\mu^2\right)\right)u = 0.\]
+Looking from the cusp at infinity and sending a wave in, it will reemerge with some function that determines $S$. Considering $\mu\in\C$, $S$ will have poles, whose location is determined by the Riemann Hypothesis.

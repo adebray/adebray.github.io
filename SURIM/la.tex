@@ -1,0 +1,39 @@
+For reference, the majority of the people at this talk have used \LaTeX{} before. Additionally, the lecturer uses RStudio as an IDE, which is unconventional and interesting. Whatever floats your boat. (In particular, the input file is an \texttt{.rnw} file, not a \texttt{.tex} one.)
+
+Between the declaration of the document class and the start of the document, there is a preamble: it contains packages which one loads and any user-defined functions.
+
+At the end of the sample document are two lines for a bibliography, which is contained in a separate \texttt{.bib} file. Every entry in this file has a type (e.g. \verb+@book{}+, with important fields such as author and title between the braces, separated by commas and lines). Interestingly, Wikibooks and Google Scholar give \textsc{Bib}\TeX{} code for a citation, making it a lot easier, and other websites might do the same. Interestingly, \textsc{Bib}\TeX{} notices when you don't use a source, so it's fairly straightforward to just have one \texttt{.bib} file with all of one's references and use the relevant ones in each document.
+
+Bibliographies are interesting because they make compiling less trivial. On the command line, one has to enter the following three commands: \texttt{pdflatex}, \texttt{bibtex}, and \texttt{pdflatex} again. RStudio handles this automatically, compiling the requisite number of times to get the output. However, RStudio makes it very difficult to find errors for some reason. Thus, \emph{ad hoc} solutions are used, such as moving the \verb+\end{document}+ clause above text which might have the error or using comments to find the source of the error.
+
+Titles are fairly nice in \LaTeX{}; one just sets a bunch of tags, such as \verb+\title{}+. Others include author and date. Apparently RStudio can catch if you leave closing braces off of these tags, and can provide some \emph{really} interesting flavor-text as a log. Then, \verb+\maketitle+ actually displays the title.
+
+Changing font sizes is also more intuitive than in other word processors: one can use \verb+\large{}+ and similar commands.\footnote{Though it is a greater question if one should: \LaTeX{} is designed so that the author specifies the logical structure, and leaves the technical details to the program. However, one can still manually set these technical details.} Similarly, one can add whitespace by the command \verb+\vspace[10mm]+, and declare a new page by \verb+\newpage+.
+
+Some people complain that \LaTeX{} can be difficult to use; one interesting response is that this approach is drawing, not writing. One should not worry about the visual output (and therefore do not use a GUI as a crutch). In particular, one should write first and tweak later, as opposed to getting distracted throughout.
+
+The creators of \TeX{} and \LaTeX{} are worth mentioning. Knuth wrote \TeX{} just in order to typset his book, \emph{The Art of Computer Programming}. And by complete accident, he changed a field. He is more known for his work in the analysis of algorithms, but the fact that \TeX{} is just a side project of his is amazing.
+
+One can mention various other commands, such as \verb+\emph+ for italics, \verb+\underline+ for underlining, and environments \texttt{itemize} for bullet points, \texttt{quotation} for, well, quotations, and \texttt{figure} that allows for the inclusion of pictures. The syntax is \verb+\begin{figure}[ht]+, where the \texttt{[ht]} specifies the location (here, if possible, and if not, near the top). \texttt{itemize} can be nested, to get indented bullet points.
+
+\LaTeX{} was written by Leslie Lamport, another theoretical computer scientist. He founded the idea of distributed systems theory (i.e. parallel computing), but also wrote a large set of macros that made \TeX{} more usable. These are \LaTeX{}, and it is much more common and higher-level than the basic \TeX{} code that Knuth used.\footnote{\LaTeX{} was actually developed at the SRI, or the Stanford Research Institute in Menlo Park. This institute is responsible for several inventions that are common in daily life, such as Disneyland and magnetic ink used in check security. However, the SRI has not been formally associated with Stanford since the '70s, when it attracted controversy for accepting military funding during the Vietnam War and was thus separated from the university. But I digress.}
+
+Another interesting tool is a subfigure, which requires the \texttt{subfigure} package. This creates a \texttt{subfigure} environment that can be used within the original one. References and labels look identical here as in other cases: \verb+\ref{name}+ and \verb+\label{name}+. Using the command \verb+\caption*{}+ can get rid of the automatic caption (as in, for example, if both subfigures have captions and you don't want an overall one).
+
+A lot of time, you'll find yourself using the same packages in every document. This can be bettered by copy/paste or including a macros or preamble file. Two packages of note are \texttt{fullpage}, which decreases the margins to one inch, and \texttt{savetrees}, which squeezes out all whitespace. This is useful for personal documents, but not professional ones. Similarly to the packages, new commands tend to be copied and pasted from document to document. These include shorthand, definitions of theorems for \texttt{amsthm}, and some low-level functions, such as one that puts the title closer to the text.
+
+A table of contents can automatically be generated with \verb+\tableofcontents+. It's that easy.
+
+Math in \LaTeX{} is set between dollar signs; if \verb+$...$+, then it is set within the paragraph, but using \verb+$$...$$+ sets it on its own line. These equations can be numbered, but that requires \verb+\begin{equation}+ (and the corresponding end). Apparently, it is better style to use the bracket notation \verb+\[...\]+ (which is unnumbered) or the full environment. Generally, one should number equations which are important so that they can be referred to. This can be accomplished by putting a label in the equation and then using \texttt{ref} as described above for pictures. 
+
+For example, this:
+
+\verb+\begin{equation} \int_a^b f'(x)\,dx = f(b) -f(a)\label{ftc}\end{equation} is Equation~\ref{ftc}.+
+
+becomes this:
+\begin{equation} \int_a^b f'(x)\,dx = f(b) -f(a)\label{ftc}\end{equation} is Equation~\ref{ftc}.
+\vspace{5mm}
+
+There are plenty of other aspects of \LaTeX{}; the mathematical aspect of it could fill another lecture. There are cheat sheets that help one identify common commands; it is also possible to use Detexify, which analyzes handwritten symbols and tries to give the command which corresponds to it. It's a machine learning algorithm, so training it will help.
+
+One advantage of \LaTeX{} over R is that there are a lot of default packages which are already installed, whereas R requires one to manually install everything and their dependencies. (Wouldn't RStudio help make this simpler?)

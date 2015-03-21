@@ -1,0 +1,66 @@
+Fermat was interested in learning which primes satisfied $x^2+y^2 = p$, $x,y\in\Z$. For odd primes, this is true iff $p \equiv 1\mod 4$ (or equivalently, that $\jac{-1}{p} = 1$). For example, $2 = 1^2+1^2$, $5 = 1^2+2^2$, and 3 has no solutions.
+
+\label{use}
+For $x^2 + 2y^2 = p$, there is a solution iff $\jac{-2}{p} = 1$, as $3 = 1^2 + 2(1^2)$, 5 and 7 have no solutions, $11 = 3^2 + 2(1^2)$, 13 has no solutions, and $19^2 = 1^2 + 2(3^2)$.
+
+Now consider $x^2+5y^2$. It seems reasonable to say that a necessary and sufficient condition is $\jac{-5}{p} = 1$, but this fails for 7, which has no solution: the only solutions less than 30 are $5 = 0^2 + 5(1^2)$ and $29 = 3^2 + 5(2^2)$.
+
+The correct condition is that $p \equiv 1,9\mod 20$. One can push around Legendre symbols and see that since $\jac{-5}{p} = 1$ iff $-5 \equiv x^2\mod p$, then $\jac{-1}{p}\jac{5}{p} = 1$ as well. If $p\equiv 1\mod 4$, then $\jac{5}{p} = 1 \implies \jac{p}{5} = 1$ as well by quadratic reciprocity (see Section~\ref{qr}), so $p \equiv 1,4\mod 5$. Similarly, if $p\equiv 3\mod 4$, then $\jac{5}{p} = -1$, so $p\equiv 2,3\mod 5$. The general technique is to use quadratic reciprocity to flip the Legendre symbol if the prime in question is on the bottom.
+
+The numbers which are $1\mod 4$ and $1,4\mod 5$ are $1,9\mod 20$; those which are $3\mod 4$ and $2,3\mod 5$ are $3,7\mod 20$\dots so something is still unaccounted for.
+
+For an even stranger example, consider $x^2+14y^2 = p$. The conditions for this to work are that $\jac{-14}{p} = 1$ and $(x^2=1)^2 \equiv 8\mod p$ has a solution.
+
+This sort of thing can be done with other quadratic forms, such as $2x^2+2xy+3y^2 = p$. This can get more interesting because now $x,y<0$ are nontrivial solutions. The restriction on this form is that $p \equiv 3,7\mod 20$. This form, along with $x^2 +5y^2$, forms the set of 2 forms with discriminant $D = -5$, and together they split the solutions. This is no coincidence.
+
+\begin{prop}
+A binary quadratic form $f(x,y)$ properly represents\footnote{i.e. there exist $x,y$ such that $(x,y) = 1$ and $f(x,y) = m$.} some $m$ iff $f$ is properly equivalent to a form $mx^2+bxy+cy^2$ for some integers $b,c$.
+\end{prop}
+\begin{proof}
+Suppose $f$ represents $m$, so that there exist relatively prime $p,q$ such that $f(p,q) = m$. Then, it is possible to find $r,s\in\Z$ such that $ps-qr = 1$ (which can be justified by B\'ezout's Theorem or the fact that $\Z$ is a principal ideal domain).
+
+Since the matrix
+$\begin{pmatrix} p&q\\r&s\end{pmatrix}$ has determinant 1, then consider $f(px+ry,qx+sy)$. After multiplying out, the $x^2$-coefficient is just $f(p,q) = m$.
+
+In the other direction, if $f \simeq (m,a,b)$, then take $(x,y) = (1,0)$, which represents $m$. Since equivalent forms represent the same integers, this is sufficient.
+\end{proof}
+
+This is why $x^2+y^2 = p$ iff $\jac{-1}{p} = 1$: if $x^2 + y^2\equiv p\mod p$, then $x^2 = -y^2\mod p$ and so $x^2/y^2 \equiv 1\mod p$. It becomes a bit more interesting when $\jac{-1}{p} = -1$.
+\begin{cor}
+Suppose $D \equiv 0,1\mod 4$ and $m$ is an odd integer relatively prime to $D$. Then, $m$ is properly represented by some primitive form with discriminant $D$ iff $D$ is a quadratic residue $\mod m$.
+\end{cor}
+\begin{proof}
+First suppose $f$ properly represents $m$. Then, $f\simeq mx^2+bxy+cy^2$, which has discriminant $D = b^2-4cm$, so $D\equiv b^2\mod m$.
+
+Conversely, if there exists a $b$ such that $b^2\equiv D\mod m$, then choose $D \equiv b\mod 2$ (which is already the case if $m$ is even; if not, this might require adding $m$ to $D$, which is fine).
+
+Thus, $b^2 \equiv D\mod 4m$, so $b^2\equiv D\mod 4$, so $b^2 - D = 4mc$ for some $c$.
+
+Thus, the form $mx^2+bxy+cy^2$ has discriminant $D$ and $b,c,m$ relatively prime (see Exercise~\ref{relprime}). Taking $(x,y) = (0,1)$, $m$ is represented.
+\end{proof}
+\begin{ex}
+\label{relprime}
+Verify that $b,c,$ and $m$ are relatively prime in the above proof.
+\end{ex}
+\begin{proof}[Solution:] The three are relatively prime if any two of them are. Since $b\equiv D\mod m$, then $(b,m) = 1$, because $b$ and $D$ are relatively prime, so $D\not\equiv 0\mod m$. Thus $b$, $c$, and $m$ are relatively prime.
+\end{proof}
+Thus, suppose $D = -4$, so that $\jac{-4}{m} = 1$. Since $x^2+y^2$ is the only form with $D = -4$, then it proprtly represents an particular $m$. Thus,
+\[\jac{-4}{m} = \jac{4}{m}\jac{-1}{m} = 1 \implies \jac{-1}{m} = 1\] (because 4 is a square, so $\jac{4}{m} = 1$). Thus if $p$ is an odd prime, then $\jac{-1}{p} = 1$ implies that $p = x^2+y^2$.
+
+Now look back to $x^2+2y^2 = p$, for which $D = -8$. If $\jac{-2}{p} = 1$, then by multiplication $\jac{-8}{p} = 1$ as well, so 8 is a quadratic residue $\mod p$, and by the corollary, $p$ is represented by some form with discriminant $-8$. Since $h(-8) = 1$, then this must be the form $x^2+2y^2$, and so the condition on whether $x^2+2y^2 = p$ is that $\jac{-2}{p} = 1$.
+
+Conversely, if $x^2+2y^2 = p$, then $x^2+2y^2 \equiv 0\mod p$, so $x^2/y^2 \equiv -2\mod p$, so $\jac{-2}{p} = 1$.
+
+Now consider the forms with discriminant $D = -20$. The corollary says that if $\jac{-5}{p} = 1$, then $p$ is represented by one of $x^2+5y^2$ and $2x^2+2xy+3y^2$, and this happens exactly when $p\equiv 1,3,7,9\mod 20$.\footnote{Notice how it is much harder to answer this when $h(D) > 1$\dots so appreciate the few times when it is!}
+
+Looking specifically at $p \equiv 3,7\mod 20$, $x^2+5y^2 \equiv 3\mod 4$ would require that $x^2+y^2 \equiv \mod 4$, which isn't possible. Apparently knowing genus theory can help with this sort of thing, but that is beyond the scope of this lecture.
+
+\begin{ex}
+In these cases, there is a dichotomy between two forms: either a number $p$ is represented by one or the other. Is this always the case, or can a prime be represented by nonequivalent forms with the same discriminant? How many ways can a prime be represented? How can this be generalized to composite numbers?
+\end{ex}
+\begin{defn}
+Two quadratic forms of the same discriminant $D$ are in the same genus if they represent the same integers modulo $D$.
+\end{defn}
+\begin{ex}
+What can you say about these primes of the form $x^2+ny^2$, and which ones can you prove? (Warning: some of these are very difficult. The case $n = 14$ apparently requires class field theory.) Also look at in particular $x^2+xy+41y^2$.\footnote{The reason this generates so many primes as an integer-valued polynomial is because it is the only choice for its discriminant, so more primes are represented by it.} What about representing $2p,3p,\dots,pq$?
+\end{ex}

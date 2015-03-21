@@ -1,0 +1,13 @@
+% Arun Debray, 28 Jan 14
+% Requires the following somewhere in your preamble:
+%	\usepackage[all]{xy}
+%	\usepackage{amsmath} (or the amsart document class)
+%	\usepackage{amssymb}
+%	\newcommand{\atm}{\entrymodifiers={++[o][F]}}
+
+\[\atm\xymatrix@R=1.5cm@C=1.5cm{
+	*{} & *{} & *{} & q_2\ar[dl]_{\square\to\square, R}\ar@(ul,ur)[]^{\substack{x\to x,L\\0\to 0,L}}\\
+	*{}\ar[r] & q_0\ar[r]_{0\to\square, R}\ar[d]^{\substack{x\to x,R\\\square\to\square,R}} & q_1\ar[r]^{0\to x,R}\ar[d]^{\square\to\square,R}\ar@(ul,u)[]^{x\to x,R}
+		& q_3\ar[u]_{\square\to\square,R}\ar@(ur,dr)[]^{x\to x,R}\ar@<0.1cm>[d]^{0\to 0,R}\\
+	*{} & q_{\text{reject}} & q_{\text{accept}} & q_4\ar@/^0.8cm/[ll]^{\square\to\square, R}\ar@(r,d)[]^{x\to x, R}\ar@<0.1cm>[u]^{0\to x,R}
+}\]

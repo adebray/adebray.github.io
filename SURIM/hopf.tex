@@ -1,0 +1,45 @@
+\subsection{Hopf algebras}
+The motivation behind a Hopf algebra is to define a group in terms of mappings in a way that can be abstracted to other things. In this formalism, a group $G$ has an operation $G\times G\stackrel{m}{\to} G$ called multiplication and two homomorphisms $1\stackrel{\e}{\to} G$ (the unit) and $G\stackrel{\e^*}{\to} 1$ (the counit). These latter two operations are equivalent to the identity axiom.
+
+Associativity is given by the commutativity of the following diagram:
+\begin{equation}
+\label{assoc}
+\xymatrix{
+G\times G\times G \ar[r]^{\ m\times 1} \ar[d]^{1\times m} & G\times G\ar[d]_m\\
+G\times G \ar[r]^m & G.
+}
+\end{equation}
+But this doesn't add any information about inverses, so let $S:G\to G$ be given by $S(x) = x^{-1}$ and let $G\stackrel{m^*}{\to} G$ be the diagonal map $x\stackrel{m^*}{\mapsto} (x,x)$, called comultiplication. Then, the inverse property is equivalent to the commutativity of
+\begin{equation}
+\label{inverses}
+\xymatrix{
+G \ar[r]^{m^*} \ar[d]^{\e^*} & G\times G \ar[r]^{1\times s} & G\times G \ar[d]^m\\
+1 \ar[rr]^{\e} & & G
+}\end{equation}
+and of the analogous diagram for $s\times 1$.
+
+As an example, this can be used to say things about vector spaces using tensor products. The universal property of the tensor product is that for vector spaces $V,W$, $V\times W$ is equivalent to $V\otimes W$ under the map $(x,y)\mapsto x\otimes y$. Thus, the properties of vector spaces can be reformulated in terms of tensors, including equivalents of diagrams \ref{assoc} and \ref{inverses} but with $\otimes$ substituted for $\times$, as well as some other properties. Thus, one could develop group theory as a special case of Hopf algebras.
+
+In this formalism, the significance of comultiplication is that if $V,W$ are modules of a Hopf algebra $H$, then $V\otimes W$ is also a module, since $h(v\otimes w) = m^*(h)(v\otimes w)$ in $H\otimes H$.
+
+It would be nice to have $V\otimes W \cong W\otimes V$. One possibility is the map $\tau:x\otimes y\mapsto y\otimes x$, but this sometimes doesn't work, and the map needs to be $\tau R$ for some $R\in H$. This map must be an isomorphism, and it also must satisfy the Yang-Baxter equation:\footnote{Interestingly, both of these are physicists; the equation itself initially came out of mathematical physics.} $R_{12}R_{13}R_{23} = R_{23}R_{13}R_{12}$ in $H\otimes H\otimes H$, where $R\in H\otimes H$ gives $R_{ij}\in H\otimes H\otimes H$ by placing $R$ in positions $i$ and $j$. Thus, $R_{12} = R\otimes 1_H$ and $R_{23} = 1_H \otimes R$, and if $R = \sum_{\alpha = 1}^N S_\alpha \otimes T_\alpha$ for $S_\alpha,T_\alpha\in H$, then $R_{13} = \sum_{\alpha = 1}^N S_\alpha \otimes 1\otimes T_\alpha$.
+
+Consider three modules $U,V$, and $W$.
+\begin{equation}
+\label{isohexanol}
+\xymatrix{
+& V\otimes W\otimes U \ar[ld]_{\tau R\otimes 1} \ar[rd] &\\
+W\otimes V\otimes U \ar[d] && V\otimes U\otimes W\ar[d]\\
+W\otimes U\otimes V \ar[rd] && U\otimes V\otimes W\ar[ld]\\
+& U\otimes W\otimes V &
+}
+\end{equation}
+The Yang-Baxter Equation says that the left-hand and right-hand sides of Diagram~\ref{isohexanol} are identical isomorphisms.
+\subsection{{\sc Sage} and Hopf algebras}
+A lot of the calculations involving Hopf alegbras can be done with \textsc{Sage}, in part because Dr. Bump has contributed code to the project! However, not all of the code is in a stable release, as demonstrated when the program accidentally redefined $e$.
+
+Consider some group \texttt{G = CyclicPermutationGroup(7)} (i.e. $\mathtt G = S_7$) and let $\mathtt H$ be the Hopf algebra over $\mathtt G$ (which is done with the command \texttt{H = GroupAlgebra(G)}). \textsc{Sage}'s notation can be a bit counterintuitive; \verb+#+ is used for $\otimes$, and \texttt{()} is used to repreent the identity (which was sufficiently confusing that Dr. Bump decided  to write a wrapper class around it to fix it). Thus, if $\mathtt g$ is the group generator, then the command \texttt{(1+g).coproduct()} returns \verb!1 # 1 + g # g!, which is akin to saying $m^*(1+\mathtt g) = 1\otimes 1+\mathtt g\otimes \mathtt g$.
+
+Consider $R = \sum_{g\in \mathtt G} q^{-ab} g^a\otimes g^b$, where $q = e^{\frac{2\pi i}{n}}$ is an $n^{\mathrm{th}}$ root of unity. This should satisfy the Yang-Baxter equation as well as some more interesting properties, which can all be tested in \textsc{Sage}. (Generating $R_{13}$ is a little more interesting, but can be done with the map $\mathtt H\otimes \mathtt H \stackrel{\mathtt f}{\to} \mathtt H\otimes \mathtt H\otimes \mathtt H$ given by $\mathtt f:x\otimes y \mapsto x\otimes 1\otimes y$. Though this isn't terrifically complicated, it can be simplified into one line using Python's lambdas.)
+
+For further reference, the book Majid, \textit{A Quantum Groups Primary} might be interesting or useful.

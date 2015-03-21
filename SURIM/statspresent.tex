@@ -1,0 +1,47 @@
+This talk will resemble the one discussed in Section~\ref{present}, but will also focus more on using the Slidy program to make presentations in HTML format. (Slidy's HTML or CSS files can \emph{also} be edited with RStudio. Go figure --- though it makes presenting R code easier.) However, it is also a lot easier to write with markdown, which can be transformed into HTML. In this aspect, it resembles Sweave, but it isn't as nice --- you still have to do a couple of things from the terminal.
+
+Beamer is a similar option, which is a \LaTeX{} package that outputs to a \texttt{pdf} file of slides, while Slidy creates HTML code.
+
+The markdown conversion is accomplished by a program called Pandoc.\footnote{Which, apparently, was written in Haskell. Interesting.} Once installed, it is run from the terminal as \verb+$ pandoc -t slidy file.md -o file.html+, after knitr is used to %$
+get the markdown (\texttt{.md}) file.
+
+Interestingly, \LaTeX{} math can be typeset straight in markdown. This is partcularly notable because it's so much harder in HTML. Markdown and HTML can also make links easily, which is pretty nice. Collapsible lists and other such nifty tricks are also supported.
+
+The actual interface of Slidy is very much like PowerPoint; since it creates an HTML file, it runs in the browser, but it also enables lots of shortcuts (e.g. \texttt{C} for the table of contents).
+
+So the only missing element here is how to actually write files in markdown, which is fairly clear if you look at some sample code.
+
+Now for the actual talk, as a sample presentation:
+\subsection*{Will Sitting Too Long Kill You?}
+Sedentary physiology has been an active field lately --- it has been covered by weight-watching blogs, and more recently popular news sources have begun discussing it.
+
+One can define the MET (metabolic equivalent of task) as the rate of metabolism relative to the rest rate, and from this define sedentary behavior. It seems that sitting and then doing lots of exercise isn't as good as taking many small breaks for one's health.
+
+One potential flaw is that this activity is self-reported. Many studies confirm it, but it would be nice to get stronger data.
+
+In particular, the presentation cites some studies and review articles that support this conclusion in several different ways. However, some of the reivew articles make the data more complicated; not all of the claimed relationships had demonstrated evidence. Though specific diseases don't seem to have strong correlations, there does seem to be one with mortality.
+
+Some basics of the HTML notation: each slide is started with a \texttt{<div class="slide">} and ended with \texttt{</div>}. Various other quirks pop up (such as escape sequences for $>$ and $<$, hyperlinks, and images: \texttt{<img src=url>}). But once again, the markdown is a lot easier to read.
+
+The statistics of this physiology question are worth mentioning.
+\begin{defn}
+For a positive random variable $T$ with density $g(t)$, the survival function is \[G(t) = P(T \ge t) = \int_t^{\infty} g(s)\,ds\] and the hazard rate (or hazard function) is $h(t) =g(t)/G(t)$.
+\end{defn}
+Hazard functions can be extrapolated from data relatively quickly using some estimations, which is common in insurance and actuarial work.
+
+A Cox proportional hazard model is an estimation with a regression. In this concept, every person has a base hazard rate $h_0(t)$ following the model
+\[h_i(t) = h_0(t)e^{\sum_k x_{ik}\beta_k}\]
+for some covariance $\beta_k$. Sir David Cox is known for his estimate of this that makes life a lot simpler, so the partial likelihood of $\beta_k$ is just
+\[L(\beta_k) = \prod_{j=1}^k P(j\mid R_j)\] where the product is over all people sampled.
+
+This technique can be made more powerful by looking at several factors or similar generalizations.
+
+For example, a survey followed people from 1992 to 2006 in order to study sedentary physiology. Using a survey, the study generated MET coefficients and made Cox estimates. Eventually, it was shown that while exercise helps, it still does not completely overcome the effect of sitting for a long time. Surprisingly, the effect is stronger for leaner people, though other confounding variables don't have very much effect.
+
+Lastly, it is worth mentioning some cautions in any medical study:
+\begin{itemize}
+\item Small sample size: a study found that high workload had a correlation with increased consumption of fats. It had a sample size of 14 people, so it's not exactly representative.
+\item Publication bias. See Ioannidis, JPA (2005), ``Why Most Published Research Findings are False.'' For example, comparing aspirin's effect on tumors shows lots of small studies tend to not be evenly distributed across the possibilities of standard error; thus, people who didn't get the results they were looking for might not have published.
+\item The multiple testing problem. A $p$-value of 0.5 means that one test in 20 is a false positive --- so you can just repeat a study 20 times (or have many people doing one study) to get some significant results which actually don't mean anything.
+\end{itemize}
+Did these happen to sedentary behavior? The biological effects of sedentary behavior aren't completely understood, but there does seem to be this correlation. So the takeaway lesson is to get up and stretch, or maybe get a standing desk (which does allow sitting as an option, too). A stationary bike may also work for this, too.

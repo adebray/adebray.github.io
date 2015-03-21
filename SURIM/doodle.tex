@@ -1,0 +1,61 @@
+%Where are your pictures?
+In some sense, the difficulty of research is asking the right questions, and in ways which can be considered elegant.
+
+%Pic here
+Suppose one draws a doodle around a bunch of letters. Do successive doodles get more circular? What does that even mean mathematically?
+\begin{defn}
+For some plane set $X$, define the $r^{\mathrm{th}}$ neighborhood (or $r^{\mathrm{th}}$ doodle) of $X$ to be $N_r(X) = \{y:|y-x|\le r\text{ for some }x\in X\}$.
+\end{defn}
+Thus, in what sense does $N_r(N_r(\dots(N_r(X))\dots))$ become ``more circular?''
+
+How does a choice of $r$ affect the situation? (In this methodology, math, both pure and applied, is an experimental science, made by hypotheses rather than dry exposition by theorem-proof.)
+\begin{claim}
+$N_{a+b}(x) = N_a(N_b(X))$.
+\end{claim}
+\begin{proof}
+First, to show that $N_{a+b}(X) \supset N_a(N_b(X))$, anything that can be reached by a step of length at most $a$ from $X$ followed by a step $b$ must be reachable by a step of at most $a+b$ by the Triangle Inequality.
+
+Conversely, if something can be reached by a step of at most $a+b$, it can be reached by a step of at most $a$ followed by a step of at most $b$ (just going in the same direction).
+\end{proof}
+Thi claim could even be thought equivalent to the Triangle Inequality, and used as a definition that is investigated on generalizations on spheres and such.
+
+Then, as $r\to\infty$, does $N_r(X)$ become more circular? It does, thanks to the obvious observation that if $A\subset B$, then $N_r(A) \subset N_r(B)$:
+
+Let $p\in X$ be in some sense its center and let $C_t$ be the circle of radius $t$ around $p$. Pick some $r$ such that $X\subset C_r$. Then, $\{p\}\subset X\subset C_r$, so
+\[C_R = N_R(\{p\})\subset N_R(X)(C_r) = C_{R+r}\]
+for some $R$, and as $R\to\infty$, $N_R(x)$ is caught between two circles that approach each other.
+
+Thus, the definition of ``more circular'' is given \emph{after} it is proven --- which seems irrigorous, but is in line with the experimental approach.
+
+%A picture would be nice here too.
+Now consider the perimeter and area of these sets. If $X$ is a convex polygon, let $P$ denote perimeter and $A$ denote area. Since $X$ is a convex polygon, $N_r(X)$ is nice: it is $X$ with its edges extended out a distance $r$, and the remaining area filled in by circular arcs. The total angle of the arcs is $2\pi$, so $P(N_r(X)) = P(X) +2\pi r$.
+
+The area argument is exactly the same, and $A(N_r(X)) = A(X)+P(X) + \pi r^2$.\footnote{It is no coincidence that $\frac{\ud A}{\ud r} = P$; think about why this might be.} This is a quadratic polynomial in $r$ --- its coefficients have a more interesting meaning than just appears on the surface.
+
+Now generalize further: suppose $X$ is a general convex region. Using the normal vector (i.e. the vector perpendicular to the tangent vector to $\partial X$, oriented outward), the same formulas for perimeter and area hold, thanks to Green's Theorem.
+
+Suppose the Earth is a perfect sphere and that a string is wrapped tightly around it. If the string's length is suddenly increased by 1 meter, how high up would it have to be to be taut again? The answer is $1/2\pi$ meters, which is much more than anyone expects. In particular, it doesn't depend on the radius or even the shape of the Earth, only that it is convex.\footnote{So, yeah, about that\dots but it's still a close enough approximation, since one could always just consider the convex hull.} If $X$ is a cross-section of the Earth, then the string is $N_r(X)$, and $P(N_r(X)) - N_r(X) = 1$. Solving for $r$ yields the correct answer.
+
+If convexity isn't important to you, the formula can still hold; however, perimeter and area may have to be redefined for this to work (implying the new, less intuitive definitions are more ``natural''). In particular, the area of $N_r(X)$ must double-count separate parts of the doodle that overlap, and must ignore the holes.
+
+However, some strange things happen. A figure 8 has $P(N_r(X)) = P(X)$, and other surfaces have $P(N_r(X)) - P(X) = 2\pi r$ (once again, the notion of area must be closely defined; in these cases it is signed, taking orientation into account).
+\begin{defn}
+The winding number of some curve around a point is the signed number of turns around that point that it makes.
+\end{defn}
+Thus, the winding number affects the perimeter and area. All the convex examples had a winding number of $1$; the figure $8$ has a winding number of $0$.
+
+Another option is to add holes or make $X$ disconnected. Then, $A(N_r(X)) = A(X) +nP(X) +\chi(X)\pi r^2$, where $\chi(X)$ is the Euler characteristic, a fundamental topological invariant that is the number of disconnected pieces minus the number of holes.\footnote{For the perimeter, just take the derivative.} This is one of many remarkable mathematical examples that relate the continuous and the discrete.
+
+One can gneralize yet again to higher dimensions. For example, something similar happens in three dimensions. If $V$ is the volume and $A$ the surface area, then
+\[V(N_r(X)) = V(X) + A(X)r +(h+\ell+w)\pi r^2 +\frac{4\pi r^3}{3}.\]
+The quadratic term is new, however, and is often forgotten in the generalization. But how does it generalize? What does it represent?
+
+Consider a Russian train company with a rule that no package can be allowed with a total $\ell+w+h > 1$. Is it possible to encase one package inside another to get around this rule (e.g. diagonally)? As it happens, no.\footnote{``One thing you learn about mathematics is, if you ever get into an argument with a Russian, then the Russian wins.''} If $X\subset Y$, then $V(N_r(X)) \le V(N_r(Y))$. Letting $r\to\infty$, the quadratic term dominates, so $h_y+\ell_y+w_y > h_x+\ell_x+w_x > 1$.
+
+In $n$-dimensional space, if $X$ is some convex region, these invariants are very interesting. In this case, $V(N_r(X)) = \sum_{i=1}^n k_i(X)r^i$, where $k_0 = V$ (the hypervolume), $k_1$ is the hypersurface area, and $k_n$ is the volume of the unit $n$-sphere.
+
+The set of compact orientable surfaces of genus $g$ has a structure as a vector space of dimension $6g-6$. It has both a size and a shape (i.e. a topology). Witten conjectured up an algorithm for this related to representation theory (and inspired by string theory), which was later proven by others. Eventually, the P.h.D. thesis of Miriam Mirzekhani, a Stanford professor, generalized this to surfaces with holes in them (as opposed to just handles that affected the genus). If the sizes of the holes are fixed, the surfaces still form a vector space, with a volume completely analogous to the polynomial expression for $V(N_r(X))$, and it can be determined through topological techniques called cutting, pasting, and sewing. This also leads to another proof for Witten's conjecture.
+
+A related Hilbert problem: is it possible to dissect a cube into a finite number of pieces (\emph{without} Banach-Tarski) and rearrange them to form a pyramid? In two dimensions, this is easy; area is the only invariant under dissection. But in three dimensions, there are two invariants: volume and a new volume-like invariant. Then, there are more and more in higher dimensions.
+
+This three-dimensional invariant is related to the shadow cast by the object onto a plane\dots which means it has been applied to determine the surface areas of transiting exosolar planets!

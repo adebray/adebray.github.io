@@ -1,0 +1,44 @@
+The basic idea behnd the SVD (singular value decomposition) is that an $n\times p$ data matrix can be thought of as $n$ points in a $p$-dimensional space. They can be plotted as points in that space (which is of course easier in 2 or 3 dimensions), so that a matrix is a collection of points.
+
+Alternatively, a matrix is a transformation. Consider some matrix $X\in\R^{n\times p}$. In this case, $X$ takes a vector of length $n$ and returns a vector of length $p$. It's worth considering some special types of matrices, such as those for which $X\T\! X = I_p$. In this case, if $X = [\vec x_1 \dotsb \vec x_p]$ then the dot products of the columns are
+\[\vec x_i\cdot \vec x_j = \vec x_i\T\vec x_j = \sum_{j=1}^n x_{ij}^2.\]
+If this is equal to 1, each column has unit length.
+
+Thus, the $ij^{\mathrm{th}}$ element of $X\T\! X$ is 1 if $i = j$, and 0 otherwise. This is called orthogonality; there can be $n$ orthogonal lines in $n$ dimensions. The identity matrix is a good example of an orthogonal matrix.
+\begin{defn}
+An orthonormal matrix is one that satisfies $X\T\! X = I$.
+\end{defn}
+These matrices are necessarily square, and (since they preserve length and are linear) they can be thought of as rotations of the space. This matrix changes the way the axes are oriented (which means it can also be a reflection across a plane through the origin, since this is a special case of rotation). If the matrix satisfied $X\T\! X = kI$, for a scalar $k$, then it would be a rotation composed with a scaling.
+
+The rank of a matrix is, if it is represented by a collection of points, a measure of how many different directions they point in (in a sense, how many different variables are at work here?).
+\begin{defn}
+The rank of a matrix is the number of linearly independent columns (or equivalently, rows) it has.
+\end{defn}
+\begin{defn}
+A full-rank matrix is a matrix that has rank equal to its number of columns.
+\end{defn}
+Obviously a matrix cannot have higher than full rank. Full-rank matrices also have the consequence that if $X\vec v = \vec 0$, then $\vec v = \vec 0$ as well. Randomly generated matrices over $\R^n$ are full-rank (unless you use some algorithm that chooses from a subspace).
+
+The singular-value decomposition is a way of writing some $n\times p$ matrix $X$ as $X = UDV\T$, where $U$ is $n\times n$, $D$ is $n\times p$, $V$ is $p\times p$, $U$ and $V$ are orthonormal, and $D$ is diagonal.\footnote{There are many variants on the SVD, and this is not the only formulation. Sometimes $D$ is square, for example.} Given that orthonormal matrices are rotations, then this means that every matrix is the composition of a rotation, a scaling, and a rotation.
+
+This is a convenient way to know the rank of a matrix because the rank of a matrix is unchanged by multiplication by an orthonormal matrix. And the rank of a diagonal matrix is the number of nonzero values it has.
+
+Interestingly, R has the ability to compute singular value decomositions with the command \texttt{svd(X)}.
+
+For the statistical side of this, it is worth looking at the specific values in $D$, which represent the variation in each of those directions. In this case, it matters a lot more whether all of the diagonal entries have similar orders of magnitude, since they are the proportions of variance represented by that dimension. If one of these is small relative to another, then there is not much variance of the data in that direction, which could imply a correlation. Thus, one can also define the statistical rank of a matrix as the number of significant entries on the diagonal. Higher-dimensional data tends to have lower rank, simply because there tend not to be that many causes for the variance. It may not be the dimensions observed (fed into the SVD), but some combination tends to be simpler.
+
+The SVD will create $D$ such that the entries are decreasing (so that the first component explains the most variance and so on).
+
+Another way of thinking about the SVD is a way to find the direction in which the data has maximal variance, which in the direction of the first principal component. This can become mired in icky computational linear algebra if one is careless, however. Much of it can be avoided by centering the data at their mean (to the origin).
+\begin{defn}
+If $X = UDV\T$, where $V = [\vec v_1 \dotsb \vec v_n]$, then the variance in the direction of $\vec v$ is $\var(X\vec v) = \vec v\T\! X\T\! X\vec v$.
+\end{defn}
+If $D$ is the diagonal matrix given in the SVD, then this simplifies to $\var (X\vec v_1) = d_1^2$ (where $d_1$ is the first diagonal entry in $D$). The overall variance, then, is $\sum_i d_i^2$.
+
+Additionally, any $\vec z\in \R^p$ can be written as $\vec z = \sum_{i=1}^p a_i\vec v_i$. If $\|\vec z\| = 1$, then $\sum a_i^2 = 1$. Then, one can decompose the variance as 
+\[\var(X\vec z) = (a_1,\dots,a_p)D^2\begin{pmatrix}a_1\\\vdots\\a_p\end{pmatrix} = \sum_{i=1}^p a_i^2d_i^2.\]
+This is in some sense a different way of choosing coordinate axes (based on $\vec v_i$ rather than $\vec e_i$), chosen based on the possible directions of maximal variance. This is particularly convenient if it is possible to analyze data in fewer variables than it is given. Plotting the values of $D$ yields a scree plot that can be used to analyze the data. In particular, if it contains an ``elbow,'' then the rank might end there (since the rest of the data is less signifcicant).
+
+There are various techniques to make a matrix of a given rank, such as taking two vectors $\vec u$ and $\vec v$ and creating
+\[X = \sum_{i=1}^p d_i\vec u_i\vec v_i\T\!,\]
+which can be fine-tuned by letting certain numbers of the $d_i$ be zero or small, in a sense doing a singular value composition.

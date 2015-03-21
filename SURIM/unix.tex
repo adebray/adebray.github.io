@@ -1,0 +1,35 @@
+%\documentclass{article}
+%\usepackage{geometry,microtype,hyperref}
+%\geometry{margin=0.67in}
+%\begin{document}
+%\title{RStudio and \LaTeX}
+%\author{SURIM}
+%\date{\today}
+%\maketitle
+RStudio is an IDE for the R programming language, which is used for statistical and mathematical processing. It is related to literate programming (i.e. programs that can be easily read by people) --- in particular, integrating \LaTeX{} with R allows for generation of, say, plots and graphs in a pretty document.
+
+%Picture of rstudio --- looks like you can't easily see much of the code
+There are four windows in RStudio: the upper left appears to be \LaTeX{} code, the lower left is a console where one can play with R interactively, and the right windows are organizational (workspace, list of files, \&c.). Of course there are lots of helpful shortcuts (e.g. setting up the standard boilerplate for a \LaTeX{} document).
+
+However, the \TeX{} code is actually an \texttt{.rnw} file, which I suppose is R and \LaTeX{} integrated together. However, it can also handle R scripts (\texttt{.r} files) and a host of others.
+\begin{itemize}
+\item An \texttt{.rnw} file is very close to a \LaTeX{} file, with some \verb+<<chunk>>+ statements that allow one to evaluate R code in a \LaTeX{} document. This is done with the \verb+knitr+ package, whic exports a function called \verb+knit()+ which processed \texttt{.rnw} files into \texttt{.tex} files, which can be compiled as before. RStudio allows one to do all the compilation in one click. \verb+knitr+ displays R code in a gray box, showing the code and then the output in a monospaced font.\footnote{If you don't have the newest version of \texttt{knitr}, then you may need to use the \texttt{alltt}, which in newer versions is handled automatically.}
+\end{itemize}
+In order to accomplish this, one needs to acquire the following tools: R, \texttt{knitr}, RStudio, and \LaTeX{} (the latter is sometimes tricky and time-consuming). Additionally, in order to set this up properly, go into the Sweave Preferences in RStudio and change it to prefer \texttt{knitr} instead of Sweave, but this is pretty straightforward.
+
+As with \texttt{.tex} files, \texttt{.rnw} files produce various different output files: a \texttt{.tex} file and a PDF, but also the aux and such.
+
+The \texttt{setup} chunk is a a fairly useful notion. In this example, it has the syntax \texttt{<<setup, inclue=FALSE, cache=FALSE>>}, which globally sets up options. So if the setup contains a \verb+opts_chunkSet$(fig.path='...')+, then figures will be placed in their own folder, so they can be added to the document in the \LaTeX{} code.
+
+Another interesting command is the \texttt{Sexpr},\footnote{\dots which stands for an expression in the S language, a precursor to R. What were \emph{you} thinking?} which allows the inline evaluation of R code. Obviously this is really useful if you change your data or such. It also allows you to hide your computation for an article which does not require it. Not all inline expressions return something: if one does not, then it will simply not appear in the output.
+
+In addition to the \texttt{<<chunk>>} notation with an \texttt{@} at the end, there is also code that uses \texttt{\%} to signal R code. In particular, the line \texttt{\%\% begin.rcode} allows one to do basically the same thing (the lines of R code are preceded by single percents). The end of the code is designated by \texttt{\%\% end.rcode}. Comments in this section of the code are demarcated by \texttt{\#}. This latter notation is actually preferred, but the angle-bracket notation is retained for reverse compatibility with Sweave.
+
+Another useful technique is to cache a chunk, by setting \texttt{\%\% begin.rcode name, cache=TRUE}. This allows a time-consuming calculation to be done only once, even if the code is compiled several times: the return data is stored elsewhere for future compilations.
+
+Interestingly, if you do something stupid in R in the display (gray-box) environment, the warnings and errors are shown right in the pdf output, unless you set a certain flag.
+
+RStudio can also process \texttt{.rhtml} files in order to generate HTML code with R. The structure of the fusion is very similar --- HTML comments look like \texttt{<!--}\dots\texttt{-->}, so the syntax with R is \texttt{<!--begin.rcode} and \texttt{end.rcode-->}. In this case, compiling generates a some HTML code and a nice preview. There are gray boxes of code and plots, warnings, messages, and errors all as before. Inline expressions do also exist. This is one of the strengths of \texttt{knitr}: while Sweave could only handle \texttt{.tex} fies, \texttt{knitr} can also handle HTML and some others, including markdown files.
+
+The \texttt{.rmd} file is used for markdown, which is very much the same as before. The comment syntax is slightly different. Markdown is used to generate HTML (since it is more human-readable), so the output is an HTML file.\footnote{You might also recognize a dialect of markdown as Reddit's comment interface.}
+%\end{document}
