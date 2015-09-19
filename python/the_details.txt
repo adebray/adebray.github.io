@@ -1,5 +1,0 @@
-I started inaxessible.sh running on myth12@stanford.edu, process 25811.
-Kill it when I'm done.
-Cool.
-
-#inAxessible

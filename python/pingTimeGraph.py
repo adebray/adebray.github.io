@@ -4,8 +4,8 @@
 # Using matplotlib to deal with ping data from axess.stanford.edu on the
 # night that course enrollment opens.
 
-# This program lives at http://www.stanford.edu/~adebray/python/pingTimeGraph.py,
-# and the data I ran it on is at http://www.stanford.edu/~adebray/python/axess_data.txt.
+# This program lives at https://adebray.github.io/python/pingTimeGraph.py,
+# and the data I ran it on is at https://adebray.github.io/python/axess_data.txt.
 
 # Usage: ./pingTimeGraph.py datafile
 
