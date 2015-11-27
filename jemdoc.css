@@ -9,7 +9,8 @@ body {
 	font-family: Charter, serif;
 	font-size: 11.5pt;
 	padding-bottom: 8px;
-	margin: 0;
+	margin-top: 0;
+	margin-left: 10em;
 }
 
 #layout-menu {
@@ -81,6 +82,7 @@ div.menu-category {
 	padding-top: 0.2em;
 	padding-bottom: 0.1em;
 	font-weight: bold;
+	width: 42em;
 }
 
 div.menu-item {
@@ -92,6 +94,7 @@ div#toptitle {
 	padding-bottom: 0.2em;
 	margin-bottom: 1.5em;
 	border-bottom: 3px double gray;
+	width: 42em;
 }
 
 /* Reduce space if we begin the page with a title. */
@@ -123,6 +126,7 @@ h1, h2, h3 {
 	line-height: 1.0;
 	padding-top: 0.5em;
 	border-bottom: 1px solid #aaaaaa;
+	width: 33.6em;
 }
 
 h1 {
@@ -148,6 +152,8 @@ p {
 	margin-bottom: 0.8em;
 	padding: 0;
 	line-height: 1.3;
+	width: 42em;
+	text-align: justify;
 }
 
 pre {
@@ -161,6 +167,7 @@ div#footer {
 	padding-top: 0.1em;
 	margin-top: 4.0em;
 	color: #c0c0c0;
+	width: 49.5em;
 }
 
 div#footer a {
@@ -217,6 +224,7 @@ ol {
 
 li p, dd p {
 	margin-bottom: 0.3em;
+	width: 39.3em;
 }
 
 
@@ -386,4 +394,10 @@ table.imgtable, table.imgtable td {
 	vertical-align: 0.15em;
 	margin-left: -0.36em;
 	margin-right: -0.15em;
+}
+
+hr {
+	text-align: left;
+	margin-left: 0;
+	width: 42em;
 }
