@@ -4,6 +4,31 @@ table#tlayout {
     background: white;
 }
 
+.button1, .button2 {
+	border: none;
+    text-align: center;
+    display: inline-block;
+	color: #ffffff;
+	font-size: 17px;
+	font-family: sans-serif;
+	font-weight: bold;
+	padding: 6px 12px 6px 12px;
+	text-decoration: none;
+}
+
+.button1:hover, .button2:hover {
+	background: #3cb0fd;
+ 	text-decoration: none;
+}
+
+.button1 {
+	background: #0037b3;
+}
+
+.button2 {
+	background: #7C00B3;
+}
+
 body {
 	background: #D3F0F7;
 	font-family: Charter, serif;
@@ -401,3 +426,5 @@ hr {
 	margin-left: 0;
 	width: 42em;
 }
+
+
