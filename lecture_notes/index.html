@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <link rel="stylesheet" href="../jemdoc.css" type="text/css" />
 <link rel="shortcut icon" href="../sun.ico" />
+<script type="text/javascript" src="toggle.js"></script>
 <title>Lecture Notes</title>
 </head>
 <body>
@@ -16,26 +17,34 @@
 <p>I <span class="latex">L<sup>a</sup>T<sub>e</sub>X</span>ed up lecture notes for many of the classes I have
 taken; feel free to read through them or use them to review. If you find a mistake or typo, please let me know.</p>
 <p>If you want to look over the <tt>.tex</tt> source for any of these notes, please send me an email.</p>
-<h3><!-- -->
-Graduate School (UT Austin)
-</h3>
-<ul>
+<h3><a id='grad_header' onClick="toggle_list('grad_header', 'grad')">▾ Graduate School (UT Austin)</a></h3>
+<ul id='grad'>
 	<li><p><a href="m381c_notes.pdf">Math 381C</a>: Measure Theory, taught by Luis Caffarelli in Fall 2015.
 	(incomplete)</p>
-	<li><p><a href="m382d_notes.pdf"><b>Math 382D</b></a>: Differential Topology, taught by Lorenzo Sadun in Spring
+	<li><p><a href="m382d_notes.pdf">Math 382D</a>: Differential Topology, taught by Lorenzo Sadun in Spring
 	2016.</p>
 	<li><p><a href="m383c_notes.pdf">Math 383C</a>: Methods of Applied Mathematics, taught by Todd Arbogast in Fall
 	2015.</p>
-	<li><p><a href="m390c_notes.pdf"><b>Math 390C</b></a>: Algebraic Geometry, taught by David Ben-Zvi in Spring
+	<li><p><a href="m390c_notes.pdf">Math 390C</a>: Algebraic Geometry, taught by David Ben-Zvi in Spring
 	2016.</p>
 	<li><p><a href="m392c_Knotes.pdf">Math 392C</a>: <i>K</i>-Theory, taught by Dan Freed in Fall 2015.</p>
 	<li><p><a href="m392c_RHTnotes.pdf">Math 392C</a>: Rational Homotopy Theory, taught by Jonathan Campbell in
 	Fall 2015. (incomplete)</p>
-	<li><p><a href="m392c_RSnotes.pdf"><b>Math 392C</b></a>: Riemann Surfaces, taught by Tim Perutz in Spring
+	<li><p><a href="m392c_RSnotes.pdf">Math 392C</a>: Riemann Surfaces, taught by Tim Perutz in Spring
 	2016.</p>
 </ul>
 
-<h3> Undergrad (Stanford University) </h3>
+<h3><a id="LS_header" onClick="toggle_list('LS_header', 'LS')">▾ Learning Seminars</a></h3>
+<ul id='LS'>
+	<li><p><a href="summer_16_algebraic_geometry.pdf"><b>Algebraic Geometry Learning Seminar</b></a>, summer 2016
+	(<a href='//www.ma.utexas.edu/users/toldfield/Seminars/Algebraicgeometryreading.html'>website</a>): on roughly
+	the middle third of Ravi Vakil's algebraic geometry lecture notes <a
+	href='//math.stanford.edu/~vakil/216blog/FOAGdec2915public.pdf'><i>The Rising Sea</i></a>.
+</ul>
+
+<h3><a id='undergrad_header' onClick="toggle_list('undergrad_header', 'undergrad')">▸ Undergrad (Stanford
+University)</a></h3>
+<div id="undergrad" style="display: none">
 <p>
 I did some calculations recently, and in undergrad, I produced 2,424 PDF pages of <span
 class="latex">L<sup>a</sup>T<sub>e</sub>X</span> for my classes. 1,491 of those (61.5%) were lecture notes; the
@@ -119,7 +128,12 @@ in Winter 2013.</p>
 <li><p><a href="physicsnotes.pdf">Physics 40 series</a>: Notes I took from the reading on Physics 41, 43, and 45.</p>
 </li>
 </ul>
-<h3>Other notes</h3>
+</div>
+<h3><a id='other_head' onClick="toggle_list('other_head', 'other')">▸ Other notes</a></h3>
+<div id="other" style="display: none">
+<p>
+These are mostly notes I used when preparing talks, so may be less polished than usual.
+</p>
 <ul>
 <li><p><a href="using_xy.pdf"><span class="latex">X<sub>Y</sub></span> for Automata</a>: A short guide on using the
 <span class="latex">X<sub>Y</sub></span> package to typeset automata in <span
@@ -149,8 +163,8 @@ talk I gave to UT Austin's undergraduate math club on March 2, 2016.
 Homology Sphere seminar showing that the Poincaré Homology Sphere is the quotient of <i>S</i><sup>3</sup> by the
 binary icosahedral group on March 28, 2016.
 </p></li>
-
 </ul>
+</div>
 <p>
 <a href="..">Back to main page.</a>
 </p>
