@@ -40,6 +40,15 @@ var tinyx=new Array();
 var tinyy=new Array();
 var tinyv=new Array();
 
+// blame Richard for this
+function roll() {
+	if (Math.random() < 0.1) {
+		var hero_image = document.getElementById('hero_image');
+		hero_image.href = 'https://www.youtube.com/watch?v=oHg5SJYRHA0';
+		hero_image.title = 'click me!';
+	}
+}
+
 window.onload=function() { if (document.getElementById) {
   var i, rats, rlef, rdow;
   for (var i=0; i<sparkles; i++) {
@@ -64,7 +73,10 @@ window.onload=function() { if (document.getElementById) {
   }
   set_width();
   sparkle();
-}}
+}
+roll();
+
+}
 
 function sparkle() {
   var c;
