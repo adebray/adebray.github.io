@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.5
+#!/usr/bin/env python3
 
 # Arun Debray
 # 4 March 2017
@@ -11,7 +11,7 @@ import os
 
 # execute command, return stdout
 def capture_output(*args) -> str:
-	return subprocess.run(args, stdout=subprocess.PIPE, check=True).stdout
+	return subprocess.check_output(args)
 
 # get 6-digit hash of latest tag
 # def latest_tag() -> str:
@@ -21,8 +21,8 @@ def capture_output(*args) -> str:
 def last_update(filename: str) -> str:
 	raw_info = capture_output('git', '--no-pager', 'log', '-1', '--pretty=format:"%ad"',
 		filename).decode('UTF-8 ')
-#	if raw_info == '':
-#		return datetime.datetime.now().strftime('%b %d, %y')
+	if raw_info == '':
+		return datetime.datetime.now().strftime('%b %d, %y')
 	return datetime.datetime.strptime(raw_info, '"%a %b %d %X %Y %z"').strftime('%B %d, %Y')
 
 
