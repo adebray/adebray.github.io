@@ -21,6 +21,7 @@ def capture_output(*args) -> str:
 def last_update(filename: str) -> str:
 	raw_info = capture_output('git', '--no-pager', 'log', '-1', '--pretty=format:"%ad"',
 		filename).decode('UTF-8 ')
+	print(filename, raw_info)
 	if raw_info == '':
 		return datetime.datetime.now().strftime('%b %d, %y')
 	return datetime.datetime.strptime(raw_info, '"%a %b %d %X %Y %z"').strftime('%B %d, %Y')
