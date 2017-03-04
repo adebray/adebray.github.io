@@ -29,7 +29,7 @@ def last_update(filename: str) -> str:
 # recursively obtain all files, ignoring hidden directories and symlinks
 def all_files() -> [str]:
 	for root, dirs, files in os.walk('.', topdown=True):
-		dirs[:] = [d for d in dirs if d != '.git']
+		dirs[:] = [d for d in dirs if d not in ('.git', 'SURIM', 'other')]
 		for filename in files:
 			yield '%s/%s' % (root, filename)
 
