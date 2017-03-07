@@ -4,6 +4,7 @@
 # 4 March 2017
 
 # git hook to produce a dictionary of when each file was last updated.
+# TODO: leave out more directories to make this faster
 
 import datetime
 import subprocess
