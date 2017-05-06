@@ -6,6 +6,7 @@ var categories = ['meta', 'food', 'math', 'CS', 'other',
 var pars = undefined
 
 window.onload = function() {
+	document.getElementById('footer-text').innerHTML = 'This page last updated ' + all_files_info['./puns.html'];
 	pars = document.getElementsByTagName('p');
 	var pun_filter = document.getElementById('filter');
 	pun_filter.onchange = function() {
