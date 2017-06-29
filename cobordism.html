@@ -7,6 +7,11 @@
 <link rel="stylesheet" href="jemdoc.css" type="text/css" />
 <link rel="shortcut icon" href="sun.ico" />
 <script src='.git/update_info.js'></script>
+<script>
+window.onload = function() {
+	document.getElementById('footer-text').innerHTML = 'This page last updated ' + all_files_info['./cobordism.html'];
+}
+</script>
 <script src='cobordism.js'></script>
 <title>Unoriented cobordism</title>
 </head>
@@ -38,9 +43,11 @@ Answer: dim<sub>𝔽<sub>2</sub></sub> Ω<sub><span id='dim_MO'><i>n</i></span><
 
 <!-- next: cobordisms with a principal Z/2-bundle -->
 <h2>Unoriented manifolds with a principal ℤ/2-bundle</h2>
+<p>
 Under cobordism, closed, unoriented manifolds with a principal ℤ/2-bundle form a graded abelian group, but not a
 ring. Thom's work identifies this ring with π<sub>*</sub>(<i>MO</i> ∧ <i>B</i>ℤ/2<sub>+</sub>), which can be
-computed in a similar manner as above.</p>
+computed in a similar manner as above.
+</p>
 
 <form name='BZ2'>
 	<input type='text' id='input_BZ2' onKeyDown="if (event.keyCode == 13) {main('BZ2'); return false}">
