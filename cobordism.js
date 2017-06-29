@@ -41,8 +41,26 @@ const dim_of_unoriented_cobordism_group = function(n) {
 	return partitions_specified_by(not_generators(n), n, n);
 }
 
-const main = function () {
-	let n = parseInt(document.getElementById('input').value);
-	document.getElementById('answer').innerHTML = dim_of_unoriented_cobordism_group(n);
-	document.getElementById('dim').innerHTML = n;
+
+/* Cobordism of unoriented manifolds together with a principal Z/2-bundle.
+   This turns out to be the cumulative sum of all unoriented cobordism classes of dimension
+   at most n, plus an extra copy of the top dimension.
+ */
+const dim_of_z2_cobordism_group = function(n) {
+	let to_return = dim_of_unoriented_cobordism_group(n);
+	for(let i = 0; i <= n; i++) {
+		to_return += dim_of_unoriented_cobordism_group(i);
+	}
+	return to_return;
+}
+
+// tang_str is a string indicating which calculation we're doing
+const main = function(tang_str) {
+	let n = parseInt(document.getElementById('input_' + tang_str).value);
+	if (tang_str === 'MO') {
+		document.getElementById('answer_MO').innerHTML = dim_of_unoriented_cobordism_group(n);
+	} else if (tang_str === 'BZ2') {
+		document.getElementById('answer_BZ2').innerHTML = dim_of_z2_cobordism_group(n);
+	}
+	document.getElementById('dim_' + tang_str).innerHTML = n;
 }
