@@ -12,8 +12,10 @@
 </head>
 
 <body>
+<h1>Cobordism groups</h1>
 <div id="layout-content">
 
+<h2>Unoriented cobordism</h2>
 <p>
 René Thom's 1954 paper <a href='http://www.maths.ed.ac.uk/~aar/papers/thomcob.pdf'><i>Quelques propriétés globales
 des variétés differentiables</i></a> calculated the unoriented <a
@@ -24,18 +26,32 @@ given <i>n</i>.
 </p>
 
 <form name='MO'>
-	<input type='text' id='input' onKeyDown="if (event.keyCode == 13) {main(); return false}">
-	<input type='button' value='Go' onClick='main()'>
+	<input type='text' id='input_MO' onKeyDown="if (event.keyCode == 13) {main('MO'); return false}">
+	<input type='button' value='Go' onClick='main("MO")'>
 </form>
+<br>
 
 <p>
-Answer: dim<sub>𝔽<sub>2</sub></sub> Ω<sub><span id='dim'><i>n</i></span></sub> = <span id='answer'>_</span>.
+Answer: dim<sub>𝔽<sub>2</sub></sub> Ω<sub><span id='dim_MO'><i>n</i></span></sub> = <span id='answer_MO'>_</span>.
 </p>
 
 
 <!-- next: cobordisms with a principal Z/2-bundle -->
+<h2>Unoriented manifolds with a principal ℤ/2-bundle</h2>
+Under cobordism, closed, unoriented manifolds with a principal ℤ/2-bundle form a graded abelian group, but not a
+ring. Thom's work identifies this ring with π<sub>*</sub>(<i>MO</i> ∧ <i>B</i>ℤ/2<sub>+</sub>), which can be
+computed in a similar manner as above.</p>
 
+<form name='BZ2'>
+	<input type='text' id='input_BZ2' onKeyDown="if (event.keyCode == 13) {main('BZ2'); return false}">
+	<input type='button' value='Go' onClick='main("BZ2")'>
+</form>
+<br>
 
+<p>
+Answer: dim<sub>𝔽<sub>2</sub></sub> π<sub><span id='dim_BZ2'><i>n</i></span></sub>(<i>MO</i> ∧
+<i>B</i>ℤ/2<sub>+</sub>) = <span id='answer_BZ2'>_</span>.
+</p>
 
 
 
