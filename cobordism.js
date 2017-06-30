@@ -54,6 +54,12 @@ const dim_of_z2_cobordism_group = function(n) {
 	return to_return;
 }
 
+// Cobordism of stably almost complex manifolds, which is a partition function for only even-size partitions.
+const dim_of_complex_cobordism_group = function(n) {
+	if (n % 2 !== 0) return 0;
+	return partitions_specified_by(new Set(), n/2, n/2); // this is literally the partition function
+}
+
 // tang_str is a string indicating which calculation we're doing
 const main = function(tang_str) {
 	let n = parseInt(document.getElementById('input_' + tang_str).value);
@@ -61,6 +67,8 @@ const main = function(tang_str) {
 		document.getElementById('answer_MO').innerHTML = dim_of_unoriented_cobordism_group(n);
 	} else if (tang_str === 'BZ2') {
 		document.getElementById('answer_BZ2').innerHTML = dim_of_z2_cobordism_group(n);
+	} else if (tang_str === 'MU') {
+		document.getElementById('answer_MU').innerHTML = dim_of_complex_cobordism_group(n);
 	}
 	document.getElementById('dim_' + tang_str).innerHTML = n;
 }
