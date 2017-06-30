@@ -45,7 +45,7 @@ Answer: dim<sub>𝔽<sub>2</sub></sub> Ω<sub><span id='dim_MO'><i>n</i></span><
 <h2>Unoriented manifolds with a principal ℤ/2-bundle</h2>
 <p>
 Under cobordism, closed, unoriented manifolds with a principal ℤ/2-bundle form a graded abelian group, but not a
-ring. Thom's work identifies this ring with π<sub>*</sub>(<i>MO</i> ∧ <i>B</i>ℤ/2<sub>+</sub>), which can be
+ring. Thom's work identifies this group with π<sub>*</sub>(<i>MO</i> ∧ <i>B</i>ℤ/2<sub>+</sub>), which can be
 computed in a similar manner as above.
 </p>
 
@@ -60,6 +60,23 @@ Answer: dim<sub>𝔽<sub>2</sub></sub> π<sub><span id='dim_BZ2'><i>n</i></span>
 <i>B</i>ℤ/2<sub>+</sub>) = <span id='answer_BZ2'>_</span>.
 </p>
 
+<h2>Complex cobordism</h2>
+<p>
+Novikov's 1960 paper <i>Some problems in the topology of manifolds connected with the theory of Thom spaces</i>
+uses Thom's construction to calculate that the cobordism ring of stably almost complex manifolds is a free
+polynomial algebra over ℤ. Again, the size of the cobordism group in dimension <i>n</i> is a modified partition
+function, computed in a similar way.
+</p>
+
+<form name='MU'>
+	<input type='text' id='input_MU' onKeyDown="if (event.keyCode == 13) {main('MU'); return false}">
+	<input type='button' value='Go' onClick='main("MU")'>
+</form>
+<br>
+
+<p>
+Answer: dim<sub>ℤ</sub> π<sub><span id='dim_MU'><i>n</i></span></sub>(<i>MU</i>) = <span id='answer_MU'>_</span>.
+</p>
 
 
 <div id="footer">
