@@ -1,7 +1,6 @@
 window.onload = function() {
-	
-	for (element of document.getElementsByClassName('updater')) {
+	Array.from(document.getElementsByClassName('updater')).forEach(element =>
 		element.innerHTML = 'Updated '
-			+ all_files_info['./lecture_notes/' + element.getAttribute('filename')] + '.';
-	}
+			+ all_files_info['./lecture_notes/' + element.getAttribute('filename')] + '.'
+	);
 }
