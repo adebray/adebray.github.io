@@ -6,8 +6,8 @@
 	'body' is the text to be hidden or shown
  */
 function toggle_list(head_id, body_id) {
-	var list = document.getElementById(body_id);
-	var head = document.getElementById(head_id);
+	const list = document.getElementById(body_id);
+	const head = document.getElementById(head_id);
 
 	if (list.style.display == "none") {
 		list.style.display = "block";
