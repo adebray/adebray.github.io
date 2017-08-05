@@ -10,7 +10,7 @@ const go_card = ['zeroth', 'first', 'second', 'third', 'fourth', 'fifth', 'sixth
    curr_time is a Date object.
  */
 const my_year = function(curr_time) {
-	const delta_year = curr_time.getFullYear() - 2015
+	let delta_year = curr_time.getFullYear() - 2015
 	// note: getMonth is zero-indexed
 	if (curr_time.getMonth() + 1 >= 8) delta_year++;
 	return delta_year;
