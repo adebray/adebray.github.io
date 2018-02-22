@@ -6,8 +6,12 @@
 # git hook to produce a dictionary of when each file was last updated.
 
 import datetime
+import json
 import subprocess
 import os
+
+# this is a hack that allows me to avoid properly parsing undate_info.js
+JS_BEGIN_LENGTH = len('var all_files_info = ')
 
 # execute command, return stdout
 def capture_output(*args) -> str:
@@ -49,14 +53,22 @@ def last_update(filename) -> str:
 # 			yield '%s/%s' % (root, filename)
 
 # dictionary of filename -> when last updated
-def changed_files_info() -> dict:
+def changed_files_info(old_info) -> dict:
 	# filename is relative to the base of the git repo
 	# so we prepend the full path to the git repo so that last_update finds the file
 	git_root = path_to_repo() + '/'
-	return {filename: last_update(git_root + filename) for filename in files_to_check()}
+	for filename in files_to_check():
+		# the js references just the filename (no basename)
+		filename_without_basename = os.path.split(filename)[-1]
+		old_info[filename_without_basename] = last_update(git_root + filename)
+	#return {filename: last_update(git_root + filename) for filename in files_to_check()}
+	return old_info
 
 def main():
-	with open('.git/update_info.js', 'w') as infile:
+	with open('.git/update_info.js', 'rw') as infile:
+		# the file begins with 'var all_files_info = ' which we don't want to parse.
+		# this has length JS_BEGIN_LENGTH, so we just skip it
+		old_info = json.loads(infile.read()[JS_BEGIN_LENGTH:]
 		infile.write('var all_files_info = %s;' % changed_files_info())
 
 if __name__ == '__main__':
