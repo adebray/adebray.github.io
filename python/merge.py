@@ -6,12 +6,17 @@
 # git hook to produce a dictionary of when each file was last updated.
 
 import datetime
-import json
+import ast
 import subprocess
 import os
 
 # this is a hack that allows me to avoid properly parsing undate_info.js
 JS_BEGIN_LENGTH = len('var all_files_info = ')
+
+# ast.literal_eval() but instead of choking on the empty string, returns the specified value
+def eval_with_maybe(s: str, nothing=None):
+	if len(s) <= 1: return nothing
+	else: return ast.literal_eval(s[:-1])
 
 # execute command, return stdout
 def capture_output(*args) -> str:
@@ -47,11 +52,11 @@ def last_update(filename) -> str:
 	return datetime.datetime.strptime(raw_info, '"%a %b %d %X %Y %z"').strftime('%B %d, %Y')
 
 # recursively obtain all files, ignoring hidden directories and symlinks
-# def all_files() -> [str]:
-# 	for root, dirs, files in os.walk('.', topdown=True):
-# 		dirs[:] = [d for d in dirs if d not in ('.git', 'SURIM', 'other')]
-# 		for filename in files:
-# 			yield '%s/%s' % (root, filename)
+#def all_files() -> [str]:
+#	for root, dirs, files in os.walk('.', topdown=True):
+#		dirs[:] = [d for d in dirs if d not in ('.git', 'SURIM', 'other')]
+#		for filename in files:
+#			yield '%s/%s' % (root, filename)
 
 # dictionary of filename -> when last updated
 def changed_files_info(old_info) -> dict:
@@ -60,17 +65,18 @@ def changed_files_info(old_info) -> dict:
 	git_root = path_to_repo() + '/'
 	for filename in files_to_check():
 		# the js references just the filename (no basename)
-		filename_without_basename = os.path.split(filename)[-1]
-		old_info[filename_without_basename] = last_update(git_root + filename)
+		#filename_without_basename = os.path.split(filename)[-1]
+		old_info[filename] = last_update(git_root + filename)
 	#return {filename: last_update(git_root + filename) for filename in files_to_check()}
 	return old_info
 
 def main():
-	with open('.git/update_info.js', 'rw') as infile:
+	with open('.git/update_info.js', 'r') as infile:
 		# the file begins with 'var all_files_info = ' which we don't want to parse.
 		# this has length JS_BEGIN_LENGTH, so we just skip it
-		old_info = json.loads(infile.read()[JS_BEGIN_LENGTH:]
-		infile.write('var all_files_info = %s;' % changed_files_info())
+		old_info = eval_with_maybe(infile.read()[JS_BEGIN_LENGTH:-1], nothing=dict())
+	with open('.git/update_info.js', 'w') as infile:
+		infile.write('var all_files_info = %s;' % changed_files_info(old_info))
 
 if __name__ == '__main__':
 	main()
