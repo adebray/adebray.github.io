@@ -6,7 +6,8 @@ const categories = ['meta', 'food', 'math', 'CS', 'other',
 let pars = undefined
 
 window.onload = function() {
-	document.getElementById('footer-text').innerHTML = 'This page last updated ' + all_files_info['./puns.html'];
+	document.getElementById('footer-text').innerHTML = 'This page last updated ' +
+		all_files_info['/d/www/users/a.debray/puns.html'];
 	pars = Array.from(document.getElementsByTagName('p'));
 	let pun_filter = document.getElementById('filter');
 	pun_filter.onchange = function() {
