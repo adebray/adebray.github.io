@@ -6,19 +6,24 @@
 # git hook to produce a dictionary of when each file was last updated.
 
 import datetime
-import ast
-import subprocess
+import json
 import os
+import subprocess
 
 # this is a hack that allows me to avoid properly parsing undate_info.js
 JS_BEGIN_LENGTH = len('var all_files_info = ')
 
 # ast.literal_eval() but instead of choking on the empty string, returns the specified value
-# TODO: this can't handle EOF. probably just split on , and actually parse the dict...
-# better: replace ' with " and then parse w/ JSON TODO
-def eval_with_maybe(s: str, nothing=None):
-	if len(s) <= 1: return nothing
-	else: return ast.literal_eval(s[:-1])
+# this can't handle EOF. probably just split on , and actually parse the dict...
+#def eval_with_maybe(s: str, nothing=None):
+#	if len(s) <= 1: return nothing
+#	else: return ast.literal_eval(s[:-1])
+
+# since single quotes are not valid JSON, this just changes them to double quotes
+# before calling json.loads
+def loads_with_single_quotes(s: str):
+	s = s.replace('\'', '"')
+	return json.loads(s)
 
 # execute command, return stdout
 def capture_output(*args) -> str:
@@ -54,20 +59,24 @@ def last_update(filename) -> str:
 	return datetime.datetime.strptime(raw_info, '"%a %b %d %X %Y %z"').strftime('%B %d, %Y')
 
 # recursively obtain all files, ignoring hidden directories and symlinks
-#def all_files() -> [str]:
-#	for root, dirs, files in os.walk('.', topdown=True):
-#		dirs[:] = [d for d in dirs if d not in ('.git', 'SURIM', 'other')]
-#		for filename in files:
-#			yield '%s/%s' % (root, filename)
+def all_files(git_root) -> [str]:
+	for root, dirs, files in os.walk(git_root, topdown=True):
+		dirs[:] = [d for d in dirs if d not in ('.git', 'SURIM', 'other')]
+		for filename in files:
+			print(root, filename)
+			yield '%s/%s' % (root, filename)
 
 # dictionary of filename -> when last updated
 def changed_files_info(git_root: str, old_info) -> dict:
 	# filename is relative to the base of the git repo
 	# so we prepend the full path to the git repo so that last_update finds the file
-	for filename in files_to_check():
+	#for filename in files_to_check():
+	for filename in all_files(git_root):
 		# the js references just the filename (no basename)
-		#filename_without_basename = os.path.split(filename)[-1]
-		old_info[filename] = last_update(git_root + '/' + filename)
+		#old_info['./' + filename] = last_update(git_root + '/' + filename)
+		# os.path.split(filename)[-1]
+		old_info[filename] = last_update(filename)
+
 	#return {filename: last_update(git_root + filename) for filename in files_to_check()}
 	print(old_info)
 	return old_info
@@ -76,13 +85,11 @@ def main():
 	# this allows us to run merge.py from anywhere in the repo
 	git_root = path_to_repo()
 	js_info_file = git_root + '/' + '.git/update_info.js'
-	with open(js_info_file, 'r') as infile:
-		print(infile.read()[JS_BEGIN_LENGTH:-1])
-		exit()
-
+	old_info = dict()
+	#with open(js_info_file, 'r') as infile:
 		# the file begins with 'var all_files_info = ' which we don't want to parse.
 		# this has length JS_BEGIN_LENGTH, so we just skip it
-		old_info = eval_with_maybe(infile.read()[JS_BEGIN_LENGTH:-1], nothing=dict())
+	#	old_info = loads_with_single_quotes(infile.read()[JS_BEGIN_LENGTH:-1])
 	with open(js_info_file, 'w') as infile:
 		infile.write('var all_files_info = %s;' % changed_files_info(git_root, old_info))
 
