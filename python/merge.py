@@ -14,6 +14,8 @@ import os
 JS_BEGIN_LENGTH = len('var all_files_info = ')
 
 # ast.literal_eval() but instead of choking on the empty string, returns the specified value
+# TODO: this can't handle EOF. probably just split on , and actually parse the dict...
+# better: replace ' with " and then parse w/ JSON TODO
 def eval_with_maybe(s: str, nothing=None):
 	if len(s) <= 1: return nothing
 	else: return ast.literal_eval(s[:-1])
@@ -59,24 +61,30 @@ def last_update(filename) -> str:
 #			yield '%s/%s' % (root, filename)
 
 # dictionary of filename -> when last updated
-def changed_files_info(old_info) -> dict:
+def changed_files_info(git_root: str, old_info) -> dict:
 	# filename is relative to the base of the git repo
 	# so we prepend the full path to the git repo so that last_update finds the file
-	git_root = path_to_repo() + '/'
 	for filename in files_to_check():
 		# the js references just the filename (no basename)
 		#filename_without_basename = os.path.split(filename)[-1]
-		old_info[filename] = last_update(git_root + filename)
+		old_info[filename] = last_update(git_root + '/' + filename)
 	#return {filename: last_update(git_root + filename) for filename in files_to_check()}
+	print(old_info)
 	return old_info
 
 def main():
-	with open('.git/update_info.js', 'r') as infile:
+	# this allows us to run merge.py from anywhere in the repo
+	git_root = path_to_repo()
+	js_info_file = git_root + '/' + '.git/update_info.js'
+	with open(js_info_file, 'r') as infile:
+		print(infile.read()[JS_BEGIN_LENGTH:-1])
+		exit()
+
 		# the file begins with 'var all_files_info = ' which we don't want to parse.
 		# this has length JS_BEGIN_LENGTH, so we just skip it
 		old_info = eval_with_maybe(infile.read()[JS_BEGIN_LENGTH:-1], nothing=dict())
-	with open('.git/update_info.js', 'w') as infile:
-		infile.write('var all_files_info = %s;' % changed_files_info(old_info))
+	with open(js_info_file, 'w') as infile:
+		infile.write('var all_files_info = %s;' % changed_files_info(git_root, old_info))
 
 if __name__ == '__main__':
 	main()
