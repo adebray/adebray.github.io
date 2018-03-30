@@ -19,7 +19,7 @@ const my_year = function(curr_time) {
 window.onload = function() {
 	// For some reason this doesn't work
 	// if (document.URL === 'https://adebray.github.io/') window.location = '//www.ma.utexas.edu/users/a.debray/';
-	document.getElementById('grad_year').innerHTML = go_card[my_year(new Date())];
+	document.getElementById('grad_year').innerHTML = go_card[my_year(new Date())] + '-year';
 	document.getElementById('footer-text').innerHTML = 'This page last updated ' +
 		all_files_info['/d/www/users/a.debray/index.html'];
 }
