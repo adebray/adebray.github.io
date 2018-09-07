@@ -49,7 +49,7 @@ function roll() {
 	}
 }
 
-window.onload=function() { if (document.getElementById) {
+sparkle_onload = function() { if (document.getElementById) {
   var i, rats, rlef, rdow;
   for (var i=0; i<sparkles; i++) {
   	var clr = color(i)
