@@ -144,22 +144,27 @@ ul, ol, dl {
 	//line-height: 90%;
 }
 
-dt {
+dl#refs > dt {
 	margin-top: 0;
 	margin-bottom: 0;
 	width: 5%;
 	float: left;
 }
 
-dl {
+dl#refs {
 	margin-left: 20px;
 	width: 90%;
 	overflow: hidden;
 }
 
-dd {
+dl#refs > dd {
 	width: 85%;
 	float: left;
+}
+
+dl#schedule > dt {
+	margin-left: 1.2em;
+	font-weight: bold;
 }
 
 dd > *:first-child {
