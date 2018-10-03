@@ -36,7 +36,7 @@ def last_two_hashes() -> (str, str):
 # return the list of files that have changed between the two pulls given by the last two hashes
 def files_to_check() -> [str]:
 	hash1, hash2 = last_two_hashes()
-	files = capture_output('git', 'diff', '--name-only', hash1, hash2).decode('UTF-8').splitlines()
+	files = capture_output('git', 'diff', '--name-only', '--diff-filter=d', hash1, hash2).decode('UTF-8').splitlines()
 	return files
 
 # return date of last update given file
@@ -49,7 +49,7 @@ def last_update(filename) -> str:
 	return datetime.datetime.strptime(raw_info, '"%a %b %d %X %Y %z"').strftime('%B %d, %Y')
 
 # recursively obtain all files, ignoring hidden directories and symlinks
-# def all_files(git_root) -> [str]:
+#def all_files(git_root) -> [str]:
 # 	for root, dirs, files in os.walk(git_root, topdown=True):
 # 		dirs[:] = [d for d in dirs if d not in ('.git', 'SURIM', 'other')]
 # 		for filename in files:
