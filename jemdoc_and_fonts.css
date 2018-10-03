@@ -118,7 +118,7 @@ p {
 	text-align: justify;
 }
 
-div#footer {
+footer {
 	font-size: small;
 	border-top: 1px solid #c0c0c0;
 	padding-top: 0.1em;
@@ -127,7 +127,7 @@ div#footer {
 	width: 49.5em;
 }
 
-div#footer a {
+footer a {
 	color: #80a0b0;
 }
 
