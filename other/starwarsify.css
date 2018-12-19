@@ -1,25 +1,45 @@
 html, body {
-	background-color: black;
+	//background-color: black;
 	height: 100%;
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
 }
 
-div#track{
+div#longtime {
+	position: absolute;
+	width: 80%;
+	padding: 0;
+	margin-left: 10%;
+	margin-top: 12.5%;
+
+	font-size: 60pt;
+	color: #4BD5EE;
+	font-family: 'Open Sans', sans-serif;
+
+	visibility: hidden;
+}
+
+div#longanim {
+	animation-name: fadeinout;
+	animation-duration: 5s;
+	animation-play-state: paused;
+}
+
+div#track {
 	width: 50%;
 	padding: 0;
 	height: inherit;
 	margin-left: 25%;
 	margin-top: -120pt;
 	border: 2px solid black;
-	perspective-origin: 50% 50%;
 	-webkit-transform: perspective(250px) rotateX(40deg);
 	font-size: 20pt;
 	font-family: 'News-Cycle', sans-serif;
 	font-weight: bold;
 	color: yellow;
 	text-align: justify;
+	visibility: hidden;
 }
 
 
@@ -27,6 +47,7 @@ div#crawler {
 	animation-name: crawl;
 	animation-duration: 60s;
 	animation-fill-mode: forwards;
+	animation-play-state: paused;
 }
 
 p#title {
@@ -43,5 +64,20 @@ span#subtitle {
 		margin-top: 90%;
 	} to {
 		margin-top: -100%;
+	}
+}
+
+@keyframes fadeinout {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 0;
+	}
+	20% {
+		opacity: 1;
+	}
+	80% {
+		opacity: 1;
 	}
 }

@@ -2,9 +2,59 @@
 <html>
 <head>
 <link href="https://fonts.googleapis.com/css?family=News+Cycle" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">
+<script src='starwarsify.js'></script>
 <link rel="stylesheet" type="text/css" href="starwarsify.css" >
 </head>
 <body>
+
+<span id='pre_animation'>
+<p>
+	<label for='crawl_title'>Title</label><br>
+	<input type='text' id='crawl_title' name='Title'>
+</p>
+<p>
+	<label for='crawl_subtitle'>Subtitle</label><br>
+	<input type='text' id='crawl_subtitle' name='Subtitle'>
+</p>
+<p>
+	<label for='crawl_text'>Opening crawl text:</label><br>
+	<textarea id='crawl_text' name='crawl_text' rows=5 cols=64></textarea>
+</p>
+<!-- TODO: at some point, a subtitle, and the option to make it above the title -->
+<p>
+<button id='animation_button'>
+Start animation
+</button>
+</p>
+
+<p>Presets:
+<select id='presets'>
+	<option value='1'>Episode I: The Phantom Menace</option>
+	<option value='2'>Episode II: Attack of the Clones</option>
+	<option value='3'>Episode III: Revenge of the Sith</option>
+
+	<option value='4'>Episode IV: A New Hope</option>
+	<option value='5'>Episode V: The Empire Strikes Back</option>
+	<option value='6'>Episode VI: Return of the Jedi</option>
+
+	<option value='7'>Episode VII: The Force Awakens</option>
+	<option value='8'>Episode VIII: The Last Jedi</option>
+
+	<option value='0'>Spaceballs</option>
+	<option value='9'>The Third Gathers: The Backstroke of the West</option>
+</select>
+<button id='apply_preset'>
+Apply
+</button>
+</p>
+</span>
+
+<div id='longtime'>
+<div id='longanim'>
+<p>A long time ago in a galaxy far,<br> far away....</p>
+</div>
+</div>
 
 <div id='track'>
 <div id='crawler'>
@@ -13,9 +63,12 @@
 Episode IV
 </span>
 <br>
+<span id='just_the_title'>
 A NEW HOPE
+</span>
 </p>
 
+<span id='crawl_body'>
 <p>
 It is a period of civil war.
 Rebel spaceships, striking
@@ -41,6 +94,7 @@ stolen plans that can save
 her people and restore
 freedom to the galaxy.....
 </p>
+</span>
 </div>
 </div>
 
