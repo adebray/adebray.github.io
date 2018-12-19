@@ -1,0 +1,47 @@
+html, body {
+	background-color: black;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+div#track{
+	width: 50%;
+	padding: 0;
+	height: inherit;
+	margin-left: 25%;
+	margin-top: -120pt;
+	border: 2px solid black;
+	perspective-origin: 50% 50%;
+	-webkit-transform: perspective(250px) rotateX(40deg);
+	font-size: 20pt;
+	font-family: 'News-Cycle', sans-serif;
+	font-weight: bold;
+	color: yellow;
+	text-align: justify;
+}
+
+
+div#crawler {
+	animation-name: crawl;
+	animation-duration: 60s;
+	animation-fill-mode: forwards;
+}
+
+p#title {
+	font-size: 45pt;
+	text-align: center;
+}
+
+span#subtitle {
+	font-size: 30pt;
+}
+
+@keyframes crawl {
+	from {
+		margin-top: 90%;
+	} to {
+		margin-top: -100%;
+	}
+}
