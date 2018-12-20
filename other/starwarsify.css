@@ -22,19 +22,46 @@ div#longtime {
 
 div#longanim {
 	animation-name: fadeinout;
-	animation-duration: 5s;
+	animation-duration: 2s;
 	animation-play-state: paused;
+	animation-fill-mode: forwards;
+}
+
+img#logo {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 100%;
+
+	visibility: hidden;
+}
+
+irrel {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 99%;
+
+	visibility: hidden;
+}
+
+div#star_wars_anim {
+	animation-name: logoshrink;
+	animation-duration: 2s;
+	animation-play-state: paused;
+	animation-fill-mode: forwards;
 }
 
 div#track {
-	width: 50%;
+	width: 45%;
 	padding: 0;
 	height: inherit;
-	margin-left: 25%;
+	margin-left: 27.5%;
 	margin-top: -120pt;
 	border: 2px solid black;
 	-webkit-transform: perspective(250px) rotateX(40deg);
-	font-size: 20pt;
+	font-size: 30pt;
 	font-family: 'News-Cycle', sans-serif;
 	font-weight: bold;
 	color: yellow;
@@ -45,7 +72,7 @@ div#track {
 
 div#crawler {
 	animation-name: crawl;
-	animation-duration: 60s;
+	animation-duration: 140s;
 	animation-fill-mode: forwards;
 	animation-play-state: paused;
 }
@@ -61,9 +88,9 @@ span#subtitle {
 
 @keyframes crawl {
 	from {
-		margin-top: 90%;
+		margin-top: 98.5%;
 	} to {
-		margin-top: -100%;
+		margin-top: -250%;
 	}
 }
 
@@ -79,5 +106,22 @@ span#subtitle {
 	}
 	80% {
 		opacity: 1;
+	}
+}
+
+@keyframes logoshrink {
+	from {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 100%;
+	}
+	to {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 0%;
 	}
 }

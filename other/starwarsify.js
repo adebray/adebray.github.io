@@ -76,6 +76,20 @@ const button_event_listener = function(button, fn) {
 	document.getElementById(button).addEventListener('click', fn, false);
 }
 
+const initialize_audio = function() {
+	const sound = document.createElement('audio');
+	sound.id = 'audio';
+	sound.controls = 'controls';
+	sound.src = 'star_wars_theme.mp3';
+	sound.type = 'audio/mp3';
+	sound.style = "display: none";
+	document.body.appendChild(sound);
+}
+
+const play_audio = function() {
+	document.getElementById('audio').play();
+}
+
 // Attempts to make this work well on different-sized screens
 const screen_size_adjustments = function() {
 	// horizontal, resp.\ vertical scale factor relative to my screen
@@ -86,19 +100,30 @@ const screen_size_adjustments = function() {
 	//console.log(document.getElementById('track').style.marginTop);
 }
 
-async function start_animation() {
+/* The animation code is in the two functions start_animation and start_crawl.
+   start_animation begins the "A long time ago, in a galaxy far, far away..." bit,
+   and start_crawl fires when it ends.
+ */
+const start_animation = function() {
 	update_css('pre_animation', 'display: none');
 	
 	// first, the "a long time ago" bit
 	document.body.setAttribute('style', 'background-color: black')
 	update_css("longtime", "visibility: visible");
 	update_css('longanim', 'animation-play-state: running')
-	await sleep(5000);
+	setTimeout(play_audio, 4500);
+}
+
+const start_logo_animation = function() {
+
 	update_css("longtime", "display: none");
 
-	// TODO: the STAR WARS bit (or Spaceballs I guess?)
+	update_css('logo', 'visibility: visible');
+	update_css('star_wars_anim', 'animation-play-state: running')
+}
 
-	// Then the opening crawl
+// Then the opening crawl
+const start_crawl = function() {
 	update_text('just_the_title', 'crawl_title');
 	update_text('subtitle', 'crawl_subtitle');
 	update_text('crawl_body', 'crawl_text');
@@ -107,6 +132,7 @@ async function start_animation() {
 
 	update_css('track', 'visibility: visible')
 	update_css('crawler', 'animation-play-state: running')
+
 }
 
 const prefill = function() {
@@ -118,6 +144,11 @@ const prefill = function() {
 }
 
 window.onload = function() {
+	initialize_audio();
+
 	button_event_listener('animation_button', start_animation);
 	button_event_listener('apply_preset', prefill);
+	// TODO: should refactor this
+	document.getElementById('longanim').addEventListener('animationend', start_logo_animation, false);
+	document.getElementById('star_wars_anim').addEventListener('animationend', start_crawl, false);
 }
