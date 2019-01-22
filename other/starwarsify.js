@@ -1,8 +1,8 @@
 // Preset information, stored as an array of dicts
 all_episodes_info = [
 	/* Spaceballs */ {
-		title: 'Chapter Eleven',
-		subtitle: '',
+		title: 'SPACEBALLS',
+		subtitle: 'Chapter Eleven',
 		text: '<p>The evil leaders of Planet Spaceball, having foolishly squandered their precious atmosphere, have devised a secret plan to take every breath of air away from their peace-loving neighbor, Planet Druidia.</p><p>Today is Princess Vespa\'s wedding day. Unbeknownest to the princess, but knownst to us, danger lurks in the stars above...</p><p>If you can read this, you don\'t need glasses.</p>'
 	},
 	/* Phantom Menace */ {
