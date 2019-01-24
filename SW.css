@@ -22,3 +22,43 @@ footer {
 	color: #c0c0c0;
 	width: 49.5em;
 }
+
+ul, ol, dl {
+        margin-top: 0.2em;
+        padding-top: 0;
+        margin-bottom: 0.8em;
+        //margin: -0.5em;
+        //line-height: 90%;
+}
+
+dl#refs > dt {
+        margin-top: 0;
+        margin-bottom: 0;
+        width: 7%;
+        float: left;
+}
+
+dl#refs {
+        margin-left: 20px;
+        width: 90%;
+        overflow: hidden;
+}
+
+dl#refs > dd {
+        width: 83%;
+        float: left;
+}
+
+dl#schedule > dt {
+        margin-left: 1.2em;
+        font-weight: bold;
+}
+
+dd > *:first-child {
+        margin-top: 0;
+}
+
+li p, dd p {
+        margin-bottom: 0.3em;
+        width: 39.3em;
+}
