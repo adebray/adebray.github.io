@@ -1,0 +1,100 @@
+body {
+	width: 50%;
+	margin-left: 25%;
+	animation: background 50s cubic-bezier(1,0,0,1) infinite;  
+}
+
+@keyframes background {
+  0% { background-color: #d3f0f7; }
+  33% { background-color: #f0d3f7; }  
+  67% { background-color: #f7bbaa; }
+  100% { background-color: #d3f0f7; }
+}
+
+b {
+	font-family: 'Neuton', serif;
+	font-size: 14pt;
+}
+
+h1 {
+	letter-spacing: 0.03em;
+	font-family: 'Neuton', serif;
+	text-align: center;
+}
+
+section {
+	background: #ffffff;
+	box-shadow: 2px 2px 4px #aaaaaa;
+	margin: 10px;
+	padding: 3px;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-family: 'Raleway', sans-serif;
+}
+
+section h3 {
+	margin-top: 3px;
+	letter-spacing: 0.03em;
+	font-family: 'Neuton', serif;
+	font-size: 18pt;
+}
+
+ul, ol, dl {
+	margin-top: 0.2em;
+	padding-top: 0;
+	margin-bottom: 0.8em;
+	//margin: -0.5em;
+	//line-height: 90%;
+}
+
+dl#refs > dt {
+	margin-top: 0;
+	margin-bottom: 0;
+	width: 7%;
+	float: left;
+}
+
+dl#refs {
+	margin-left: 20px;
+	width: 90%;
+	overflow: hidden;
+}
+
+dl#refs > dd {
+	width: 83%;
+	float: left;
+}
+
+dl#schedule > dt {
+	margin-left: 1.2em;
+	font-weight: bold;
+}
+
+dd > *:first-child {
+	margin-top: 0;
+}
+
+li p, dd p {
+	margin-bottom: 0.4em;
+		margin-top: 0em;
+	width: 39.3em;
+}
+
+footer, div#footer {
+	font-size: small;
+	border-top: 1px solid #c0c0c0;
+	padding-top: 0.1em;
+	margin-top: 4.0em;
+	color: #c0c0c0;
+	width: 50%;
+	margin-left: 25%;
+}
+
+footer a, div#footer a {
+	color: #80a0b0;
+}
+
+div#footer-text {
+	float: left;
+	padding-bottom: 8px;
+}
