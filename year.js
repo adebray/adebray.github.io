@@ -21,5 +21,5 @@ window.onload = function() {
 	// if (document.URL === 'https://adebray.github.io/') window.location = '//www.ma.utexas.edu/users/a.debray/';
 	document.getElementById('grad_year').innerHTML = go_card[my_year(new Date())] + '-year';
 	document.getElementById('footer-text').innerHTML = 'This page last updated ' +
-		all_files_info['/d/www/users/a.debray/index.html'];
+		all_files_info['/home/a.debray/public_html/index.html'];
 }
