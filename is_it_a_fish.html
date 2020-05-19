@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="//www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta name="generator" content="jemdoc, see http://jemdoc.jaboc.net/" />
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link rel="stylesheet" href="jemdoc.css" type="text/css" />
+<link rel="shortcut icon" href="sun.ico" />
+<script src='.git/update_info.js'></script>
+<script>
+window.onload = function() {
+	document.getElementById('footer-text').innerHTML = 'This page last updated ' +
+		all_files_info['/home/a.debray/public_html/is_it_a_fish.html'];
+}
+</script>
+<script src='fish.js'></script>
+<title>Is it a fish?</title>
+</head>
+
+<body>
+<h1>Is it a fish?</h1>
+<div id="layout-content">
+
+<form name='thing_which_might_be_a_fish'>
+	<input type=text id='input_fish' onKeyDown="if (event.keyCode == 13) {main('MO'); return false}">
+	<input type='button' value='Go' onClick='main()'>
+</form>
+<br>
+
+<p>
+Answer: <b><span id='answer_fish'></span></b>
+</p>
+
+<footer>
+<div id="footer-text"></div>
+</footer>
+</div>
+</body>
+</html>
