@@ -16,10 +16,24 @@ const my_year = function(curr_time) {
 	return delta_year;
 }
 
+// also an easter egg that I decided to make
+const get_cookie_value_by_key = function(name) {
+  var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+  if (match) return match[2];
+}
+
+const UT_login_name = function() {
+	return get_cookie_value_by_key("utlogin-name")
+}
+
 window.onload = function() {
-	// For some reason this doesn't work
-	// if (document.URL === 'https://adebray.github.io/') window.location = '//www.ma.utexas.edu/users/a.debray/';
 	document.getElementById('grad_year').innerHTML = go_card[my_year(new Date())] + '-year';
 	document.getElementById('footer-text').innerHTML = 'This page last updated ' +
 		all_files_info['/home/a.debray/public_html/index.html'];
+	
+	if (UT_login_name() != null) {
+		let the_32 = document.getElementById('off_by_one');
+		the_32.title = "Click me!";
+		the_32.onClick = "alert('Hello, ' + UT_login_name())";
+	}
 }
