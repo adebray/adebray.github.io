@@ -23,7 +23,7 @@ const get_cookie_value_by_key = function(name) {
 }
 
 const UT_login_name = function() {
-	return get_cookie_value_by_key("utlogin-name")
+	return get_cookie_value_by_key("utlogin-name").replace('+', ' ');
 }
 
 window.onload = function() {
@@ -34,6 +34,6 @@ window.onload = function() {
 	if (UT_login_name() != null) {
 		let the_32 = document.getElementById('off_by_one');
 		the_32.title = "Click me!";
-		the_32.onClick = "alert('Hello, ' + UT_login_name())";
+		the_32.onclick = "alert('Hello, ' + UT_login_name() + '!')";
 	}
 }
