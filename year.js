@@ -34,6 +34,8 @@ window.onload = function() {
 	if (UT_login_name() != null) {
 		let the_32 = document.getElementById('off_by_one');
 		the_32.title = "Click me!";
-		the_32.onclick = "alert('Hello, ' + UT_login_name() + '!')";
+		the_32.onclick = function() {
+			alert('Hello, ' + UT_login_name() + '!');
+		}
 	}
 }
