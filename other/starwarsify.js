@@ -45,11 +45,28 @@ all_episodes_info = [
 		subtitle: "Episode VIII",
 		text: "<p>The FIRST ORDER reigns. Having decimated the peaceful Republic, Supreme Leader Snoke now deploys the merciless legions to seize military control of the galaxy.</p><p>Only General Leia Organa's band of RESISTANCE fighters stand against the rising tyranny, certain that Jedi Master Luke Skywalker will return and restore a spark of hope to the fight.</p><p>But the Resistance has been exposed. As the First Order speeds toward the rebel base, the brave heroes mount a desperate escape....</p>"
 	},
+	/* The Rise of Skywalker */ {
+		title: "THE RISE OF SKYWALKER",
+		subtitle: "Episode IX",
+		text: "<p>The dead speak! The galaxy has heard a mysterious broadcast, a threat of REVENGE in the sinister voice of the late EMPEROR PALPATINE.</p><p>GENERAL LEIA ORGANA dispatches secret agents to gather intelligence, while REY, the last hope of the Jedi, trains for battle against the diabolical FIRST ORDER.</p><p>Meanwhile, Supreme Leader KYLO REN rages in search of the phantom Emperor, determined to destroy any threat to his power....</p>"
+	},
 	/* The Third Gather */ {
 		title: "THE BACKSTROKE OF THE WEST",
 		subtitle: "The Third Gather",
 		text: "<p>The war came! The republic encountered Two squares fight the vehemence The improbity fills the world</p><p>The space general of the alliance is skillful Kidnap the D the speaker the conduct  The proper abruption alliance troops tries ratio prosperous drive with the</p>"
-	}
+	},
+	/* A Tale of Two Cities */ {
+		title: "A TALE OF TWO CITIES",
+		subtitle: "",
+		text: "<p>It was the best of times, it was the worst of times, it was the age of wisdom, it was the age of foolishness, it was the epoch of belief, it was the epoch of incredulity, it was the season of Light, it was the season of Darkness, it was the spring of hope, it was the winter of despair, we had everything before us, we had nothing before us, we were all going direct to Heaven, we were all going direct the other way &ndash; in short, the period was so far like the present period, that some of its noisiest authorities insisted on its being received, for good or for evil, in the superlative degree of comparison only.</p>"
+	},
+	/* Pride and Prejudice */ {
+		title: "PRIDE AND PREJUDICE",
+		subtitle: "Volume I",
+		text: "<p>It is a truth universally acknowledged, that a single man in possession of a good fortune must be in want of a wife.</p><p>However little known the feelings or views of such a man may be on his first entering a neighbourhood, this truth is so well fixed in the minds of the surrounding families, that he is considered as the rightful property of some one or other of their daughters.</p><p>&ldquo;My dear Mr. Bennet,&rdquo; said his lady to him one day, &ldquo;have you heard that Netherfield Park is let at last?&rdquo;</p><p>Mr. Bennet replied that he had not.</p><p>&ldquo;But it is,&rdquo; returned she; &ldquo;for Mrs. Long has just been here, and she told me all about it.&rdquo;</p><p>Mr. Bennet made no answer.</p><p>&ldquo;Do not you want to know who has taken it?&rdquo; cried his wife impatiently.</p><p>&ldquo;You want to tell me, and I have no objection to hearing it.&rdquo;</p><p>This was invitation enough.</p>"
+	},
+
+	
 ]
 
 // Given the id of an element, add the line `update` to its CSS.
