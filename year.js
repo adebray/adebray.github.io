@@ -22,20 +22,21 @@ const get_cookie_value_by_key = function(name) {
   if (match) return match[2];
 }
 
-const UT_login_name = function() {
-	return get_cookie_value_by_key("utlogin-name").replace('+', ' ');
-}
+// TODO: what is Purdue's equivalent?
+//const UT_login_name = function() {
+//	return get_cookie_value_by_key("utlogin-name").replace('+', ' ');
+//}
 
 window.onload = function() {
 	document.getElementById('grad_year').innerHTML = go_card[my_year(new Date())] + '-year';
 	document.getElementById('footer-text').innerHTML = 'This page last updated ' +
-		all_files_info['/home/a.debray/public_html/index.html'];
+		all_files_info['/export/userswww/adebray/WWW/index.html'];
 	
-	if (UT_login_name() != null) {
+/*	if (UT_login_name() != null) {
 		let the_32 = document.getElementById('off_by_one');
 		the_32.title = "Click me!";
 		the_32.onclick = function() {
 			alert('Hello, ' + UT_login_name() + '!');
 		}
-	}
+	} */
 }

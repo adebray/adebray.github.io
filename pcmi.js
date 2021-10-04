@@ -42,6 +42,6 @@ const populate_upcoming_talks = function() {
 window.onload = function() {
 	populate_upcoming_talks();
 	document.getElementById('footer-text').innerHTML = 'This page last updated ' +
-		all_files_info['/home/users/a.debray/public_html/pcmi_prep.html'];
+		all_files_info['/export/userswww/adebray/WWW/pcmi_prep.html'];
 
 }

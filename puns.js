@@ -7,7 +7,7 @@ let pars = undefined
 
 window.onload = function() {
 	document.getElementById('footer-text').innerHTML = 'This page last updated ' +
-		all_files_info['/home/a.debray/public_html/puns.html'];
+		all_files_info['/export/userswww/adebray/WWW/puns.html'];
 	pars = Array.from(document.getElementsByTagName('p'));
 	let pun_filter = document.getElementById('filter');
 	pun_filter.onchange = function() {
