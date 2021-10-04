@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Arun Debray
-# 4 March 2017, updated 28 August 2019
+# 4 March 2017, updated 4 October 2021
 
 # usage:
 # ./merge.py
@@ -23,7 +23,8 @@ DIRS_TO_IGNORE = ('.git', 'SURIM', 'other')
 
 # I wish I didn't have to encode this as a global, but in the current usage I never need to run this
 # anywhere except in this directory
-WORKING_DIR = '/home/a.debray/public_html'
+WORKING_DIR = '/export/userswww/adebray/WWW'
+#WORKING_DIR = '/home/a.debray/public_html'
 
 # since single quotes are not valid JSON, this just changes them to double quotes
 # before calling json.loads
