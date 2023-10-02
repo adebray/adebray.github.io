@@ -28,8 +28,8 @@ const get_cookie_value_by_key = function(name) {
 //}
 
 window.onload = function() {
-	document.getElementById('grad_year').innerHTML = go_card[my_year(new Date())] + '-year';
-	document.getElementById('footer-text').innerHTML = 'This page last updated ' +
+//	document.getElementById('grad_year').innerHTML = go_card[my_year(new Date())] + '-year';
+//	document.getElementById('footer-text').innerHTML = 'This page last updated ' +
 		all_files_info['/export/userswww/adebray/WWW/index.html'];
 	
 /*	if (UT_login_name() != null) {
